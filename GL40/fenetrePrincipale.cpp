@@ -51,11 +51,11 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
     // Actions de la barre
     nouveau = new QMenu("Nouveau", this);
-    newFitts = new QAction("Loi de Fitts", this);
+    newFitts = new QAction("Loi de Fitts", nouveau);
     nouveau->addAction(newFitts);
-    newGoms1 = new QAction("Goms-Keystroke avec saisie de texte", this);
+    newGoms1 = new QAction("Goms-Keystroke avec saisie de texte", nouveau);
     nouveau->addAction(newGoms1);
-    newGoms2 = new QAction("Goms-Keystroke avec clics", this);
+    newGoms2 = new QAction("Goms-Keystroke avec clics", nouveau);
     nouveau->addAction(newGoms2);
 
     about = new QAction("À propos de nous", this);
@@ -67,24 +67,39 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     menuFile->addAction(fermer);
 
     // On initialise ici la fenêtre des options pour les paramètres de l'application
-    fenetreOptions = new FenetreOptions;
+    fenetreOptionsFitts = new FenetreOptionsFitts;
+    fenetreOptionsGomsSaisieTexte = new FenetreOptionsGomsSaisieTexte;
 
     // Les connexions
-    connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptions()));
+    connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsFitts()));
+    connect(newGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
-    connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptions()));
+    connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
+    connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(fermer, SIGNAL(triggered()), this, SLOT(close()));
 
 }
 
 // Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
-void FenetrePrincipale::afficheFenetreOptions() {
+void FenetrePrincipale::afficheFenetreOptionsFitts() {
 
-    fenetreOptions->setModal(true);
+    fenetreOptionsFitts->setModal(true);
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
-    if(fenetreOptions->exec() == QDialog::Accepted) {
-        setCentralWidget(new FenetreTest(fenetreOptions->getNbClics(), this, fenetreOptions->getParametre1(), fenetreOptions->getParametre2()));
+    if(fenetreOptionsFitts->exec() == QDialog::Accepted) {
+        setCentralWidget(new FenetreTest(fenetreOptionsFitts->getNbClics(), this, fenetreOptionsFitts->getParametre1(), fenetreOptionsFitts->getParametre2()));
+    }
+
+}
+
+// Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
+void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
+
+    fenetreOptionsGomsSaisieTexte->setModal(true);
+
+    // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
+    if(fenetreOptionsGomsSaisieTexte->exec() == QDialog::Accepted) {
+        //setCentralWidget(new FenetreTest(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre1(), fenetreOptionsGomsSaisieTexte->getParametre2()));
     }
 
 }

@@ -8,7 +8,8 @@
 #include <QStatusBar>
 #include <vector>
 #include <iostream>
-#include "fenetreOptions.h"
+#include "fenetreOptionsFitts.h"
+#include "fenetreOptionsGomsSaisieTexte.h"
 #include "fenetreTest.h"
 #include "fenetreStatistiques.h"
 
@@ -30,15 +31,16 @@ private:
     QPushButton *btnGoms1;
     QPushButton *btnGoms2;
 
-    FenetreOptions *fenetreOptions;
+    FenetreOptionsFitts *fenetreOptionsFitts;
+    FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
     FenetreStatistiques *fenetreStatistiques;
 
 public:
     explicit FenetrePrincipale(QWidget *parent = 0);
 
 public slots:
-    void afficheFenetreOptions();
-    //void afficheFenetreOptionsGoms();
+    void afficheFenetreOptionsFitts();
+    void afficheFenetreOptionsGomsSaisieTexte();
     void afficheFenetreStatistiques(std::vector<Statistiques> statistiques);
     void aPropos();
 

@@ -27,13 +27,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
     fenetreTest.cpp \
     fenetrePrincipale.cpp \
-    fenetreOptions.cpp \
     fenetreStatistiques.cpp \
-    statistiques.cpp
+    statistiques.cpp \
+    fenetreOptionsFitts.cpp \
+    fenetreOptionsGomsSaisieTexte.cpp
 
 HEADERS  += \
     fenetreTest.h \
     fenetrePrincipale.h \
-    fenetreOptions.h \
     fenetreStatistiques.h \
-    statistiques.h 
+    statistiques.h \ 
+    fenetreOptionsFitts.h \
+    fenetreOptionsGomsSaisieTexte.h
