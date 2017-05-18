@@ -9,8 +9,6 @@ QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
-
 TARGET = Loi_de_Fitts
 TEMPLATE = app
 
@@ -33,7 +31,9 @@ SOURCES += main.cpp\
     fenetreTestFitts.cpp \
     statistiquesFitts.cpp \
     fenetreStatistiquesFitts.cpp \
-    fenetreTestGomsSaisieTexte.cpp
+    fenetreTestGomsSaisieTexte.cpp \
+    statistiquesGomsSaisieTexte.cpp \
+    fenetreStatistiquesGomsSaisieTexte.cpp
 
 HEADERS  += \
     fenetrePrincipale.h \
@@ -42,4 +42,6 @@ HEADERS  += \
     fenetreTestFitts.h \
     statistiquesFitts.h \
     fenetreStatistiquesFitts.h \
-    fenetreTestGomsSaisieTexte.h
+    fenetreTestGomsSaisieTexte.h \
+    fenetreStatistiquesGomsSaisieTexte.h \
+    statistiquesGomsSaisieTexte.h

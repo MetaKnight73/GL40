@@ -1,4 +1,4 @@
-#include "fenetreStatistiquesFitts.h"
+#include "fenetreStatistiquesGomsSaisieTexte.h"
 #include "fenetrePrincipale.h"
 #include <QBoxLayout>
 #include <QtCharts/QChartView>
@@ -7,9 +7,9 @@
 using namespace QtCharts;
 using namespace std;
 
-FenetreStatistiquesFitts::FenetreStatistiquesFitts(QWidget *parent) : QWidget(parent) {}
+FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(QWidget *parent) : QWidget(parent) {}
 
-FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts, QWidget *parent) : QWidget(parent) {
+FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte, QWidget *parent) : QWidget(parent) {
 
     // Layout principal
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -52,15 +52,13 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     tableauResultats->setModel(modeleTableau);
 
     // Titres des colonnes
-    modeleTableau->setItem(0, 0, new QStandardItem("Distance"));
-    modeleTableau->setItem(0, 1, new QStandardItem("Largeur du bouton"));
-    modeleTableau->setItem(0, 2, new QStandardItem("Temps Fitts (prévu)"));
-    modeleTableau->setItem(0, 3, new QStandardItem("Temps réalisé (réel)"));
+    modeleTableau->setItem(0, 0, new QStandardItem("Longueur du mot"));
+    modeleTableau->setItem(0, 1, new QStandardItem("Temps Goms (prévu)"));
+    modeleTableau->setItem(0, 2, new QStandardItem("Temps Goms (réel)"));
 
-    tableauResultats->setColumnWidth(0, 60);
-    tableauResultats->setColumnWidth(1, 130);
-    tableauResultats->setColumnWidth(2, 130);
-    tableauResultats->setColumnWidth(3, 130);
+    tableauResultats->setColumnWidth(0, 150);
+    tableauResultats->setColumnWidth(1, 150);
+    tableauResultats->setColumnWidth(2, 150);
     tableauResultats->setMinimumWidth(453);
     tableauResultats->setMaximumWidth(453);
 
@@ -69,34 +67,34 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
 
     // On initialise les temps totaux à 0
     tempsTotalReel = 0;
-    tempsTotalFitts = 0;
+    tempsTotalGoms = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i=1; i<statistiquesFitts.size()+1; i++) {
+    for(unsigned int i=1; i<statistiquesGomsSaisieTexte.size()+1; i++) {
+        statistiquesGomsSaisieTexte[i-1].calculTempsGoms();
 
-        modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesFitts[i-1].getDistance())));
-        modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesFitts[i-1].getLargeurBouton())));
-        modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesFitts[i-1].getTempsFitts())));
-        modeleTableau->setItem(i, 3, new QStandardItem(QString::number((double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000)));
+        modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getLongueurMot())));
+        modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getTempsGoms())));
+        modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getTempsReal()/1000)));
 
         // Calculate average times
-        tempsTotalReel += (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000;
-        tempsTotalFitts += statistiquesFitts[i-1].getTempsFitts();
+        tempsTotalReel += ((double)statistiquesGomsSaisieTexte[i-1].getTempsReal()/1000);
+        tempsTotalGoms += statistiquesGomsSaisieTexte[i-1].getTempsGoms();
     }
 
-    modeleTableau->setItem(statistiquesFitts.size()+1, 1, new QStandardItem("Temps moyen"));
-    modeleTableau->setItem(statistiquesFitts.size()+1, 2, new QStandardItem(QString::number(tempsTotalFitts/statistiquesFitts.size())));
-    modeleTableau->setItem(statistiquesFitts.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel/statistiquesFitts.size())));
+    modeleTableau->setItem(statistiquesGomsSaisieTexte.size()+1, 0, new QStandardItem("Temps moyen"));
+    modeleTableau->setItem(statistiquesGomsSaisieTexte.size()+1, 1, new QStandardItem(QString::number(tempsTotalGoms/statistiquesGomsSaisieTexte.size())));
+    modeleTableau->setItem(statistiquesGomsSaisieTexte.size()+1, 2, new QStandardItem(QString::number(tempsTotalReel/statistiquesGomsSaisieTexte.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i<statistiquesFitts.size()+2; i++) {
-        for(unsigned int j = 0; j<4; j++) {
+    for(unsigned int i = 0; i<statistiquesGomsSaisieTexte.size()+2; i++) {
+        for(unsigned int j = 0; j<3; j++) {
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
         }
     }
 
     // Dessin
-    QChartView *chartView = new QChartView(createLineChart(statistiquesFitts), parent);
+    QChartView *chartView = new QChartView(createLineChart(statistiquesGomsSaisieTexte), parent);
     chartView->setMinimumSize(830, 730);
     chartView->setMaximumSize(830, 730);
     chartView->setStyleSheet("border: 1px solid black");
@@ -112,14 +110,14 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
 
 }
 
-QPushButton* FenetreStatistiquesFitts::getBoutonRecommencer() {
+QPushButton* FenetreStatistiquesGomsSaisieTexte::getBoutonRecommencer() {
     return recommencer;
 }
 
-QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> statistiquesFitts) const {
+QChart* FenetreStatistiquesGomsSaisieTexte::createLineChart(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) const {
     QChart *chart = new QChart();
 
-    chart->setTitle("Comparaison des temps Fitts théorique et réalisé");
+    chart->setTitle("Comparaison des temps Goms théorique et réalisé");
 
     QString nameTheorique("Temps théorique");
     QString nameReel("Temps réalisé");
@@ -130,9 +128,9 @@ QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> stat
     serieTheorique->append(0, 0);
     serieReel->append(0, 0);
 
-    for (unsigned int i=1; i<statistiquesFitts.size()+1; i++) {
-        serieTheorique->append(i, statistiquesFitts[i-1].getTempsFitts());
-        serieReel->append(i, (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000);
+    for (unsigned int i=1; i<statistiquesGomsSaisieTexte.size()+1; i++) {
+        serieTheorique->append(i, statistiquesGomsSaisieTexte[i-1].getTempsGoms());
+        serieReel->append(i, (double)statistiquesGomsSaisieTexte[i-1].getTempsReal()/1000);
     }
 
     serieTheorique->setName(nameTheorique);
@@ -146,13 +144,13 @@ QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> stat
     return chart;
 }
 
-void FenetreStatistiquesFitts::quitterApplication() {
+void FenetreStatistiquesGomsSaisieTexte::quitterApplication() {
 
     parentWidget()->close();
 
 }
 
-void FenetreStatistiquesFitts::retournerMenu() {
+void FenetreStatistiquesGomsSaisieTexte::retournerMenu() {
 
     parentWidget()->close();
     FenetrePrincipale *fenetre = new FenetrePrincipale;

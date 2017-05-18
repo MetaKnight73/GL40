@@ -107,7 +107,6 @@ void FenetreOptionsFitts::restoreDefaultValues() {
 
     spinParam1->setValue(1.03);
     spinParam2->setValue(0.1);
-    spinNbClics->setValue(10);
     userExpert->setDown(false);
     userExpert->setEnabled(true);
 
@@ -117,7 +116,6 @@ void FenetreOptionsFitts::restoreExpertValues() {
 
     spinParam1->setValue(0.9);
     spinParam2->setValue(0.1);
-    spinNbClics->setValue(10);
     userNormal->setDown(false);
     userNormal->setEnabled(true);
 

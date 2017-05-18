@@ -99,7 +99,7 @@ void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsSaisieTexte->exec() == QDialog::Accepted) {
-        setCentralWidget(new FenetreTestGomsSaisieTexte(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre1(), fenetreOptionsGomsSaisieTexte->getParametre2()));
+        setCentralWidget(new FenetreTestGomsSaisieTexte(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre2(), fenetreOptionsGomsSaisieTexte->getParametre1()));
     }
 
 }
@@ -113,6 +113,18 @@ void FenetrePrincipale::afficheFenetreStatistiquesFitts(std::vector<Statistiques
     connect(fenetreStatistiquesFitts->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
 
     setCentralWidget(fenetreStatistiquesFitts);
+
+}
+
+// Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
+void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(std::vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
+
+    fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statistiquesGomsSaisieTexte);
+
+    // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
+    connect(fenetreStatistiquesGomsSaisieTexte->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
+
+    setCentralWidget(fenetreStatistiquesGomsSaisieTexte);
 
 }
 
