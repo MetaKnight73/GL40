@@ -87,7 +87,7 @@ void FenetrePrincipale::afficheFenetreOptionsFitts() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsFitts->exec() == QDialog::Accepted) {
-        setCentralWidget(new FenetreTest(fenetreOptionsFitts->getNbClics(), this, fenetreOptionsFitts->getParametre1(), fenetreOptionsFitts->getParametre2()));
+        setCentralWidget(new FenetreTestFitts(fenetreOptionsFitts->getNbClics(), this, fenetreOptionsFitts->getParametre1(), fenetreOptionsFitts->getParametre2()));
     }
 
 }
@@ -99,20 +99,20 @@ void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsSaisieTexte->exec() == QDialog::Accepted) {
-        //setCentralWidget(new FenetreTest(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre1(), fenetreOptionsGomsSaisieTexte->getParametre2()));
+        setCentralWidget(new FenetreTestGomsSaisieTexte(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre1(), fenetreOptionsGomsSaisieTexte->getParametre2()));
     }
 
 }
 
 // Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
-void FenetrePrincipale::afficheFenetreStatistiques(std::vector<Statistiques> statistiques) {
+void FenetrePrincipale::afficheFenetreStatistiquesFitts(std::vector<StatistiquesFitts> statistiquesFitts) {
 
-    fenetreStatistiques = new FenetreStatistiques(statistiques);
+    fenetreStatistiquesFitts = new FenetreStatistiquesFitts(statistiquesFitts);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
-    connect(fenetreStatistiques->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptions()));
+    connect(fenetreStatistiquesFitts->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
 
-    setCentralWidget(fenetreStatistiques);
+    setCentralWidget(fenetreStatistiquesFitts);
 
 }
 

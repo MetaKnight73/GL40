@@ -9,6 +9,8 @@ QT       += charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++11
+
 TARGET = Loi_de_Fitts
 TEMPLATE = app
 
@@ -25,17 +27,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-    fenetreTest.cpp \
     fenetrePrincipale.cpp \
-    fenetreStatistiques.cpp \
-    statistiques.cpp \
     fenetreOptionsFitts.cpp \
-    fenetreOptionsGomsSaisieTexte.cpp
+    fenetreOptionsGomsSaisieTexte.cpp \
+    fenetreTestFitts.cpp \
+    statistiquesFitts.cpp \
+    fenetreStatistiquesFitts.cpp \
+    fenetreTestGomsSaisieTexte.cpp
 
 HEADERS  += \
-    fenetreTest.h \
     fenetrePrincipale.h \
-    fenetreStatistiques.h \
-    statistiques.h \ 
     fenetreOptionsFitts.h \
-    fenetreOptionsGomsSaisieTexte.h
+    fenetreOptionsGomsSaisieTexte.h \
+    fenetreTestFitts.h \
+    statistiquesFitts.h \
+    fenetreStatistiquesFitts.h \
+    fenetreTestGomsSaisieTexte.h
