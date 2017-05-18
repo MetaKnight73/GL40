@@ -37,16 +37,12 @@ char* FenetreTestGomsSaisieTexte::genererMotCourant(double longueur) {
     char* str = (char*) malloc(sizeof(char*));
 
     const char charset[] = "abcdefghijklmnopqrstuvwxyz";
-    if (length) {
-        if(length == 1) {
-            --length;
-        }
-        for (unsigned int n = 0; n < length; n++) {
-            int key = rand() % (int) (sizeof charset - 1);
-            str[n] = charset[key];
-        }
-        str[length] = '\0';
+    for (unsigned int n = 0; n < length; n++) {
+        int key = rand() % (int) (sizeof charset - 1);
+        str[n] = charset[key];
     }
+    str[length] = '\0';
+
     return str;
 }
 
