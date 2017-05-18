@@ -10,8 +10,9 @@
 #include <iostream>
 #include "fenetreOptionsFitts.h"
 #include "fenetreOptionsGomsSaisieTexte.h"
-#include "fenetreTest.h"
-#include "fenetreStatistiques.h"
+#include "fenetreTestFitts.h"
+#include "fenetretestGomsSaisieTexte.h"
+#include "fenetreStatistiquesFitts.h"
 
 class FenetrePrincipale : public QMainWindow {
     Q_OBJECT
@@ -33,7 +34,7 @@ private:
 
     FenetreOptionsFitts *fenetreOptionsFitts;
     FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
-    FenetreStatistiques *fenetreStatistiques;
+    FenetreStatistiquesFitts *fenetreStatistiquesFitts;
 
 public:
     explicit FenetrePrincipale(QWidget *parent = 0);
@@ -41,9 +42,9 @@ public:
 public slots:
     void afficheFenetreOptionsFitts();
     void afficheFenetreOptionsGomsSaisieTexte();
-    void afficheFenetreStatistiques(std::vector<Statistiques> statistiques);
+    void afficheFenetreStatistiquesFitts(std::vector<StatistiquesFitts> statistiquesFitts);
     void aPropos();
 
 };
 
-#endif // FENETREPRINCIPALE_H
+#endif

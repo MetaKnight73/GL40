@@ -2,7 +2,7 @@
 #include <QTextCodec>
 #include <QDesktopWidget>
 #include "fenetrePrincipale.h"
-#include "fenetreTest.h"
+#include "fenetreTestFitts.h"
 
 int main(int argc, char *argv[])
 {
