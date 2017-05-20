@@ -34,7 +34,9 @@ SOURCES += main.cpp\
     fenetreTestGomsSaisieTexte.cpp \
     statistiquesGomsSaisieTexte.cpp \
     fenetreStatistiquesGomsSaisieTexte.cpp \
-    fenetreOptionsGomsClics.cpp
+    fenetreOptionsGomsClics.cpp \
+    statistiquesGomsClics.cpp \
+    fenetreTestGomsClics.cpp
 
 HEADERS  += \
     fenetrePrincipale.h \
@@ -46,4 +48,6 @@ HEADERS  += \
     fenetreTestGomsSaisieTexte.h \
     fenetreStatistiquesGomsSaisieTexte.h \
     statistiquesGomsSaisieTexte.h \
-    fenetreOptionsGomsClics.h
+    fenetreOptionsGomsClics.h \
+    statistiquesGomsClics.h \
+    fenetreTestGomsClics.h

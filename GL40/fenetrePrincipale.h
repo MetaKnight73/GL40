@@ -13,6 +13,7 @@
 #include "fenetreOptionsGomsClics.h"
 #include "fenetreTestFitts.h"
 #include "fenetreTestGomsSaisieTexte.h"
+#include "fenetreTestGomsClics.h"
 #include "fenetreStatistiquesFitts.h"
 #include "fenetreStatistiquesGomsSaisieTexte.h"
 

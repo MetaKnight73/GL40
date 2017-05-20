@@ -13,7 +13,7 @@ class FenetreOptionsGomsClics : public QDialog {
     Q_OBJECT
 private:
     // Paramètres Goms-Clics
-    double parametre1, parametre2;
+    double parametre1, parametre2, parametre3;
 
     // Layout
     QGridLayout *layout;
@@ -24,11 +24,13 @@ private:
     QSpinBox *spinProfondeur;
     QDoubleSpinBox *spinParam1;
     QDoubleSpinBox *spinParam2;
+    QDoubleSpinBox *spinParam3;
 
 
     // Labels
     QLabel *label1;
     QLabel *label2;
+    QLabel *label3;
     QLabel *labelProfondeur;
 
     // Boutons
@@ -42,6 +44,7 @@ public:
     int getProfondeur();
     double getParametre1();
     double getParametre2();
+    double getParametre3();
 
 public slots:
     void restoreDefaultValues();

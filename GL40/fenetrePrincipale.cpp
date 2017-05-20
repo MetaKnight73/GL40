@@ -114,8 +114,7 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClics() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsClics->exec() == QDialog::Accepted) {
-        //setCentralWidget(new FenetreTestGomsClics(fenetreOptionsGomsClics->getProfondeur(), this, fenetreOptionsGomsClics->getParametre2(), fenetreOptionsGomsClics->getParametre1()));
-        std::cout << "Modifier FenetrePrincipale::afficheFenetreOptionsClics() après avoir créer la classe de test GomsClics ! - ligne 118?" << std::endl;
+        setCentralWidget(new FenetreTestGomsClics(fenetreOptionsGomsClics->getProfondeur(), this, fenetreOptionsGomsClics->getParametre1(), fenetreOptionsGomsClics->getParametre2(), fenetreOptionsGomsClics->getParametre3()));
     }
 
 }

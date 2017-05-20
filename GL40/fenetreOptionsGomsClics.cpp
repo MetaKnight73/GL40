@@ -19,34 +19,45 @@ FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(pare
     // Labels de la fenêtre
     label1 = new QLabel;
     label2 = new QLabel;
+    label3 = new QLabel;
     labelProfondeur = new QLabel;
 
     // Spinners
     spinParam1 = new QDoubleSpinBox;
     spinParam2 = new QDoubleSpinBox;
+    spinParam3 = new QDoubleSpinBox;
     spinProfondeur = new QSpinBox;
     spinProfondeur->setAlignment(Qt::AlignCenter);
     spinParam1->setFixedWidth(110);
     spinParam1->setAlignment(Qt::AlignCenter);
     spinParam2->setFixedWidth(110);
     spinParam2->setAlignment(Qt::AlignCenter);
+    spinParam3->setFixedWidth(110);
+    spinParam3->setAlignment(Qt::AlignCenter);
 
     // Assignation des textes des labels
-    label1->setText("Temps d'un mouvement (?) : ");
+    label1->setText("Temps moyen pointage (P) : ");
     label2->setText("Temps d'activité mentale (M) : ");
+    label3->setText("Temps moyen frappe (K) : ");
     labelProfondeur->setText("Sélectionnez le nombre de répertoires : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(0.01);
-    spinParam1->setMaximum(2);
+    spinParam1->setMaximum(3);
     spinParam1->setSingleStep(0.01);
-    spinParam1->setValue(0.1);
+    spinParam1->setValue(1.1);
 
     // On gère les valeurs du spinner 2
     spinParam2->setMinimum(0.01);
     spinParam2->setMaximum(2);
     spinParam2->setSingleStep(0.01);
     spinParam2->setValue(1.35);
+
+    // On gère les valeurs du spinner 3
+    spinParam3->setMinimum(0.01);
+    spinParam3->setMaximum(2);
+    spinParam3->setSingleStep(0.01);
+    spinParam3->setValue(0.1);
 
     // On gère les valeurs du spinner du nombre de clics
     spinProfondeur->setMinimum(1);
@@ -80,10 +91,12 @@ FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(pare
     layout->addWidget(spinParam1, 0, 1);
     layout->addWidget(label2, 1, 0);
     layout->addWidget(spinParam2, 1, 1);
-    layout->addWidget(labelProfondeur, 2, 0);
-    layout->addWidget(spinProfondeur, 2, 1);
-    layout->addLayout(layoutUsers, 3, 0, 1, 6, 0);
-    layout->addLayout(layoutValiderAnnuler, 4, 0, 1, 6, 0);
+    layout->addWidget(label3, 2, 0);
+    layout->addWidget(spinParam3, 2, 1);
+    layout->addWidget(labelProfondeur, 3, 0);
+    layout->addWidget(spinProfondeur, 3, 1);
+    layout->addLayout(layoutUsers, 4, 0, 1, 6, 0);
+    layout->addLayout(layoutValiderAnnuler, 5, 0, 1, 6, 0);
 
     setLayout(layout);
 
@@ -102,8 +115,9 @@ FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(pare
 
 void FenetreOptionsGomsClics::restoreDefaultValues() {
 
-    spinParam1->setValue(0.1);
+    spinParam1->setValue(1.1);
     spinParam2->setValue(1.35);
+    spinParam3->setValue(0.1);
     spinProfondeur->setValue(10);
     userExpert->setDown(false);
     userExpert->setEnabled(true);
@@ -112,8 +126,9 @@ void FenetreOptionsGomsClics::restoreDefaultValues() {
 
 void FenetreOptionsGomsClics::restoreExpertValues() {
 
-    spinParam1->setValue(0.1);
+    spinParam1->setValue(0.9);
     spinParam2->setValue(1.25);
+    spinParam3->setValue(0.08);
     spinProfondeur->setValue(10);
     userNormal->setDown(false);
     userNormal->setEnabled(true);
@@ -156,5 +171,11 @@ double FenetreOptionsGomsClics::getParametre1() {
 double FenetreOptionsGomsClics::getParametre2() {
 
     return spinParam2->value();
+
+}
+
+double FenetreOptionsGomsClics::getParametre3() {
+
+    return spinParam3->value();
 
 }
