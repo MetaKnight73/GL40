@@ -10,6 +10,7 @@
 #include <iostream>
 #include "fenetreOptionsFitts.h"
 #include "fenetreOptionsGomsSaisieTexte.h"
+#include "fenetreOptionsGomsClics.h"
 #include "fenetreTestFitts.h"
 #include "fenetreTestGomsSaisieTexte.h"
 #include "fenetreStatistiquesFitts.h"
@@ -35,8 +36,11 @@ private:
 
     FenetreOptionsFitts *fenetreOptionsFitts;
     FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
+    FenetreOptionsGomsClics *fenetreOptionsGomsClics;
+
     FenetreStatistiquesFitts *fenetreStatistiquesFitts;
     FenetreStatistiquesGomsSaisieTexte *fenetreStatistiquesGomsSaisieTexte;
+    //FenetreStatistiquesGomsClics *fenetreStatistiquesGomsClics;
 
 public:
     explicit FenetrePrincipale(QWidget *parent = 0);
@@ -44,6 +48,7 @@ public:
 public slots:
     void afficheFenetreOptionsFitts();
     void afficheFenetreOptionsGomsSaisieTexte();
+    void afficheFenetreOptionsGomsClics();
     void afficheFenetreStatistiquesFitts(std::vector<StatistiquesFitts> statistiquesFitts);
     void afficheFenetreStatistiquesGomsSaisieTexte(std::vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte);
     void aPropos();

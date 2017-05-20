@@ -69,13 +69,16 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     // On initialise ici la fenêtre des options pour les paramètres de l'application
     fenetreOptionsFitts = new FenetreOptionsFitts;
     fenetreOptionsGomsSaisieTexte = new FenetreOptionsGomsSaisieTexte;
+    fenetreOptionsGomsClics = new FenetreOptionsGomsClics;
 
     // Les connexions
     connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(newGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
+    connect(newGoms2, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClics()));
     connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
     connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
+    connect(btnGoms2, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
     connect(fermer, SIGNAL(triggered()), this, SLOT(close()));
 
 }
@@ -100,6 +103,19 @@ void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsSaisieTexte->exec() == QDialog::Accepted) {
         setCentralWidget(new FenetreTestGomsSaisieTexte(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre2(), fenetreOptionsGomsSaisieTexte->getParametre1()));
+    }
+
+}
+
+// Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
+void FenetrePrincipale::afficheFenetreOptionsGomsClics() {
+
+    fenetreOptionsGomsClics->setModal(true);
+
+    // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
+    if(fenetreOptionsGomsClics->exec() == QDialog::Accepted) {
+        //setCentralWidget(new FenetreTestGomsClics(fenetreOptionsGomsClics->getProfondeur(), this, fenetreOptionsGomsClics->getParametre2(), fenetreOptionsGomsClics->getParametre1()));
+        std::cout << "Modifier FenetrePrincipale::afficheFenetreOptionsClics() après avoir créer la classe de test GomsClics ! - ligne 118?" << std::endl;
     }
 
 }
