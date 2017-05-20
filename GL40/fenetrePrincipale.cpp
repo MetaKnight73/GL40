@@ -143,6 +143,18 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(std::vector<St
 
 }
 
+// Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(std::vector<StatistiquesGomsClics> statistiquesGomsClics) {
+
+    fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statistiquesGomsClics);
+
+    // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
+    connect(fenetreStatistiquesGomsClics->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
+
+    setCentralWidget(fenetreStatistiquesGomsClics);
+
+}
+
 // Méthode appelée pour l'affichage de la boîte de dialogue "A propos"
 void FenetrePrincipale::aPropos() {
 

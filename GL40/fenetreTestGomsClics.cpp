@@ -25,7 +25,7 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
 
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(demarrer()));
-    //connect(this, SIGNAL(sequenceFin(std::vector<StatistiquesGomsClics>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsClics(std::vector<StatistiquesGomsClics>)));
+    connect(this, SIGNAL(sequenceFin(std::vector<StatistiquesGomsClics>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsClics(std::vector<StatistiquesGomsClics>)));
 
 }
 
@@ -72,12 +72,16 @@ void FenetreTestGomsClics::changer(){
         grille[boutonActif]->setDisabled(true);
         grille[boutonActif]->setText("pas là");
 
+        //ajout aux stats :
+        statistiquesGomsClics.push_back(StatistiquesGomsClics(param2, param1, param3, boutonActif, chronometre->elapsed()));
+
         // on met un nouveau
         boutonActif = qrand()%16;
         grille[boutonActif]->setEnabled(true);
         grille[boutonActif]->setText("celui là");
         selectionne = false;
 
+        chronometre->restart();
         ++nombreClicsCourant;
     }else{
         grille[boutonActif]->setDown(true);
@@ -85,7 +89,6 @@ void FenetreTestGomsClics::changer(){
     }
 
     if (nombreClicsCourant-1 >= nombreC){ // fin
-        //emit sequenceFin(statistiquesGomsClics);
-        std::cout << "sequence fin a faire... FenetreTestGomsClics::changer()" << std::endl;
+        emit sequenceFin(statistiquesGomsClics);
     }
 }

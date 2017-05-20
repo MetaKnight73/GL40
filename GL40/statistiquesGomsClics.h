@@ -8,22 +8,24 @@
 class StatistiquesGomsClics {
 private:
     // Paramètres Goms
-    double tempsM;
-    double profondeur;
+    double tempsM, tempsP, tempsK;
+    double numbouton;
 
     // Temps Goms
     double tempsGoms, tempsGomsReal;
 
 public:
     StatistiquesGomsClics();
-    StatistiquesGomsClics(double tempsM, double profondeur, int tempsGomsReal);
+    StatistiquesGomsClics(double tM, double tP, double tK, double numBout, int tempsGomsReal);
 
     // Méthodes de calcul
     void calculTempsGoms();
 
     double getTempsGoms();
     double getTempsM();
-    double getProfondeur();
+    double getTempsP();
+    double getTempsK();
+    double getNumBouton();
     double getTempsReal();
 
 };
