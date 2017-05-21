@@ -1,5 +1,4 @@
 #include "fenetreOptionsFitts.h"
-#include <iostream>
 
 FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
 
@@ -127,30 +126,46 @@ void FenetreOptionsFitts::onChange() {
     double param2 = spinParam2->value();
 
     if(param1 == (double)1.03) {
+
         if(param2 == (double)0.1) {
+
             userNormal->setDown(true);
             userNormal->setDisabled(true);
+
         }
+
         else {
+
             userNormal->setDown(false);
             userNormal->setEnabled(true);
+
         }
     }
+
     else if(param1 == (double)0.9) {
+
         if(param2 == (double)0.1) {
+
             userExpert->setDown(true);
             userExpert->setDisabled(true);
+
         }
+
         else {
+
             userExpert->setDown(false);
             userExpert->setEnabled(true);
+
         }
     }
+
     else {
+
         userNormal->setDown(false);
         userExpert->setDown(false);
         userNormal->setEnabled(true);
         userExpert->setEnabled(true);
+
     }
 
 }

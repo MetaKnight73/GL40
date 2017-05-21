@@ -1,11 +1,12 @@
 #include <QApplication>
 #include <QTextCodec>
 #include <QDesktopWidget>
+
 #include "fenetrePrincipale.h"
 #include "fenetreTestFitts.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
+
     //Application
     QApplication app(argc, argv);
 
@@ -26,5 +27,6 @@ int main(int argc, char *argv[])
     fenetre->show();
 
     return app.exec();
+
 }
 

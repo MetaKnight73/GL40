@@ -1,11 +1,5 @@
 #include "fenetreStatistiquesGomsClics.h"
 #include "fenetrePrincipale.h"
-#include <QBoxLayout>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-
-using namespace QtCharts;
-using namespace std;
 
 FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(QWidget *parent) : QWidget(parent) {}
 
@@ -52,8 +46,8 @@ FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(vector<StatistiquesGo
     tableauResultats->setModel(modeleTableau);
 
     // Titres des colonnes
-    modeleTableau->setItem(0, 0, new QStandardItem("colonne"));
-    modeleTableau->setItem(0, 1, new QStandardItem("ligne"));
+    modeleTableau->setItem(0, 0, new QStandardItem("Colonne"));
+    modeleTableau->setItem(0, 1, new QStandardItem("Ligne"));
     modeleTableau->setItem(0, 2, new QStandardItem("Temps Goms (prévu)"));
     modeleTableau->setItem(0, 3, new QStandardItem("Temps Goms (réel)"));
 
@@ -72,7 +66,8 @@ FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(vector<StatistiquesGo
     tempsTotalGoms = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i=1; i<statistiquesGomsClics.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesGomsClics.size()+1; i++) {
+
         statistiquesGomsClics[i-1].calculTempsGoms();
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(fmod(statistiquesGomsClics[i-1].getNumBouton(),4)+1)));
@@ -83,17 +78,22 @@ FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(vector<StatistiquesGo
         // Calculate average times
         tempsTotalReel += ((double)statistiquesGomsClics[i-1].getTempsReal()/1000);
         tempsTotalGoms += statistiquesGomsClics[i-1].getTempsGoms();
+
     }
 
-    modeleTableau->setItem(statistiquesGomsClics.size()+1, 1, new QStandardItem("Temps total"));
-    modeleTableau->setItem(statistiquesGomsClics.size()+1, 2, new QStandardItem(QString::number(tempsTotalGoms)));
-    modeleTableau->setItem(statistiquesGomsClics.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel)));
+    modeleTableau->setItem(statistiquesGomsClics.size()+1, 1, new QStandardItem("Temps moyen"));
+    modeleTableau->setItem(statistiquesGomsClics.size()+1, 2, new QStandardItem(QString::number(tempsTotalGoms/statistiquesGomsClics.size())));
+    modeleTableau->setItem(statistiquesGomsClics.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel/statistiquesGomsClics.size())));
 
     // Alignement central dans les cellules
     for(unsigned int i = 0; i<statistiquesGomsClics.size()+2; i++) {
-        for(unsigned int j = 0; j<3; j++) {
+
+        for(unsigned int j = 0; j < 3; j++) {
+
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
+
         }
+
     }
 
     // Dessin
@@ -114,10 +114,13 @@ FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(vector<StatistiquesGo
 }
 
 QPushButton* FenetreStatistiquesGomsClics::getBoutonRecommencer() {
+
     return recommencer;
+
 }
 
 QChart* FenetreStatistiquesGomsClics::createLineChart(vector<StatistiquesGomsClics> statistiquesGomsClics) const {
+
     QChart *chart = new QChart();
 
     chart->setTitle("Comparaison des temps Goms théorique et réalisé");
@@ -131,9 +134,11 @@ QChart* FenetreStatistiquesGomsClics::createLineChart(vector<StatistiquesGomsCli
     serieTheorique->append(0, 0);
     serieReel->append(0, 0);
 
-    for (unsigned int i=1; i<statistiquesGomsClics.size()+1; i++) {
+    for (unsigned int i = 1; i<statistiquesGomsClics.size()+1; i++) {
+
         serieTheorique->append(i, statistiquesGomsClics[i-1].getTempsGoms());
         serieReel->append(i, (double)statistiquesGomsClics[i-1].getTempsReal()/1000);
+
     }
 
     serieTheorique->setName(nameTheorique);

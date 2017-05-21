@@ -1,7 +1,6 @@
 #ifndef FENETREOPTIONSGOMSCLICS_H
 #define FENETREOPTIONSGOMSCLICS_H
 
-
 #include <QDialog>
 #include <QPushButton>
 #include <QSpinBox>
@@ -11,7 +10,9 @@
 
 class FenetreOptionsGomsClics : public QDialog {
     Q_OBJECT
+
 private:
+
     // Paramètres Goms-Clics
     double parametre1, parametre2, parametre3;
 
@@ -26,7 +27,6 @@ private:
     QDoubleSpinBox *spinParam2;
     QDoubleSpinBox *spinParam3;
 
-
     // Labels
     QLabel *label1;
     QLabel *label2;
@@ -40,6 +40,7 @@ private:
     QPushButton *userExpert;
 
 public:
+
     explicit FenetreOptionsGomsClics(QWidget *parent = 0);
     int getProfondeur();
     double getParametre1();
@@ -47,10 +48,11 @@ public:
     double getParametre3();
 
 public slots:
+
     void restoreDefaultValues();
     void restoreExpertValues();
     void onChange();
 
 };
 
-#endif // FENETREOPTIONSGOMSCLICS_H
+#endif

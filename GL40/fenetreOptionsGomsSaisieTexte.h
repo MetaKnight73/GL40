@@ -10,7 +10,9 @@
 
 class FenetreOptionsGomsSaisieTexte : public QDialog {
     Q_OBJECT
+
 private:
+
     // Paramètres Goms-Keystroke
     double parametre1, parametre2;
 
@@ -36,12 +38,14 @@ private:
     QPushButton *userExpert;
 
 public:
+
     explicit FenetreOptionsGomsSaisieTexte(QWidget *parent = 0);
     int getNbMots();
     double getParametre1();
     double getParametre2();
 
 public slots:
+
     void restoreDefaultValues();
     void restoreExpertValues();
     void onChange();

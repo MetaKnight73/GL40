@@ -1,5 +1,4 @@
 #include "fenetreOptionsGomsSaisieTexte.h"
-#include <iostream>
 
 FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : QDialog(parent) {
 
@@ -124,18 +123,26 @@ void FenetreOptionsGomsSaisieTexte::onChange() {
     double param2 = spinParam2->value();
 
     if(param2 == (double)1.35) {
+
         userNormal->setDown(true);
         userNormal->setDisabled(true);
+
     }
+
     else if(param2 == (double)1.25) {
+
         userExpert->setDown(true);
         userExpert->setDisabled(true);
+
     }
+
     else {
+
         userNormal->setDown(false);
         userExpert->setDown(false);
         userNormal->setEnabled(true);
         userExpert->setEnabled(true);
+
     }
 
 }

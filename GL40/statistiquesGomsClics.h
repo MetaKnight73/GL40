@@ -3,10 +3,11 @@
 
 #include <QTime>
 #include <math.h>
-#include <iostream>
 
 class StatistiquesGomsClics {
+
 private:
+
     // Paramètres Goms
     double tempsM, tempsP, tempsK;
     double numbouton;
@@ -15,6 +16,7 @@ private:
     double tempsGoms, tempsGomsReal;
 
 public:
+
     StatistiquesGomsClics();
     StatistiquesGomsClics(double tM, double tP, double tK, double numBout, int tempsGomsReal);
 
@@ -30,4 +32,4 @@ public:
 
 };
 
-#endif // STATISTIQUESGOMSCLICS_H
+#endif

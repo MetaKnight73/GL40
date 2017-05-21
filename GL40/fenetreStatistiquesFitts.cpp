@@ -1,11 +1,5 @@
 #include "fenetreStatistiquesFitts.h"
 #include "fenetrePrincipale.h"
-#include <QBoxLayout>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-
-using namespace QtCharts;
-using namespace std;
 
 FenetreStatistiquesFitts::FenetreStatistiquesFitts(QWidget *parent) : QWidget(parent) {}
 
@@ -72,16 +66,17 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     tempsTotalFitts = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i=1; i<statistiquesFitts.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesFitts.size()+1; i++) {
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesFitts[i-1].getDistance())));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesFitts[i-1].getLargeurBouton())));
         modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesFitts[i-1].getTempsFitts())));
         modeleTableau->setItem(i, 3, new QStandardItem(QString::number((double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000)));
 
-        // Calculate average times
+        // Calcul du temps moyen
         tempsTotalReel += (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000;
         tempsTotalFitts += statistiquesFitts[i-1].getTempsFitts();
+
     }
 
     modeleTableau->setItem(statistiquesFitts.size()+1, 1, new QStandardItem("Temps moyen"));
@@ -89,10 +84,14 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     modeleTableau->setItem(statistiquesFitts.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel/statistiquesFitts.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i<statistiquesFitts.size()+2; i++) {
-        for(unsigned int j = 0; j<4; j++) {
+    for(unsigned int i = 0; i < statistiquesFitts.size()+2; i++) {
+
+        for(unsigned int j = 0; j < 4; j++) {
+
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
+
         }
+
     }
 
     // Dessin
@@ -113,10 +112,13 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
 }
 
 QPushButton* FenetreStatistiquesFitts::getBoutonRecommencer() {
+
     return recommencer;
+
 }
 
 QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> statistiquesFitts) const {
+
     QChart *chart = new QChart();
 
     chart->setTitle("Comparaison des temps Fitts théorique et réalisé");
@@ -130,9 +132,11 @@ QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> stat
     serieTheorique->append(0, 0);
     serieReel->append(0, 0);
 
-    for (unsigned int i=1; i<statistiquesFitts.size()+1; i++) {
+    for (unsigned int i = 1; i < statistiquesFitts.size()+1; i++) {
+
         serieTheorique->append(i, statistiquesFitts[i-1].getTempsFitts());
         serieReel->append(i, (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000);
+
     }
 
     serieTheorique->setName(nameTheorique);

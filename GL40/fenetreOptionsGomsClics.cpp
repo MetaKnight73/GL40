@@ -1,11 +1,10 @@
 #include "fenetreOptionsGomsClics.h"
 
-#include <iostream>
-
 FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(parent) {
 
     // On assigne une taille fixe de fenêtre à 400x200
     setFixedSize(400,200);
+
     // Layouts de la fenêtre
     layout = new QGridLayout;
     layout->setHorizontalSpacing(5);
@@ -140,18 +139,26 @@ void FenetreOptionsGomsClics::onChange() {
     double param2 = spinParam2->value();
 
     if(param2 == (double)1.35) {
+
         userNormal->setDown(true);
         userNormal->setDisabled(true);
+
     }
+
     else if(param2 == (double)1.25) {
+
         userExpert->setDown(true);
         userExpert->setDisabled(true);
+
     }
+
     else {
+
         userNormal->setDown(false);
         userExpert->setDown(false);
         userNormal->setEnabled(true);
         userExpert->setEnabled(true);
+
     }
 
 }

@@ -4,10 +4,11 @@
 #include <QTime>
 #include <QPointF>
 #include <math.h>
-#include <iostream>
 
 class StatistiquesFitts {
+
 private:
+
     // Position initiale
     QPointF positionInitiale;
 
@@ -31,6 +32,7 @@ private:
     double tempsFitts;
 
 public:
+
     StatistiquesFitts();
     StatistiquesFitts(QPointF positionInit, QPointF positionBout, int largeurB, int tempsDeplacementS, double param1, double param2);
 

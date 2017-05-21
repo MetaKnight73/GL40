@@ -10,7 +10,9 @@
 
 class FenetreOptionsFitts : public QDialog {
     Q_OBJECT
+
 private:
+
     // Paramètres Fitts
     double parametre1, parametre2;
 
@@ -37,12 +39,14 @@ private:
     QPushButton *userExpert;
 
 public:
+
     explicit FenetreOptionsFitts(QWidget *parent = 0);
     int getNbClics();
     double getParametre1();
     double getParametre2();
 
 public slots:
+
     void restoreDefaultValues();
     void restoreExpertValues();
     void onChange();

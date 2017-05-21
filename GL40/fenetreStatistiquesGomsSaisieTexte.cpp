@@ -1,11 +1,5 @@
 #include "fenetreStatistiquesGomsSaisieTexte.h"
 #include "fenetrePrincipale.h"
-#include <QBoxLayout>
-#include <QtCharts/QChartView>
-#include <QtCharts/QLineSeries>
-
-using namespace QtCharts;
-using namespace std;
 
 FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(QWidget *parent) : QWidget(parent) {}
 
@@ -70,7 +64,7 @@ FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<St
     tempsTotalGoms = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i=1; i<statistiquesGomsSaisieTexte.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesGomsSaisieTexte.size()+1; i++) {
         statistiquesGomsSaisieTexte[i-1].calculTempsGoms();
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getLongueurMot())));
@@ -80,6 +74,7 @@ FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<St
         // Calculate average times
         tempsTotalReel += ((double)statistiquesGomsSaisieTexte[i-1].getTempsReal()/1000);
         tempsTotalGoms += statistiquesGomsSaisieTexte[i-1].getTempsGoms();
+
     }
 
     modeleTableau->setItem(statistiquesGomsSaisieTexte.size()+1, 0, new QStandardItem("Temps moyen"));
@@ -87,10 +82,14 @@ FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<St
     modeleTableau->setItem(statistiquesGomsSaisieTexte.size()+1, 2, new QStandardItem(QString::number(tempsTotalReel/statistiquesGomsSaisieTexte.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i<statistiquesGomsSaisieTexte.size()+2; i++) {
+    for(unsigned int i = 0; i < statistiquesGomsSaisieTexte.size()+2; i++) {
+
         for(unsigned int j = 0; j<3; j++) {
+
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
+
         }
+
     }
 
     // Dessin
@@ -111,10 +110,13 @@ FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<St
 }
 
 QPushButton* FenetreStatistiquesGomsSaisieTexte::getBoutonRecommencer() {
+
     return recommencer;
+
 }
 
 QChart* FenetreStatistiquesGomsSaisieTexte::createLineChart(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) const {
+
     QChart *chart = new QChart();
 
     chart->setTitle("Comparaison des temps Goms théorique et réalisé");
@@ -128,9 +130,11 @@ QChart* FenetreStatistiquesGomsSaisieTexte::createLineChart(vector<StatistiquesG
     serieTheorique->append(0, 0);
     serieReel->append(0, 0);
 
-    for (unsigned int i=1; i<statistiquesGomsSaisieTexte.size()+1; i++) {
+    for (unsigned int i = 1; i < statistiquesGomsSaisieTexte.size()+1; i++) {
+
         serieTheorique->append(i, statistiquesGomsSaisieTexte[i-1].getTempsGoms());
         serieReel->append(i, (double)statistiquesGomsSaisieTexte[i-1].getTempsReal()/1000);
+
     }
 
     serieTheorique->setName(nameTheorique);

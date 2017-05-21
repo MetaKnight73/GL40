@@ -3,10 +3,11 @@
 
 #include <QTime>
 #include <math.h>
-#include <iostream>
 
 class StatistiquesGomsSaisieTexte {
+
 private:
+
     // Paramètres Goms
     double tempsM;
     double longueurMot;
@@ -15,6 +16,7 @@ private:
     double tempsGoms, tempsGomsReal;
 
 public:
+
     StatistiquesGomsSaisieTexte();
     StatistiquesGomsSaisieTexte(double tempsM, double longueurMot, int tempsGomsReal);
 

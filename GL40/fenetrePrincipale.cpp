@@ -1,17 +1,13 @@
 #include "fenetrePrincipale.h"
-#include <QGridLayout>
-#include <QBoxLayout>
-#include <QWidget>
-#include <QLabel>
 
 FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
-    // Taille fixe à 1280x720, envisager une adaptation
+    // Taille fixe à 1280x720
     setFixedSize(1280, 720);
 
     // Layout de la page
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->setSpacing(50);
+    layout->setSpacing(25);
 
     // Widget central de la page
     QWidget *middle = new QWidget;
@@ -24,7 +20,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     label->setAlignment(Qt::AlignCenter);
     layout->addWidget(label);
 
-    // Label de l'énoncé (première partie)
+    // Label de l'énoncé
     QLabel *label2 = new QLabel("Ceci est un programme permettant d'effectuer des tests afin de comparer les résultats théoriques de plusieurs tests connus tels que la loi de Fitts et Goms-Keystroke avec les valeurs récoltées manuellement lors de ces tests.");
     label2->setWordWrap(true);
     label2->setAlignment(Qt::AlignCenter);
@@ -33,18 +29,28 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
     // Bouton servant à lancer l'application (la partie fitts)
     btnFitts = new QPushButton("Loi de Fitts");
-    btnFitts->setFixedSize(400, 75);
+    btnFitts->setFixedSize(350, 75);
     layout->addWidget(btnFitts, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 1)
     btnGoms1 = new QPushButton("Goms-Keystroke (saisie de texte)");
-    btnGoms1->setFixedSize(400, 100);
+    btnGoms1->setFixedSize(350, 75);
     layout->addWidget(btnGoms1, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 2)
     btnGoms2 = new QPushButton("Goms-Keystroke (clics)");
-    btnGoms2->setFixedSize(400, 125);
+    btnGoms2->setFixedSize(350, 75);
     layout->addWidget(btnGoms2, 0, Qt::AlignCenter);
+
+    // Bouton servant à lancer l'application (la partie goms 3)
+    btnGoms3 = new QPushButton("Goms-Keystroke (version bash)");
+    btnGoms3->setFixedSize(350, 75);
+    layout->addWidget(btnGoms3, 0, Qt::AlignCenter);
+
+    // Bouton servant à lancer l'application (la partie goms 4)
+    btnGoms4 = new QPushButton("Goms-Keystroke (flèches)");
+    btnGoms4->setFixedSize(350, 75);
+    layout->addWidget(btnGoms4, 0, Qt::AlignCenter);
 
     // Menu bar au sommet
     menuFile = menuBar()->addMenu("Fichier");
@@ -57,6 +63,10 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     nouveau->addAction(newGoms1);
     newGoms2 = new QAction("Goms-Keystroke avec clics", nouveau);
     nouveau->addAction(newGoms2);
+    newGoms3 = new QAction("Goms-Keystroke avec saisie du chemin", nouveau);
+    nouveau->addAction(newGoms3);
+    newGoms4 = new QAction("Goms-Keystroke avec les flèches", nouveau);
+    nouveau->addAction(newGoms4);
 
     about = new QAction("À propos de nous", this);
     fermer = new QAction("Quitter", this);
@@ -66,7 +76,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     menuFile->addAction(about);
     menuFile->addAction(fermer);
 
-    // On initialise ici la fenêtre des options pour les paramètres de l'application
+    // On initialise ici les fenêtres des options pour les paramètres de l'application
     fenetreOptionsFitts = new FenetreOptionsFitts;
     fenetreOptionsGomsSaisieTexte = new FenetreOptionsGomsSaisieTexte;
     fenetreOptionsGomsClics = new FenetreOptionsGomsClics;
@@ -75,10 +85,16 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(newGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(newGoms2, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClics()));
-    connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
+    //connect(newGoms3, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsBash()));
+    //connect(newGoms4, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsFleches()));
+
     connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(btnGoms2, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
+    //connect(btnGoms3, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
+    //connect(btnGoms4, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsFleches()));
+
+    connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
     connect(fermer, SIGNAL(triggered()), this, SLOT(close()));
 
 }
@@ -90,7 +106,9 @@ void FenetrePrincipale::afficheFenetreOptionsFitts() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsFitts->exec() == QDialog::Accepted) {
+
         setCentralWidget(new FenetreTestFitts(fenetreOptionsFitts->getNbClics(), this, fenetreOptionsFitts->getParametre1(), fenetreOptionsFitts->getParametre2()));
+
     }
 
 }
@@ -102,7 +120,9 @@ void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsSaisieTexte->exec() == QDialog::Accepted) {
+
         setCentralWidget(new FenetreTestGomsSaisieTexte(fenetreOptionsGomsSaisieTexte->getNbMots(), this, fenetreOptionsGomsSaisieTexte->getParametre2(), fenetreOptionsGomsSaisieTexte->getParametre1()));
+
     }
 
 }
@@ -114,13 +134,15 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClics() {
 
     // Si on clique sur valider dans la fenêtre d'options, on va ouvrir la fenêtre avec le test
     if(fenetreOptionsGomsClics->exec() == QDialog::Accepted) {
+
         setCentralWidget(new FenetreTestGomsClics(fenetreOptionsGomsClics->getProfondeur(), this, fenetreOptionsGomsClics->getParametre1(), fenetreOptionsGomsClics->getParametre2(), fenetreOptionsGomsClics->getParametre3()));
+
     }
 
 }
 
 // Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
-void FenetrePrincipale::afficheFenetreStatistiquesFitts(std::vector<StatistiquesFitts> statistiquesFitts) {
+void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts) {
 
     fenetreStatistiquesFitts = new FenetreStatistiquesFitts(statistiquesFitts);
 
@@ -132,7 +154,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesFitts(std::vector<Statistiques
 }
 
 // Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
-void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(std::vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
+void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
 
     fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statistiquesGomsSaisieTexte);
 
@@ -144,7 +166,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(std::vector<St
 }
 
 // Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
-void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(std::vector<StatistiquesGomsClics> statistiquesGomsClics) {
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics) {
 
     fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statistiquesGomsClics);
 

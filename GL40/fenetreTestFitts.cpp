@@ -1,5 +1,4 @@
 #include "fenetreTestFitts.h"
-#include <QLayout>
 
 FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double parametre1, double parametre2) : QWidget(parent) {
 
@@ -22,14 +21,16 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
 
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(deplacerBoutonClic()));
-    connect(this, SIGNAL(sequenceFin(std::vector<StatistiquesFitts>)), this->parent(), SLOT(afficheFenetreStatistiquesFitts(std::vector<StatistiquesFitts>)));
+    connect(this, SIGNAL(sequenceFin(vector<StatistiquesFitts>)), this->parent(), SLOT(afficheFenetreStatistiquesFitts(vector<StatistiquesFitts>)));
 
 }
 
 void FenetreTestFitts::mouseMoveEvent(QMouseEvent *) {
 
     if(sourisBougeeDebut == false) {
+
         chronometre->start();
+
     }
 
     sourisBougeeDebut = true;
@@ -55,18 +56,27 @@ void FenetreTestFitts::deplacerBoutonClic() {
     // On déplace le bouton selon l'axe X, jusqu'à un minimum de 0 (garanti par le test)
     int tempx = (qrand()%1280) - largeurBouton;
     if(tempx >= 0) {
+
         x = tempx;
+
     }
 
     // On déplace le bouton selon l'axe Y, jusqu'à un minimum de 0 (garanti par le test)
     int tempy = (qrand()%720) - largeurBouton;
     if(tempy >= 0) {
+
         if(tempy+largeurBouton >= 670) {
+
             y = 670-largeurBouton;
+
         }
+
         else {
+
            y = tempy;
+
         }
+
     }
 
     // On déplace le bouton
@@ -89,15 +99,17 @@ void FenetreTestFitts::deplacerBoutonClic() {
 
     // Si on est au moins au deuxième clic (soit le premier clic du test)
     if(nombreClicsCourant >= 2) {
+
         // On ajoute les informations dans le vecteur des stats
         statistiquesFitts.push_back(StatistiquesFitts(positionInitiale, QPoint(x, y), largeurBouton, chronometre->elapsed(), param1, param2));
+
     }
 
     // Si on est après le dernier clic
     if(nombreClicsCourant - 1 == nombreC) {
 
         // On calcule les valeurs nécessaires
-        for(unsigned int i=0; i<statistiquesFitts.size(); i++) {
+        for(unsigned int i = 0; i < statistiquesFitts.size(); i++) {
 
             statistiquesFitts[i].calculDistance();
             statistiquesFitts[i].calculTempsFitts();

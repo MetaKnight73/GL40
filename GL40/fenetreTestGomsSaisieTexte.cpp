@@ -1,7 +1,4 @@
 #include "fenetreTestGomsSaisieTexte.h"
-#include <time.h>
-#include <QString>
-#include <QLayout>
 
 FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent, double tempsM, double longueurMaximale) : QWidget(parent) {
 
@@ -27,11 +24,12 @@ FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(lancerTest()));
     connect(zoneSaisie, SIGNAL(returnPressed()), this, SLOT(checkWord()));
-    connect(this, SIGNAL(sequenceFinGoms(std::vector<StatistiquesGomsSaisieTexte>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsSaisieTexte(std::vector<StatistiquesGomsSaisieTexte>)));
+    connect(this, SIGNAL(sequenceFinGoms(vector<StatistiquesGomsSaisieTexte>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte>)));
 
 }
 
 char* FenetreTestGomsSaisieTexte::genererMotCourant(double longueur) {
+
     srand(time(NULL));
     unsigned int length = (rand() % (int)longueur) + 1;
     char* str = (char*) malloc(sizeof(char*));
@@ -44,6 +42,7 @@ char* FenetreTestGomsSaisieTexte::genererMotCourant(double longueur) {
     str[length] = '\0';
 
     return str;
+
 }
 
 void FenetreTestGomsSaisieTexte::lancerTest() {
@@ -75,6 +74,7 @@ void FenetreTestGomsSaisieTexte::lancerTest() {
     chronometre->start();
 
     zoneSaisie->setFocus();
+
 }
 
 void FenetreTestGomsSaisieTexte::checkWord() {
@@ -84,16 +84,23 @@ void FenetreTestGomsSaisieTexte::checkWord() {
 
     int x = QString::compare(texteZoneSaisie, texteMotCourant, Qt::CaseSensitive);
     if(!x) {
+
         nombreMotsValidesCourant++;
         statistiquesGomsSaisieTexte.push_back(StatistiquesGomsSaisieTexte(tempsMental, texteMotCourant.length(), chronometre->elapsed()));
         if(nombreMotsValidesCourant < nombreM) {
+
             zoneSaisie->clear();
             motCourant->setText(QString(genererMotCourant(longueurMax)));
             chronometre->restart();
+
         }
+
         else {
+
             emit sequenceFinGoms(statistiquesGomsSaisieTexte);
+
         }
+
     }
 
 }
