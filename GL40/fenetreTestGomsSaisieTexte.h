@@ -26,7 +26,8 @@ private:
     // Variables générales
     int nombreM;
     int nombreMotsValidesCourant;
-    double tempsMental, longueurMax;
+    double tempsMental;
+    int longueurMax;
     QGridLayout *layout;
     QVBoxLayout *layoutZoneSaisie;
     QLabel *motCourant, *labelZoneSaisie;
@@ -41,8 +42,8 @@ private:
 
 public:
 
-    explicit FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent = 0, double tempsM = 0, double longueurMax = 0);
-    char* genererMotCourant(double longueur);
+    explicit FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent = 0, double tempsM = 0, int longueurMax = 0);
+    char* genererMotCourant(int longueur);
 
 signals:
 

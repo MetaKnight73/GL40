@@ -21,7 +21,7 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
     labelMots = new QLabel;
 
     // Spinners
-    spinParam1 = new QDoubleSpinBox;
+    spinParam1 = new QSpinBox;
     spinParam2 = new QDoubleSpinBox;
     spinNbMots = new QSpinBox;
     spinNbMots->setAlignment(Qt::AlignCenter);
@@ -153,7 +153,7 @@ int FenetreOptionsGomsSaisieTexte::getNbMots() {
 
 }
 
-double FenetreOptionsGomsSaisieTexte::getParametre1() {
+int FenetreOptionsGomsSaisieTexte::getParametre1() {
 
     return spinParam1->value();
 

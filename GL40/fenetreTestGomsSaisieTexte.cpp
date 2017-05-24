@@ -1,6 +1,6 @@
 #include "fenetreTestGomsSaisieTexte.h"
 
-FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent, double tempsM, double longueurMaximale) : QWidget(parent) {
+FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent, double tempsM, int longueurMaximale) : QWidget(parent) {
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
@@ -28,11 +28,11 @@ FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *
 
 }
 
-char* FenetreTestGomsSaisieTexte::genererMotCourant(double longueur) {
+char* FenetreTestGomsSaisieTexte::genererMotCourant(int longueur) {
 
     srand(time(NULL));
-    unsigned int length = (rand() % (int)longueur) + 1;
-    char* str = (char*) malloc(sizeof(char*));
+    unsigned int length = (rand() % longueur) + 1;
+    char* str = new char[length];
 
     const char charset[] = "abcdefghijklmnopqrstuvwxyz";
     for (unsigned int n = 0; n < length; n++) {

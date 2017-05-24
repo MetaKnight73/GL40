@@ -14,7 +14,8 @@ class FenetreOptionsGomsSaisieTexte : public QDialog {
 private:
 
     // Paramètres Goms-Keystroke
-    double parametre1, parametre2;
+    int parametre1;
+    double parametre2;
 
     // Layout
     QGridLayout *layout;
@@ -23,7 +24,7 @@ private:
 
     // Spinners
     QSpinBox *spinNbMots;
-    QDoubleSpinBox *spinParam1;
+    QSpinBox *spinParam1;
     QDoubleSpinBox *spinParam2;
 
     // Labels
@@ -41,7 +42,7 @@ public:
 
     explicit FenetreOptionsGomsSaisieTexte(QWidget *parent = 0);
     int getNbMots();
-    double getParametre1();
+    int getParametre1();
     double getParametre2();
 
 public slots:
