@@ -80,18 +80,19 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     fenetreOptionsFitts = new FenetreOptionsFitts;
     fenetreOptionsGomsSaisieTexte = new FenetreOptionsGomsSaisieTexte;
     fenetreOptionsGomsClics = new FenetreOptionsGomsClics;
+    fenetreOptionsGomsBash = new FenetreOptionsGomsBash;
 
     // Les connexions
     connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(newGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(newGoms2, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClics()));
-    //connect(newGoms3, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsBash()));
+    connect(newGoms3, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsBash()));
     //connect(newGoms4, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsFleches()));
 
     connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
     connect(btnGoms2, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
-    //connect(btnGoms3, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
+    connect(btnGoms3, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
     //connect(btnGoms4, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsFleches()));
 
     connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
@@ -141,6 +142,18 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClics() {
 
 }
 
+//Méthode appelée pour paramétrer le test Goms Bash
+void FenetrePrincipale::afficheFenetreOptionsGomsBash() {
+
+    fenetreOptionsGomsBash->setModal(true);
+
+    //Le test s'ouvre sur clic au bouton gauche (Accepted) dans la fenêtre d'options via le connect() au QDialog
+    if(fenetreOptionsGomsBash->exec() == QDialog::Accepted) {
+
+        setCentralWidget(new FenetreTestGomsBash(fenetreOptionsGomsBash->getLongRep(), this, fenetreOptionsGomsBash->getParametre2(),fenetreOptionsGomsBash->getParametre1()));
+    }
+}
+
 // Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
 void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts) {
 
@@ -174,6 +187,17 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesG
     connect(fenetreStatistiquesGomsClics->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
 
     setCentralWidget(fenetreStatistiquesGomsClics);
+
+}
+
+void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash) {
+
+    fenetreStatistiquesGomsBash = new FenetreStatistiquesGomsBash(statistiquesGomsBash);
+
+    // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
+    connect(fenetreStatistiquesGomsBash->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
+
+    setCentralWidget(fenetreStatistiquesGomsBash);
 
 }
 
