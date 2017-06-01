@@ -7,7 +7,7 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     bouton->setGeometry(515, 310, 250, 100);
 
     //Texte d'informations
-    info = new QLabel("Dans ce test vous devez naviguer avec les flèches et choisir le adequat bouton avec \"Entrée\" ",this);
+    info = new QLabel("Dans ce test vous devez naviguer avec les flèches et choisir le bouton adequat avec \"Entrée\" ",this);
     info->setGeometry(250,380,900,100);
     info->setFont(QFont("Arial", 15, -1, true));
 
@@ -36,6 +36,7 @@ void FenetreTestGomsClavier::demarrer() {
 
     bouton->hide();
     chronometre->start();
+    info->hide();
 
     // Création layout
     QGridLayout *gridLayout = new QGridLayout(this);
@@ -120,7 +121,7 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                 break;
             }
 
-        case Qt::Key_Return || Qt::Key_Enter :
+        case Qt::Key_Return :
             {
                 if (boutonActif == boutonHasard) //si on est sur le bon bouton au moment d'appuyer sur Entrer
                 {
