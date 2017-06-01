@@ -1,5 +1,6 @@
 #include "fenetreTestGomsClavier.h"
 
+#include <QDebug>
 FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, double parametre1, double parametre2, double parametre3) : QWidget(parent)
 {
     // Bouton pour lancer le test
@@ -30,6 +31,12 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     //On autorise l'utilisation du clavier
     setFocusPolicy(Qt::TabFocus);
 
+    //Création du style générale du bouton (cible & courant)
+    style = new QString ("background-color : Blank;"
+             "border-width : 2px;"
+             "border-style : outline;"
+             "color : black;");
+
 }
 
 void FenetreTestGomsClavier::demarrer() {
@@ -57,10 +64,13 @@ void FenetreTestGomsClavier::demarrer() {
     QTime now = QTime::currentTime();
     qsrand(now.msec());
     boutonHasard = qrand()%16;
-    grille[boutonHasard]->setText("Celui-ci");
-    grille[boutonHasard]->setDisabled(false);//On active le bouton choisi au hasard
 
-    grille[boutonActif]->setDisabled(false);//On active le premier bouton en haut à gauche pour le test
+    QString styleTemp = *style;
+    grille[boutonHasard]->setText("Celui-ci");
+    grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank","Green"));//mise en forme bouton hasard
+
+    styleTemp = *style;;
+    grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank","LightBlue"));//mise en forme bouton actif (par défaut le premier est celui en haut à gauche)
 
     setLayout(gridLayout);
 
@@ -68,56 +78,45 @@ void FenetreTestGomsClavier::demarrer() {
 
 void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
+    QString styleTemp = *style;
+
     if(event->isAccepted())
     {
+
+        grille[boutonActif]->setStyleSheet(""); //efface le style du bouton qui vient d'être quitté
+
         switch (event->key())
         {
 
         case Qt::Key_Right : // Si on appuie sur la flèche de droite on change de colonne => on avance de 4 dans le tableau
             {
                 if((boutonActif / 4) != 3)
-                {
-                    grille[boutonActif]->setEnabled(false);
                     boutonActif += 4;
 
-                    grille[boutonActif]->setEnabled(true);
-                }
                 break;
             }
 
         case Qt::Key_Left : // Appuie sur la flèche de gauche : recule d'une colonne -4 pour l'index
             {
                 if((boutonActif / 4) != 0)
-                {
-                    grille[boutonActif]->setEnabled(false);
                     boutonActif -= 4;
 
-                    grille[boutonActif]->setEnabled(true);
-                }
                 break;
             }
 
         case Qt::Key_Down : // Appuie sur la flèche du bas : recule d'une colonne -4 pour l'index
             {
                 if((boutonActif % 4)  != 3)
-                {
-                    grille[boutonActif]->setEnabled(false);
                     boutonActif += 1;
 
-                    grille[boutonActif]->setEnabled(true);
-                }
                 break;
              }
 
         case Qt::Key_Up : // Appuie sur la flèche de gauche : recule d'une colonne -4 pour l'index
             {
                 if((boutonActif % 4) != 0 )
-                {
-                    grille[boutonActif]->setEnabled(false);
                     boutonActif -= 1;
 
-                    grille[boutonActif]->setEnabled(true);
-                }
                 break;
             }
 
@@ -128,13 +127,17 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
                 // On reste à la même position
                 grille[boutonActif]->setText("Pas ici");
+                grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank","LightBlue"));//le bouton cible devient un simple bouton actif
 
                 // Ajout aux stats :
                 statistiquesGomsClavier.push_back(StatistiquesGomsClavier(param2, param1, param3, boutonActif, chronometre->elapsed()));
 
                 // On met un nouveau
                 boutonHasard = qrand()%16;
+
                 grille[boutonHasard]->setText("Celui-ci");
+                styleTemp = *style;
+                grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank","Green"));
 
                 chronometre->restart();
                 nombreClicsCourant++;
@@ -150,6 +153,12 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
         }
 
-        grille[boutonHasard]->setEnabled(true);//on active toujours le bouton choisi au hasard
+        styleTemp = *style;
+        grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank","Green"));
+
+        styleTemp = *style;
+        grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank","LightBlue"));
+
+
     }
 }

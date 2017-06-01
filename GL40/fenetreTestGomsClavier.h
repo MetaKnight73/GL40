@@ -35,6 +35,7 @@ public:
     QPushButton *grille[16];
     QTime *chronometre;
     QLabel* info;
+    QString *style;
 
 signals:
 
