@@ -9,7 +9,8 @@ class StatistiquesGomsClavier {
 private:
 
     // Paramètres Goms
-    double tempsM, tempsP, tempsK;
+    double tempsM, tempsK;
+    int deplacementX, deplacementY;
     double numbouton;
 
     // Temps Goms
@@ -18,18 +19,19 @@ private:
 public:
 
     StatistiquesGomsClavier();
-    StatistiquesGomsClavier(double tM, double tP, double tK, double numBout, int tempsGomsReal);
+    StatistiquesGomsClavier(double tM, double tK, int deplacementX, int deplacementY, double numBout, int tempsGomsReal);
 
     // Méthodes de calcul
     void calculTempsGoms();
 
     double getTempsGoms();
     double getTempsM();
-    double getTempsP();
     double getTempsK();
+    int getDeplacementX();
+    int getDeplacementY();
     double getNumBouton();
     double getTempsReal();
 
 };
 
-#endif // STATISTIQUESGOMSCLAVIER_H
+#endif

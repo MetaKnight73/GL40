@@ -15,7 +15,7 @@ class FenetreOptionsGomsClavier : public QDialog
 public:
 
     // Paramètres Goms-Clics
-    double parametre1, parametre2, parametre3;
+    double parametre1, parametre2;
 
     // Layout
     QGridLayout *layout;
@@ -26,12 +26,10 @@ public:
     QSpinBox *spinProfondeur;
     QDoubleSpinBox *spinParam1;
     QDoubleSpinBox *spinParam2;
-    QDoubleSpinBox *spinParam3;
 
     // Labels
     QLabel *label1;
     QLabel *label2;
-    QLabel *label3;
     QLabel *labelProfondeur;
 
     // Boutons
@@ -46,7 +44,6 @@ public:
     int getProfondeur();
     double getParametre1();
     double getParametre2();
-    double getParametre3();
 
 public slots:
 
@@ -55,4 +52,4 @@ public slots:
     void onChange();
 };
 
-#endif // FENETREOPTIONSGOMSCLAVIER_H
+#endif

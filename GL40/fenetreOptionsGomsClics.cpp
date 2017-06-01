@@ -3,7 +3,7 @@
 FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(parent) {
 
     // On assigne une taille fixe de fenêtre à 400x200
-    setFixedSize(400,200);
+    setFixedSize(400, 200);
 
     // Layouts de la fenêtre
     layout = new QGridLayout;
@@ -107,8 +107,9 @@ FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(pare
     connect(cancel, SIGNAL(clicked()), this, SLOT(close()));
     connect(userNormal, SIGNAL(clicked()), this, SLOT(restoreDefaultValues()));
     connect(userExpert, SIGNAL(clicked()), this, SLOT(restoreExpertValues()));
-    //connect(spinParam1, SIGNAL(valueChanged(double)), this, SLOT(onChange()));
+    connect(spinParam1, SIGNAL(valueChanged(double)), this, SLOT(onChange()));
     connect(spinParam2, SIGNAL(valueChanged(double)), this, SLOT(onChange()));
+    connect(spinParam3, SIGNAL(valueChanged(double)), this, SLOT(onChange()));
 
 }
 
@@ -136,16 +137,18 @@ void FenetreOptionsGomsClics::restoreExpertValues() {
 
 void FenetreOptionsGomsClics::onChange() {
 
+    double param1 = spinParam1->value();
     double param2 = spinParam2->value();
+    double param3 = spinParam3->value();
 
-    if(param2 == (double)1.35) {
+    if(param1 == (double)1.1 && param2 == (double)1.35 && param3 == (double)0.1) {
 
         userNormal->setDown(true);
         userNormal->setDisabled(true);
 
     }
 
-    else if(param2 == (double)1.25) {
+    else if(param1 == (double)0.9 && param2 == (double)1.25 && param3 == (double)0.08) {
 
         userExpert->setDown(true);
         userExpert->setDisabled(true);

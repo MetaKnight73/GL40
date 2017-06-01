@@ -37,9 +37,9 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(1);
-    spinParam1->setMaximum(20);
+    spinParam1->setMaximum(10);
     spinParam1->setSingleStep(1);
-    spinParam1->setValue(10);
+    spinParam1->setValue(5);
 
     // On gère les valeurs du spinner 2
     spinParam2->setMinimum(0.01);

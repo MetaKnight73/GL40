@@ -47,4 +47,4 @@ public slots:
 
 };
 
-#endif // FENETRESTATISTIQUESGOMSCLAVIER_H
+#endif

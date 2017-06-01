@@ -1,8 +1,6 @@
 #include "fenetreTestGomsBash.h"
-#include <QDebug>
 
-FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double tempsM, int tailleChemin) : QWidget(parent)
-{
+FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double tempsM, int tailleChemin) : QWidget(parent) {
     srand(time(NULL));
 
     // Bouton pour lancer le test
@@ -18,7 +16,7 @@ FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double te
     // Chronomètre pour le calcul des temps
     chronometre = new QTime;
 
-    //On crée le layout
+    // On crée le layout
     layout = new QGridLayout;
 
     zoneSaisie = new QLineEdit;
@@ -32,8 +30,6 @@ FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double te
 }
 
 char* FenetreTestGomsBash::genererMotCourant(int longueur) {
-
-    //srand(time(NULL)); seed effectuer dans le constructeur
 
     unsigned int length = (rand() % longueur) + 1;
     char* str = new char[length];
@@ -56,17 +52,16 @@ void FenetreTestGomsBash::lancerTest() {
     layoutZoneSaisie = new QVBoxLayout;
 
     //On génère le chemin aléatoire
-    char* chemin = new char[longueurMaxRep*nbRep];//On créer une chaîne de la taille Nombre de répertoire x Longueur max d'un répertoire
+    char* chemin = new char[longueurMaxRep * nbRep]; //On crée une chaîne de la taille Nombre de répertoire x Longueur max d'un répertoire
     chemin[0] = '\0';
 
-    for(int i=0; i < nbRep; ++i)
-    {
-        strcat(chemin,genererMotCourant(longueurMaxRep));
-        strcat(chemin,"/");
+    for(int i = 0; i < nbRep; ++i) {
+        strcat(chemin, genererMotCourant(longueurMaxRep));
+        strcat(chemin, "/");
     }
 
     cheminCourant = new QLabel(QString(chemin), this, 0);
-    cheminCourant->setFont(QFont("Arial Black", 12));
+    cheminCourant->setFont(QFont("Arial Black", 24));
     labelZoneSaisie->setText(QString("Parcourez le chemin ci-dessus via la commande bash \"cd repertoire\". \"Entrée\" pour valider."));
     labelZoneSaisie->setFont(QFont("Arial", 20, -1, true));
     zoneSaisie->setMaximumHeight(50);
@@ -92,13 +87,14 @@ void FenetreTestGomsBash::lancerTest() {
 void FenetreTestGomsBash::checkWord() {
 
     QString texteZoneSaisie = zoneSaisie->text();
-    QStringList listTexteMotCourant = cheminCourant->text().split("/",QString::SkipEmptyParts); // on découpe la chaine contenant le chemin en list de QString
+    QStringList listTexteMotCourant = cheminCourant->text().split("/", QString::SkipEmptyParts); // on découpe la chaine contenant le chemin en list de QString
     QString texteMotCourant;
 
-    if(!listTexteMotCourant.isEmpty())
-    {
-        texteMotCourant = listTexteMotCourant.takeFirst(); //on prend le premier élement de la liste qui est le nom du répertoire
-        texteMotCourant = QString("cd ") + texteMotCourant; //on ajoute la commande au début du QString
+    if(!listTexteMotCourant.isEmpty()) {
+
+        texteMotCourant = listTexteMotCourant.takeFirst(); // On prend le premier élement de la liste qui est le nom du répertoire
+        texteMotCourant = QString("cd ") + texteMotCourant; // On ajoute la commande au début du QString
+
     }
 
     int x = QString::compare(texteZoneSaisie, texteMotCourant, Qt::CaseSensitive);

@@ -66,29 +66,29 @@ FenetreStatistiquesGomsClics::FenetreStatistiquesGomsClics(vector<StatistiquesGo
     tempsTotalGoms = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i = 1; i < statistiquesGomsClics.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesGomsClics.size() + 1; i++) {
 
         statistiquesGomsClics[i-1].calculTempsGoms();
 
-        modeleTableau->setItem(i, 0, new QStandardItem(QString::number(fmod(statistiquesGomsClics[i-1].getNumBouton(),4)+1)));
-        modeleTableau->setItem(i, 1, new QStandardItem(QString::number(floor(statistiquesGomsClics[i-1].getNumBouton()/4)+1)));
+        modeleTableau->setItem(i, 0, new QStandardItem(QString::number(floor(statistiquesGomsClics[i-1].getNumBouton() / 4) + 1)));
+        modeleTableau->setItem(i, 1, new QStandardItem(QString::number(fmod(statistiquesGomsClics[i-1].getNumBouton(), 4) + 1)));
         modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesGomsClics[i-1].getTempsGoms())));
-        modeleTableau->setItem(i, 3, new QStandardItem(QString::number(statistiquesGomsClics[i-1].getTempsReal()/1000)));
+        modeleTableau->setItem(i, 3, new QStandardItem(QString::number(statistiquesGomsClics[i-1].getTempsReal() / 1000)));
 
         // Calculate average times
-        tempsTotalReel += ((double)statistiquesGomsClics[i-1].getTempsReal()/1000);
+        tempsTotalReel += ((double)statistiquesGomsClics[i-1].getTempsReal() / 1000);
         tempsTotalGoms += statistiquesGomsClics[i-1].getTempsGoms();
 
     }
 
     modeleTableau->setItem(statistiquesGomsClics.size()+1, 1, new QStandardItem("Temps moyen"));
-    modeleTableau->setItem(statistiquesGomsClics.size()+1, 2, new QStandardItem(QString::number(tempsTotalGoms/statistiquesGomsClics.size())));
-    modeleTableau->setItem(statistiquesGomsClics.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel/statistiquesGomsClics.size())));
+    modeleTableau->setItem(statistiquesGomsClics.size()+1, 2, new QStandardItem(QString::number(tempsTotalGoms / statistiquesGomsClics.size())));
+    modeleTableau->setItem(statistiquesGomsClics.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel / statistiquesGomsClics.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i<statistiquesGomsClics.size()+2; i++) {
+    for(unsigned int i = 0; i < statistiquesGomsClics.size() + 2; i++) {
 
-        for(unsigned int j = 0; j < 3; j++) {
+        for(unsigned int j = 0; j < 4; j++) {
 
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
 
@@ -131,13 +131,10 @@ QChart* FenetreStatistiquesGomsClics::createLineChart(vector<StatistiquesGomsCli
     QLineSeries *serieTheorique = new QLineSeries(chart);
     QLineSeries *serieReel = new QLineSeries(chart);
 
-    serieTheorique->append(0, 0);
-    serieReel->append(0, 0);
+    for (unsigned int i = 1; i < statistiquesGomsClics.size() + 1; i++) {
 
-    for (unsigned int i = 1; i<statistiquesGomsClics.size()+1; i++) {
-
-        serieTheorique->append(i, statistiquesGomsClics[i-1].getTempsGoms());
-        serieReel->append(i, (double)statistiquesGomsClics[i-1].getTempsReal()/1000);
+        serieTheorique->append(i-1, statistiquesGomsClics[i-1].getTempsGoms());
+        serieReel->append(i-1, (double)statistiquesGomsClics[i-1].getTempsReal() / 1000);
 
     }
 

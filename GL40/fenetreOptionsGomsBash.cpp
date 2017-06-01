@@ -3,7 +3,7 @@
 FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent)
 {
     // On assigne une taille fixe de fenêtre à 400x200
-    setFixedSize(450,200);
+    setFixedSize(450, 200);
 
     // Layouts de la fenêtre
     layout = new QGridLayout;
@@ -37,9 +37,9 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(1);
-    spinParam1->setMaximum(15);
+    spinParam1->setMaximum(10);
     spinParam1->setSingleStep(1);
-    spinParam1->setValue(10);
+    spinParam1->setValue(5);
 
     // On gère les valeurs du spinner 2
     spinParam2->setMinimum(0.01);
@@ -49,9 +49,9 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
 
     // On gère les valeurs du spinner du nombre de répertoire à parcourir
     spinLongRep->setMinimum(1);
-    spinLongRep->setMaximum(15);
+    spinLongRep->setMaximum(8);
     spinLongRep->setSingleStep(1);
-    spinLongRep->setValue(10);
+    spinLongRep->setValue(5);
 
     // Textes de boutons
     start = new QPushButton("Valider");

@@ -1,13 +1,9 @@
 #include "fenetreStatistiquesGomsBash.h"
 #include "fenetrePrincipale.h"
 
-FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(QWidget *parent) : QWidget(parent)
-{
+FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(QWidget *parent) : QWidget(parent) {}
 
-}
-
-FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash, QWidget *parent) : QWidget(parent)
-{
+FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash, QWidget *parent) : QWidget(parent) {
 
     // Layout principal
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -68,27 +64,27 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGoms
     tempsTotalGoms = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i = 1; i < statistiquesGomsBash.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
         statistiquesGomsBash[i-1].calculTempsGoms();
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getLongueurMot())));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getTempsGoms())));
-        modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getTempsReal()/1000)));
+        modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getTempsReal() / 1000)));
 
         // Calculate average times
-        tempsTotalReel += ((double)statistiquesGomsBash[i-1].getTempsReal()/1000);
+        tempsTotalReel += ((double)statistiquesGomsBash[i-1].getTempsReal() / 1000);
         tempsTotalGoms += statistiquesGomsBash[i-1].getTempsGoms();
 
     }
 
     modeleTableau->setItem(statistiquesGomsBash.size()+1, 0, new QStandardItem("Temps moyen"));
-    modeleTableau->setItem(statistiquesGomsBash.size()+1, 1, new QStandardItem(QString::number(tempsTotalGoms/statistiquesGomsBash.size())));
-    modeleTableau->setItem(statistiquesGomsBash.size()+1, 2, new QStandardItem(QString::number(tempsTotalReel/statistiquesGomsBash.size())));
+    modeleTableau->setItem(statistiquesGomsBash.size()+1, 1, new QStandardItem(QString::number(tempsTotalGoms / statistiquesGomsBash.size())));
+    modeleTableau->setItem(statistiquesGomsBash.size()+1, 2, new QStandardItem(QString::number(tempsTotalReel / statistiquesGomsBash.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i < statistiquesGomsBash.size()+2; i++) {
+    for(unsigned int i = 0; i < statistiquesGomsBash.size() + 2; i++) {
 
-        for(unsigned int j = 0; j<3; j++) {
+        for(unsigned int j = 0; j < 3; j++) {
 
             modeleTableau->setData(modeleTableau->index(i, j), Qt::AlignCenter, Qt::TextAlignmentRole);
 
@@ -131,13 +127,10 @@ QChart* FenetreStatistiquesGomsBash::createLineChart(vector<StatistiquesGomsBash
     QLineSeries *serieTheorique = new QLineSeries(chart);
     QLineSeries *serieReel = new QLineSeries(chart);
 
-    serieTheorique->append(0, 0);
-    serieReel->append(0, 0);
+    for (unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
 
-    for (unsigned int i = 1; i < statistiquesGomsBash.size()+1; i++) {
-
-        serieTheorique->append(i, statistiquesGomsBash[i-1].getTempsGoms());
-        serieReel->append(i, (double)statistiquesGomsBash[i-1].getTempsReal()/1000);
+        serieTheorique->append(i-1, statistiquesGomsBash[i-1].getTempsGoms());
+        serieReel->append(i-1, (double)statistiquesGomsBash[i-1].getTempsReal() / 1000);
 
     }
 

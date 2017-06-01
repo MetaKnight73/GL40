@@ -163,7 +163,7 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClavier() {
     //Le test s'ouvre sur clic au bouton gauche (Accepted) dans la fenêtre d'options via le connect() au QDialog
     if(fenetreOptionsGomsClavier->exec() == QDialog::Accepted) {
 
-        setCentralWidget(new FenetreTestGomsClavier(fenetreOptionsGomsClavier->getProfondeur(), this, fenetreOptionsGomsClavier->getParametre1(), fenetreOptionsGomsClavier->getParametre2(), fenetreOptionsGomsClavier->getParametre3()));
+        setCentralWidget(new FenetreTestGomsClavier(fenetreOptionsGomsClavier->getProfondeur(), this, fenetreOptionsGomsClavier->getParametre1(), fenetreOptionsGomsClavier->getParametre2()));
     }
 
 }

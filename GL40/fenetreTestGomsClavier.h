@@ -14,18 +14,18 @@
 
 using namespace std;
 
-class FenetreTestGomsClavier : public QWidget
-{
+class FenetreTestGomsClavier : public QWidget {
     Q_OBJECT
+
 public:
 
-    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0, double param3 = 0);
+    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0);
 
     // Variables générales
     int nombreC;
     int nombreClicsCourant;
-    int boutonActif,boutonHasard;
-    double param1, param2, param3;
+    int boutonActif, boutonHasard, deplacementX, deplacementY;
+    double param1, param2;
 
     // Vecteur contenant les valeurs récoltées lors du test
     vector<StatistiquesGomsClavier> statistiquesGomsClavier;
@@ -47,4 +47,4 @@ public slots:
     void keyPressEvent(QKeyEvent *event);
 };
 
-#endif // FENETRETESTGOMSCLAVIER_H
+#endif

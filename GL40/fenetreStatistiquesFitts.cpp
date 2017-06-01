@@ -66,25 +66,25 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     tempsTotalFitts = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
-    for(unsigned int i = 1; i < statistiquesFitts.size()+1; i++) {
+    for(unsigned int i = 1; i < statistiquesFitts.size() + 1; i++) {
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesFitts[i-1].getDistance())));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesFitts[i-1].getLargeurBouton())));
         modeleTableau->setItem(i, 2, new QStandardItem(QString::number(statistiquesFitts[i-1].getTempsFitts())));
-        modeleTableau->setItem(i, 3, new QStandardItem(QString::number((double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000)));
+        modeleTableau->setItem(i, 3, new QStandardItem(QString::number((double)statistiquesFitts[i-1].getTempsDeplacementSouris() / 1000)));
 
         // Calcul du temps moyen
-        tempsTotalReel += (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000;
+        tempsTotalReel += (double)statistiquesFitts[i-1].getTempsDeplacementSouris() / 1000;
         tempsTotalFitts += statistiquesFitts[i-1].getTempsFitts();
 
     }
 
     modeleTableau->setItem(statistiquesFitts.size()+1, 1, new QStandardItem("Temps moyen"));
-    modeleTableau->setItem(statistiquesFitts.size()+1, 2, new QStandardItem(QString::number(tempsTotalFitts/statistiquesFitts.size())));
-    modeleTableau->setItem(statistiquesFitts.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel/statistiquesFitts.size())));
+    modeleTableau->setItem(statistiquesFitts.size()+1, 2, new QStandardItem(QString::number(tempsTotalFitts / statistiquesFitts.size())));
+    modeleTableau->setItem(statistiquesFitts.size()+1, 3, new QStandardItem(QString::number(tempsTotalReel / statistiquesFitts.size())));
 
     // Alignement central dans les cellules
-    for(unsigned int i = 0; i < statistiquesFitts.size()+2; i++) {
+    for(unsigned int i = 0; i < statistiquesFitts.size() + 2; i++) {
 
         for(unsigned int j = 0; j < 4; j++) {
 
@@ -129,13 +129,10 @@ QChart* FenetreStatistiquesFitts::createLineChart(vector<StatistiquesFitts> stat
     QLineSeries *serieTheorique = new QLineSeries(chart);
     QLineSeries *serieReel = new QLineSeries(chart);
 
-    serieTheorique->append(0, 0);
-    serieReel->append(0, 0);
+    for (unsigned int i = 1; i < statistiquesFitts.size() + 1; i++) {
 
-    for (unsigned int i = 1; i < statistiquesFitts.size()+1; i++) {
-
-        serieTheorique->append(i, statistiquesFitts[i-1].getTempsFitts());
-        serieReel->append(i, (double)statistiquesFitts[i-1].getTempsDeplacementSouris()/1000);
+        serieTheorique->append(i-1, statistiquesFitts[i-1].getTempsFitts());
+        serieReel->append(i-1, (double)statistiquesFitts[i-1].getTempsDeplacementSouris() / 1000);
 
     }
 
