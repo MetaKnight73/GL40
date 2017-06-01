@@ -15,14 +15,17 @@
 #include "fenetreOptionsGomsSaisieTexte.h"
 #include "fenetreOptionsGomsClics.h"
 #include "fenetreOptionsGomsBash.h"
+#include "fenetreOptionsGomsClavier.h"
 #include "fenetreTestFitts.h"
 #include "fenetreTestGomsSaisieTexte.h"
 #include "fenetreTestGomsClics.h"
 #include "fenetreTestGomsBash.h"
+#include "fenetreTestGomsClavier.h"
 #include "fenetreStatistiquesFitts.h"
 #include "fenetreStatistiquesGomsSaisieTexte.h"
 #include "fenetreStatistiquesGomsClics.h"
 #include "fenetreStatistiquesGomsBash.h"
+#include "fenetreStatistiquesGomsClavier.h"
 
 using namespace std;
 
@@ -54,11 +57,13 @@ private:
     FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
     FenetreOptionsGomsClics *fenetreOptionsGomsClics;
     FenetreOptionsGomsBash *fenetreOptionsGomsBash;
+    FenetreOptionsGomsClavier *fenetreOptionsGomsClavier;
 
     FenetreStatistiquesFitts *fenetreStatistiquesFitts;
     FenetreStatistiquesGomsSaisieTexte *fenetreStatistiquesGomsSaisieTexte;
     FenetreStatistiquesGomsClics *fenetreStatistiquesGomsClics;
     FenetreStatistiquesGomsBash *fenetreStatistiquesGomsBash;
+    FenetreStatistiquesGomsClavier *fenetreStatistiquesGomsClavier;
 
 public:
 
@@ -70,10 +75,12 @@ public slots:
     void afficheFenetreOptionsGomsSaisieTexte();
     void afficheFenetreOptionsGomsClics();
     void afficheFenetreOptionsGomsBash();
+    void afficheFenetreOptionsGomsClavier();
     void afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts);
     void afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte);
     void afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics);
     void afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash);
+    void afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier);
     void aPropos();
 
 };
