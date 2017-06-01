@@ -1,6 +1,6 @@
 #include "fenetreOptionsGomsClavier.h"
 
-FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) {
+FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(parent) {
 
     // On assigne une taille fixe de fenêtre à 400x200
     setFixedSize(400,200);
