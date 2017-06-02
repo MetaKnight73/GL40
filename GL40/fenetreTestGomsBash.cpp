@@ -57,7 +57,9 @@ void FenetreTestGomsBash::lancerTest() {
 
     for(int i = 0; i < nbRep; ++i) {
         strcat(chemin, genererMotCourant(longueurMaxRep));
-        strcat(chemin, "/");
+        if(i != nbRep - 1) {
+            strcat(chemin, "/");
+        }
     }
 
     cheminCourant = new QLabel(QString(chemin), this, 0);

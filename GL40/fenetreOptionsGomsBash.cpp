@@ -1,7 +1,7 @@
 #include "fenetreOptionsGomsBash.h"
 
-FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent)
-{
+FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent) {
+
     // On assigne une taille fixe de fenêtre à 400x200
     setFixedSize(450, 200);
 
@@ -56,11 +56,11 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
     // Textes de boutons
     start = new QPushButton("Valider");
     start->setFixedHeight(40);
-    start->setStyleSheet(QString("background-color: #32CD32; border: 1px solid black;"));
+    start->setStyleSheet(QString("background-color: #32CD32; border: 1px solid black;  border-radius: 2px;"));
 
     cancel = new QPushButton("Annuler");
     cancel->setFixedHeight(40);
-    cancel->setStyleSheet(QString("background-color: #DC143C; border: 1px solid black;"));
+    cancel->setStyleSheet(QString("background-color: #DC143C; border: 1px solid black;  border-radius: 2px;"));
 
     userNormal = new QPushButton("Utilisateur normal (par défaut)");
     userNormal->setFixedHeight(40);

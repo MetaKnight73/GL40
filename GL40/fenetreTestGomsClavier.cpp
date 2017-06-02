@@ -54,7 +54,7 @@ void FenetreTestGomsClavier::demarrer() {
         grille[i] = new QPushButton("Pas ici", this);
         grille[i]->setFixedSize(80,80);
         grille[i]->setDisabled(true);
-        grille[i]->setAttribute(Qt::WA_TransparentForMouseEvents); //Désactive clic par souris
+        grille[i]->setAttribute(Qt::WA_TransparentForMouseEvents); // Désactive clic par souris
 
         gridLayout->addWidget(grille[i], i%4, i/4);
 
@@ -119,6 +119,7 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
             }
 
         case Qt::Key_Return :
+        case Qt::Key_Enter :
             {
                 if (boutonActif == boutonHasard) // Si on est sur le bon bouton au moment d'appuyer sur Entrer
                 {

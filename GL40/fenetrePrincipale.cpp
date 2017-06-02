@@ -22,6 +22,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
     // Label de l'énoncé
     QLabel *label2 = new QLabel("Ceci est un programme permettant d'effectuer des tests afin de comparer les résultats théoriques de plusieurs tests connus tels que la loi de Fitts et Goms-Keystroke avec les valeurs récoltées manuellement lors de ces tests.");
+    label2->setFont(QFont("Arial", 18, -1, true));
     label2->setWordWrap(true);
     label2->setAlignment(Qt::AlignCenter);
 
@@ -30,26 +31,31 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     // Bouton servant à lancer l'application (la partie fitts)
     btnFitts = new QPushButton("Loi de Fitts");
     btnFitts->setFixedSize(350, 75);
+    btnFitts->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", cliquez simplement sur les ronds quand ils apparaissent."));
     layout->addWidget(btnFitts, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 1)
     btnGoms1 = new QPushButton("Goms-Keystroke (saisie de texte)");
     btnGoms1->setFixedSize(350, 75);
+    btnGoms1->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", saisissez simplement les chaînes de caractère qui apparaissent à l'écran. Une fois le mot saisi, appuyez sur \"Entrée\" pour passer au mot suivant."));
     layout->addWidget(btnGoms1, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 2)
     btnGoms2 = new QPushButton("Goms-Keystroke (clics)");
     btnGoms2->setFixedSize(350, 75);
+    btnGoms2->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", double-cliquez sur chaque carré affichant \"Celui-ci\" afin de passer au suivant."));
     layout->addWidget(btnGoms2, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 3)
     btnGoms3 = new QPushButton("Goms-Keystroke (version bash)");
     btnGoms3->setFixedSize(350, 75);
+    btnGoms3->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", saisissez la commande \"cd\" suivie de la chaîne de caractères précédant le premier \"/\" de la chaîne affichée à l'écran, puis appuyez sur \"Entrée\" pour passer à la chaîne suivante."));
     layout->addWidget(btnGoms3, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 4)
     btnGoms4 = new QPushButton("Goms-Keystroke (flèches)");
     btnGoms4->setFixedSize(350, 75);
+    btnGoms4->setToolTip(QString("Paramétrez le test et après avoir cliqué sur \"Comencer\", déplacez vous d'un carré à un autre grâce aux flèches directionnelles afin de parvenir au carré voulu. Le carré courant est le carré bleu et le carré visé et le carré vert."));
     layout->addWidget(btnGoms4, 0, Qt::AlignCenter);
 
     // Menu bar au sommet
@@ -101,7 +107,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
 }
 
-// Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
+// Méthode appelée pour paramétrer le test Fitts
 void FenetrePrincipale::afficheFenetreOptionsFitts() {
 
     fenetreOptionsFitts->setModal(true);
@@ -115,7 +121,7 @@ void FenetrePrincipale::afficheFenetreOptionsFitts() {
 
 }
 
-// Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
+// Méthode appelée pour paramétrer le test Goms Saisie Texte
 void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
 
     fenetreOptionsGomsSaisieTexte->setModal(true);
@@ -129,7 +135,7 @@ void FenetrePrincipale::afficheFenetreOptionsGomsSaisieTexte() {
 
 }
 
-// Méthode appelée pour l'affichage de la fenêtre avec les paramètres de l'application
+// Méthode appelée pour paramétrer le test Goms Clics
 void FenetrePrincipale::afficheFenetreOptionsGomsClics() {
 
     fenetreOptionsGomsClics->setModal(true);
@@ -168,7 +174,7 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClavier() {
 
 }
 
-// Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
+// Méthode appelée pour afficher les statistiques du test Fitts
 void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts) {
 
     fenetreStatistiquesFitts = new FenetreStatistiquesFitts(statistiquesFitts);
@@ -180,7 +186,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts
 
 }
 
-// Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
+// Méthode appelée pour afficher les statistiques du test Goms Saisie Texte
 void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
 
     fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statistiquesGomsSaisieTexte);
@@ -192,7 +198,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<Statist
 
 }
 
-// Méthode appelée quand quand le test est fini, qui affiche la fenêtre des stats
+// Méthode appelée pour afficher les statistiques du test Goms Clics
 void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics) {
 
     fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statistiquesGomsClics);
@@ -204,6 +210,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesG
 
 }
 
+// Méthode appelée pour afficher les statistiques du test Goms Bash
 void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash) {
 
     fenetreStatistiquesGomsBash = new FenetreStatistiquesGomsBash(statistiquesGomsBash);
@@ -215,6 +222,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGo
 
 }
 
+// Méthode appelée pour afficher les statistiques du test Goms Clavier
 void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier) {
 
     fenetreStatistiquesGomsClavier = new FenetreStatistiquesGomsClavier(statistiquesGomsClavier);
