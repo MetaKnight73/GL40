@@ -1,0 +1,6 @@
+Revoir alignement feneteres options
+Mettre une couleur (verte ?) sur le bouton à double-cliquer dans le test clic
+Mettre les textes avec quoi faire sous chaque bouton Commencer là où ca manque
+Goms Bash possibilité de saisir un chemin plus long que une unité de profondeur à chaque fois
+Ajouter \n sur les tooltip du menu principal pour que ce soit plus compact
+Optionnel : Historique
