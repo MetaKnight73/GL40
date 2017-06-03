@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QTime>
 #include <QLayout>
+#include <QLabel>
 
 #include <vector>
 
@@ -30,6 +31,7 @@ private:
     // Widgets Qt
     QPushButton *bouton;
     QPushButton *grille[16];
+    QLabel *info;
     QTime *chronometre;
 
 public:

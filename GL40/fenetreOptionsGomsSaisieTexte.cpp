@@ -9,7 +9,7 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
     layout = new QGridLayout;
     layout->setHorizontalSpacing(5);
     layout->setColumnMinimumWidth(0, 15);
-    layout->setColumnMinimumWidth(1, 15);
+    layout->setColumnMinimumWidth(1, 75);
     layout->setColumnMinimumWidth(2, 15);
     layout->setColumnMinimumWidth(3, 15);
     layoutUsers = new QHBoxLayout;
@@ -25,15 +25,16 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
     spinParam2 = new QDoubleSpinBox;
     spinNbMots = new QSpinBox;
     spinNbMots->setAlignment(Qt::AlignCenter);
-    spinParam1->setFixedWidth(110);
+    spinNbMots->setFixedWidth(210);
+    spinParam1->setFixedWidth(210);
     spinParam1->setAlignment(Qt::AlignCenter);
-    spinParam2->setFixedWidth(110);
+    spinParam2->setFixedWidth(210);
     spinParam2->setAlignment(Qt::AlignCenter);
 
     // Assignation des textes des labels
-    label1->setText("Nombre de caractères maximal d'un mot : ");
-    label2->setText("Temps d'activité mentale (M) : ");
-    labelMots->setText("Sélectionnez le nombre de mots à saisir : ");
+    label1->setText("Longueur max. d'un mot : ");
+    label2->setText("Temps d'activité mentale : ");
+    labelMots->setText("Nombre de mots à saisir : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(1);
@@ -47,7 +48,7 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
     spinParam2->setSingleStep(0.01);
     spinParam2->setValue(1.35);
 
-    // On gère les valeurs du spinner du nombre de clics
+    // On gère les valeurs du spinner du nombre de mots
     spinNbMots->setMinimum(1);
     spinNbMots->setMaximum(20);
     spinNbMots->setSingleStep(1);
@@ -76,11 +77,11 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
 
     // On ajoute les éléments dans la page
     layout->addWidget(label1, 0, 0);
-    layout->addWidget(spinParam1, 0, 1);
+    layout->addWidget(spinParam1, 0, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(label2, 1, 0);
-    layout->addWidget(spinParam2, 1, 1);
+    layout->addWidget(spinParam2, 1, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(labelMots, 2, 0);
-    layout->addWidget(spinNbMots, 2, 1);
+    layout->addWidget(spinNbMots, 2, 2, 1, 2, Qt::AlignCenter);
     layout->addLayout(layoutUsers, 3, 0, 1, 6, 0);
     layout->addLayout(layoutValiderAnnuler, 4, 0, 1, 6, 0);
 
@@ -100,9 +101,7 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
 
 void FenetreOptionsGomsSaisieTexte::restoreDefaultValues() {
 
-    spinParam1->setValue(10);
     spinParam2->setValue(1.35);
-    spinNbMots->setValue(10);
     userExpert->setDown(false);
     userExpert->setEnabled(true);
 
@@ -110,9 +109,7 @@ void FenetreOptionsGomsSaisieTexte::restoreDefaultValues() {
 
 void FenetreOptionsGomsSaisieTexte::restoreExpertValues() {
 
-    spinParam1->setValue(10);
     spinParam2->setValue(1.25);
-    spinNbMots->setValue(10);
     userNormal->setDown(false);
     userNormal->setEnabled(true);
 

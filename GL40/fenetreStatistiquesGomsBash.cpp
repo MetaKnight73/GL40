@@ -65,7 +65,13 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGoms
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
     for(unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
-        statistiquesGomsBash[i-1].calculTempsGoms();
+
+        if(i == 1) {
+            statistiquesGomsBash[i-1].calculTempsGomsFirst();
+        }
+        else {
+            statistiquesGomsBash[i-1].calculTempsGoms();
+        }
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getLongueurMot())));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesGomsBash[i-1].getTempsGoms())));

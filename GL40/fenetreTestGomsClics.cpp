@@ -6,6 +6,10 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
     bouton = new QPushButton("Commencer", this);
     bouton->setGeometry(515, 310, 250, 100);
 
+    info = new QLabel("Dans ce test, vous devez double-cliquer le bouton correct (en vert).", this);
+    info->setGeometry(290, 390, 1280, 100);
+    info->setFont(QFont("Arial", 18, -1, true));
+
     // On initialise les paramètres
     param1 = parametre1;
     param2 = parametre2;
@@ -27,7 +31,7 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
 void FenetreTestGomsClics::demarrer() {
 
     bouton->hide();
-    chronometre->start();
+    info->hide();
 
     // Création layout
     QGridLayout *gridLayout = new QGridLayout(this);
@@ -49,25 +53,23 @@ void FenetreTestGomsClics::demarrer() {
     qsrand(now.msec());
     boutonActif = qrand()%16;
     grille[boutonActif]->setEnabled(true);
-    grille[boutonActif]->setText("Celui-ci");
-    grille[boutonActif]->setStyleSheet("background-color : Green;"
-                                       "border-width : 2px;"
-                                       "border-style : outline;"
-                                       "color : black;"); // On applique un style pou repérer le bouton cible
+    grille[boutonActif]->setStyleSheet(QString("background-color : Green; border-width : 2px; border-style : outline; color : white;"));
+    grille[boutonActif]->setText("CELUI-CI");
 
     setLayout(gridLayout);
+    chronometre->start();
 
 }
 
 void FenetreTestGomsClics::changer() {
 
-    if (selectionne) { //2eme clic
+    if (selectionne) { // 2eme clic
 
         // On enlève l'ancien
+        grille[boutonActif]->setStyleSheet(QString(""));
         grille[boutonActif]->setDown(false);
         grille[boutonActif]->setDisabled(true);
         grille[boutonActif]->setText("Pas ici");
-        grille[boutonActif]->setStyleSheet("");//on efface le style de l'ancien bouton cible
 
         // Ajout aux stats :
         statistiquesGomsClics.push_back(StatistiquesGomsClics(param2, param1, param3, boutonActif, chronometre->elapsed()));
@@ -75,11 +77,8 @@ void FenetreTestGomsClics::changer() {
         // On met un nouveau
         boutonActif = qrand()%16;
         grille[boutonActif]->setEnabled(true);
-        grille[boutonActif]->setText("Celui-ci");
-        grille[boutonActif]->setStyleSheet("background-color : Green;"
-                                           "border-width : 2px;"
-                                           "border-style : outline;"
-                                           "color : black;");
+        grille[boutonActif]->setStyleSheet(QString("background-color : Green; border-width : 2px; border-style : outline; color : white;"));
+        grille[boutonActif]->setText("CELUI-CI");
         selectionne = false;
 
         chronometre->restart();
@@ -94,7 +93,7 @@ void FenetreTestGomsClics::changer() {
 
     }
 
-    if (nombreClicsCourant == nombreC) { // fin
+    if (nombreClicsCourant == nombreC) { // Fin
 
         emit sequenceFin(statistiquesGomsClics);
 

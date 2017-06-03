@@ -22,6 +22,7 @@ public:
 
     // Méthodes de calcul
     void calculTempsGoms();
+    void calculTempsGomsFirst();
 
     double getTempsGoms();
     double getTempsM();
@@ -30,4 +31,4 @@ public:
 
 };
 
-#endif // STATISTIQUESGOMSBASH_H
+#endif

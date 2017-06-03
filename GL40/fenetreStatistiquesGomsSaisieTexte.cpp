@@ -65,7 +65,13 @@ FenetreStatistiquesGomsSaisieTexte::FenetreStatistiquesGomsSaisieTexte(vector<St
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
     for(unsigned int i = 1; i < statistiquesGomsSaisieTexte.size() + 1; i++) {
-        statistiquesGomsSaisieTexte[i-1].calculTempsGoms();
+
+        if(i == 1) {
+            statistiquesGomsSaisieTexte[i-1].calculTempsGomsFirst();
+        }
+        else {
+            statistiquesGomsSaisieTexte[i-1].calculTempsGoms();
+        }
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getLongueurMot())));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(statistiquesGomsSaisieTexte[i-1].getTempsGoms())));

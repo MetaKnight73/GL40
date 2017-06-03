@@ -69,7 +69,12 @@ FenetreStatistiquesGomsClavier::FenetreStatistiquesGomsClavier(vector<Statistiqu
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
     for(unsigned int i = 1; i < statistiquesGomsClavier.size() + 1; i++) {
 
-        statistiquesGomsClavier[i-1].calculTempsGoms();
+        if(i == 1) {
+            statistiquesGomsClavier[i-1].calculTempsGomsFirst();
+        }
+        else {
+            statistiquesGomsClavier[i-1].calculTempsGoms();
+        }
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(floor(statistiquesGomsClavier[i-1].getNumBouton() / 4) + 1)));
         modeleTableau->setItem(i, 1, new QStandardItem(QString::number(fmod(statistiquesGomsClavier[i-1].getNumBouton(), 4) + 1)));

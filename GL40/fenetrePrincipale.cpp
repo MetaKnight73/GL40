@@ -31,31 +31,31 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     // Bouton servant à lancer l'application (la partie fitts)
     btnFitts = new QPushButton("Loi de Fitts");
     btnFitts->setFixedSize(350, 75);
-    btnFitts->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", cliquez simplement sur les ronds quand ils apparaissent."));
+    btnFitts->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n cliquez simplement sur les ronds quand ils apparaissent."));
     layout->addWidget(btnFitts, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 1)
     btnGoms1 = new QPushButton("Goms-Keystroke (saisie de texte)");
     btnGoms1->setFixedSize(350, 75);
-    btnGoms1->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", saisissez simplement les chaînes de caractère qui apparaissent à l'écran. Une fois le mot saisi, appuyez sur \"Entrée\" pour passer au mot suivant."));
+    btnGoms1->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n saisissez simplement les chaînes de caractère qui apparaissent à l'écran.\n Une fois le mot saisi, appuyez sur \"Entrée\" pour passer au mot suivant."));
     layout->addWidget(btnGoms1, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 2)
     btnGoms2 = new QPushButton("Goms-Keystroke (clics)");
     btnGoms2->setFixedSize(350, 75);
-    btnGoms2->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", double-cliquez sur chaque carré affichant \"Celui-ci\" afin de passer au suivant."));
+    btnGoms2->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n double-cliquez sur chaque carré affichant \"Celui-ci\" afin de passer au suivant."));
     layout->addWidget(btnGoms2, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 3)
     btnGoms3 = new QPushButton("Goms-Keystroke (version bash)");
     btnGoms3->setFixedSize(350, 75);
-    btnGoms3->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\", saisissez la commande \"cd\" suivie de la chaîne de caractères précédant le premier \"/\" de la chaîne affichée à l'écran, puis appuyez sur \"Entrée\" pour passer à la chaîne suivante."));
+    btnGoms3->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n saisissez la commande \"cd\" suivie de la chaîne de caractères précédant le premier \"/\" de la chaîne affichée à l'écran,\n puis appuyez sur \"Entrée\" pour passer à la chaîne suivante."));
     layout->addWidget(btnGoms3, 0, Qt::AlignCenter);
 
     // Bouton servant à lancer l'application (la partie goms 4)
     btnGoms4 = new QPushButton("Goms-Keystroke (flèches)");
     btnGoms4->setFixedSize(350, 75);
-    btnGoms4->setToolTip(QString("Paramétrez le test et après avoir cliqué sur \"Comencer\", déplacez vous d'un carré à un autre grâce aux flèches directionnelles afin de parvenir au carré voulu. Le carré courant est le carré bleu et le carré visé et le carré vert."));
+    btnGoms4->setToolTip(QString("Paramétrez le test et après avoir cliqué sur \"Commencer\",\n déplacez vous d'un carré à un autre grâce aux flèches directionnelles ou la touche de tabulation afin de parvenir au carré voulu.\n Le carré courant est le carré bleu et le carré visé et le carré vert."));
     layout->addWidget(btnGoms4, 0, Qt::AlignCenter);
 
     // Menu bar au sommet

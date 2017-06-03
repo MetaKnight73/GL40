@@ -9,7 +9,7 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     layout = new QGridLayout;
     layout->setHorizontalSpacing(5);
     layout->setColumnMinimumWidth(0, 15);
-    layout->setColumnMinimumWidth(1, 15);
+    layout->setColumnMinimumWidth(1, 75);
     layout->setColumnMinimumWidth(2, 15);
     layout->setColumnMinimumWidth(3, 15);
     layoutUsers = new QHBoxLayout;
@@ -25,15 +25,16 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     spinParam2 = new QDoubleSpinBox;
     spinProfondeur = new QSpinBox;
     spinProfondeur->setAlignment(Qt::AlignCenter);
-    spinParam1->setFixedWidth(110);
+    spinProfondeur->setFixedWidth(210);
+    spinParam1->setFixedWidth(210);
     spinParam1->setAlignment(Qt::AlignCenter);
-    spinParam2->setFixedWidth(110);
+    spinParam2->setFixedWidth(210);
     spinParam2->setAlignment(Qt::AlignCenter);
 
     // Assignation des textes des labels
-    label1->setText("Temps d'activité mentale (M) : ");
-    label2->setText("Temps moyen frappe (K) : ");
-    labelProfondeur->setText("Sélectionnez le nombre de répertoires : ");
+    label1->setText("Temps d'activité mentale : ");
+    label2->setText("Temps moyen par frappe : ");
+    labelProfondeur->setText("Nombre de répertoires : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(0.01);
@@ -76,11 +77,11 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
 
     // On ajoute les éléments dans la page
     layout->addWidget(label1, 0, 0);
-    layout->addWidget(spinParam1, 0, 1);
+    layout->addWidget(spinParam1, 0, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(label2, 1, 0);
-    layout->addWidget(spinParam2, 1, 1);
+    layout->addWidget(spinParam2, 1, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(labelProfondeur, 2, 0);
-    layout->addWidget(spinProfondeur, 2, 1);
+    layout->addWidget(spinProfondeur, 2, 2, 1, 2, Qt::AlignCenter);
     layout->addLayout(layoutUsers, 3, 0, 1, 6, 0);
     layout->addLayout(layoutValiderAnnuler, 4, 0, 1, 6, 0);
 
@@ -103,7 +104,6 @@ void FenetreOptionsGomsClavier::restoreDefaultValues() {
 
     spinParam1->setValue(1.35);
     spinParam2->setValue(0.1);
-    spinProfondeur->setValue(10);
     userExpert->setDown(false);
     userExpert->setEnabled(true);
 
@@ -113,7 +113,6 @@ void FenetreOptionsGomsClavier::restoreExpertValues() {
 
     spinParam1->setValue(1.25);
     spinParam2->setValue(0.08);
-    spinProfondeur->setValue(10);
     userNormal->setDown(false);
     userNormal->setEnabled(true);
 

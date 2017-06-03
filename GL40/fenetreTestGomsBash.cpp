@@ -1,11 +1,16 @@
 #include "fenetreTestGomsBash.h"
 
 FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double tempsM, int tailleChemin) : QWidget(parent) {
+
     srand(time(NULL));
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
     bouton->setGeometry(515, 310, 250, 100);
+
+    info = new QLabel("Dans ce test, vous devez saisir la commande \"cd\" suivie du premier nom de répertoire affiché puis appuyer sur \"Entrée\".", this);
+    info->setGeometry(0, 390, 1280, 100);
+    info->setFont(QFont("Arial", 18, -1, true));
 
     // On initialise les paramètres
     tempsMental= tempsM;
@@ -48,6 +53,7 @@ void FenetreTestGomsBash::lancerTest() {
 
     // On fait disparaître le bouton
     bouton->hide();
+    info->hide();
 
     layoutZoneSaisie = new QVBoxLayout;
 
@@ -65,7 +71,7 @@ void FenetreTestGomsBash::lancerTest() {
     cheminCourant = new QLabel(QString(chemin), this, 0);
     cheminCourant->setFont(QFont("Arial Black", 24));
     labelZoneSaisie->setText(QString("Parcourez le chemin ci-dessus via la commande bash \"cd repertoire\". \"Entrée\" pour valider."));
-    labelZoneSaisie->setFont(QFont("Arial", 20, -1, true));
+    labelZoneSaisie->setFont(QFont("Arial", 18, -1, true));
     zoneSaisie->setMaximumHeight(50);
     zoneSaisie->setMinimumHeight(50);
     zoneSaisie->setMaximumWidth(700);
@@ -89,7 +95,7 @@ void FenetreTestGomsBash::lancerTest() {
 void FenetreTestGomsBash::checkWord() {
 
     QString texteZoneSaisie = zoneSaisie->text();
-    QStringList listTexteMotCourant = cheminCourant->text().split("/", QString::SkipEmptyParts); // on découpe la chaine contenant le chemin en list de QString
+    QStringList listTexteMotCourant = cheminCourant->text().split("/", QString::SkipEmptyParts); // On découpe la chaine contenant le chemin en list de QString
     QString texteMotCourant;
 
     if(!listTexteMotCourant.isEmpty()) {

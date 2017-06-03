@@ -10,7 +10,6 @@
 #include <QLineEdit>
 #include <QString>
 #include <QLayout>
-#include <QList>
 
 #include <vector>
 #include <time.h>
@@ -31,7 +30,7 @@ private:
     int nbRep;
     QGridLayout *layout;
     QVBoxLayout *layoutZoneSaisie;
-    QLabel *cheminCourant, *labelZoneSaisie;
+    QLabel *cheminCourant, *labelZoneSaisie, *info;
     QLineEdit *zoneSaisie;
 
     // Vecteur contenant les valeurs récoltées lors du test
@@ -56,4 +55,4 @@ public slots:
     void checkWord();
 };
 
-#endif // FENETRETESTGOMSBASH_H
+#endif

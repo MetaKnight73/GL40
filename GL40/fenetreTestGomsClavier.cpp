@@ -1,5 +1,4 @@
 #include "fenetreTestGomsClavier.h"
-#include <QDebug>
 
 FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, double parametre1, double parametre2) : QWidget(parent) {
 
@@ -8,9 +7,9 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     bouton->setGeometry(515, 310, 250, 100);
 
     //Texte d'informations
-    info = new QLabel("Dans ce test vous devez naviguer avec les flèches et choisir le bouton adequat avec \"Entrée\" ",this);
-    info->setGeometry(250, 380, 900, 100);
-    info->setFont(QFont("Arial", 15, -1, true));
+    info = new QLabel("Dans ce test, vous devez naviguer avec les flèches ou la touche \"Tab\" et choisir le bouton adéquat avec \"Entrée\".", this);
+    info->setGeometry(40, 390, 1280, 100);
+    info->setFont(QFont("Arial", 18, -1, true));
 
     // On initialise les paramètres
     param1 = parametre1;
@@ -32,18 +31,17 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     //On autorise l'utilisation du clavier
     setFocusPolicy(Qt::TabFocus);
 
-    //Création du style générale du bouton (cible & courant)
+    //Création du style général du bouton (cible & courant)
     style = new QString ("background-color : Blank;"
-                         "border-width : 2px;"
-                         "border-style : outline;"
-                         "color : black;");
+             "border-width : 2px;"
+             "border-style : outline;"
+             "color : black;");
 
 }
 
 void FenetreTestGomsClavier::demarrer() {
 
     bouton->hide();
-    chronometre->start();
     info->hide();
 
     // Création layout
@@ -67,13 +65,16 @@ void FenetreTestGomsClavier::demarrer() {
     boutonHasard = qrand()%16;
 
     QString styleTemp = *style;
-    grille[boutonHasard]->setText("Celui-ci");
-    grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank", "Green"));//mise en forme bouton hasard
+    grille[boutonHasard]->setText("CELUI-CI");
+    grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank", "Green")); // Mise en forme bouton hasard
+    grille[boutonHasard]->setStyleSheet(styleTemp.replace("black", "white"));
 
     styleTemp = *style;;
-    grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue"));//mise en forme bouton actif (par défaut le premier est celui en haut à gauche)
+    grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue")); // Mise en forme bouton actif (par défaut le premier est celui en haut à gauche)
+    grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
 
     setLayout(gridLayout);
+    chronometre->start();
 
 }
 
@@ -87,7 +88,8 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
         switch (event->key()) {
 
-        case Qt::Key_Right : // Si on appuie sur la flèche de droite on change de colonne => on avance de 4 dans le tableau
+        case Qt::Key_Right :
+        case Qt::Key_Tab :    // Si on appuie sur la flèche de droite ou tab on change de colonne => on avance de 4 dans le tableau
             {
                 if((boutonActif / 4) != 3)
                     boutonActif += 4;
@@ -109,7 +111,7 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     boutonActif += 1;
 
                 break;
-            }
+             }
 
         case Qt::Key_Up : // Appui sur la flèche de gauche : recule d'une colonne -4 pour l'index
             {
@@ -128,6 +130,7 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     // On reste à la même position
                     grille[boutonActif]->setText("Pas ici");
                     grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue")); // Le bouton cible devient un simple bouton actif
+                    grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
 
                     if(nombreClicsCourant == 0) {
                         deplacementX = boutonHasard % 4;
@@ -147,35 +150,20 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     deplacementX = abs(colonneArrivee - colonneDepart);
                     deplacementY = abs(ligneArrivee - ligneDepart);
 
-                    grille[boutonHasard]->setText("Celui-ci");
+                    grille[boutonHasard]->setText("CELUI-CI");
                     styleTemp = *style;
                     grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank", "Green"));
+                    grille[boutonHasard]->setStyleSheet(styleTemp.replace("black", "white"));
 
                     chronometre->restart();
                     nombreClicsCourant++;
 
-                    if (nombreClicsCourant == nombreC) // fin
-                        emit sequenceFin(statistiquesGomsClavier);
-
                 }
 
-                break;
+                if (nombreClicsCourant == nombreC) // Fin
+                    emit sequenceFin(statistiquesGomsClavier);
 
             }
-        case Qt::Key_Tab :
-            {
-                if(boutonActif != 15)
-                {
-                    if((boutonActif /4) == 3)
-                        (boutonActif %= 4) += 1; // on retombe sur le premier bouton tout à gauche de la ligne suivante
-                    else
-                        boutonActif += 4;
-                }
-                else
-                    boutonActif = 0; //on revient au premier
-
-                break;
-             }
 
         default : break;
 
@@ -183,9 +171,11 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
         styleTemp = *style;
         grille[boutonHasard]->setStyleSheet(styleTemp.replace("Blank", "Green"));
+        grille[boutonHasard]->setStyleSheet(styleTemp.replace("black", "white"));
 
         styleTemp = *style;
         grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue"));
+        grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
 
 
     }

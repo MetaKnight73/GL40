@@ -10,6 +10,12 @@ void StatistiquesGomsSaisieTexte::calculTempsGoms() {
 
 }
 
+void StatistiquesGomsSaisieTexte::calculTempsGomsFirst() {
+
+    tempsGoms =  tempsM + 0.4 + (longueurMot+1)*0.2; //Le codage est MHKKKKKK... avec K^(nb de caractères + 1 (retour chariot))
+
+}
+
 double StatistiquesGomsSaisieTexte::getTempsGoms() {
 
     return tempsGoms;

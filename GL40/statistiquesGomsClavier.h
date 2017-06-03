@@ -23,6 +23,7 @@ public:
 
     // Méthodes de calcul
     void calculTempsGoms();
+    void calculTempsGomsFirst();
 
     double getTempsGoms();
     double getTempsM();

@@ -10,7 +10,7 @@ FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
     layout->setHorizontalSpacing(5);
     layout->setColumnMinimumWidth(0, 15);
     layout->setColumnMinimumWidth(1, 15);
-    layout->setColumnMinimumWidth(2, 15);
+    layout->setColumnMinimumWidth(2, 70);
     layout->setColumnMinimumWidth(3, 15);
     layoutUsers = new QHBoxLayout;
     layoutValiderAnnuler = new QHBoxLayout;
@@ -26,16 +26,17 @@ FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
     spinParam2 = new QDoubleSpinBox;
     spinNbClics = new QSpinBox;
     spinNbClics->setAlignment(Qt::AlignCenter);
+    spinNbClics->setFixedWidth(210);
     spinParam1->setFixedWidth(110);
     spinParam1->setAlignment(Qt::AlignCenter);
-    spinParam2->setFixedWidth(110);
+    spinParam2->setFixedWidth(120);
     spinParam2->setAlignment(Qt::AlignCenter);
 
     // Assignation des textes des labels
     label1->setText("T = ");
     label2->setText("+");
-    label3->setText(" * log(D/L + 0.5) ");
-    labelClics->setText("Sélectionnez le nombre de clics : ");
+    label3->setText(" x log(D/L + 0.5) ");
+    labelClics->setText("Nombre de clics à réaliser : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(0);
@@ -79,7 +80,7 @@ FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
     // On ajoute les éléments dans la page
     layout->addWidget(label1, 0, 0);
     layout->addWidget(spinParam1, 0, 1);
-    layout->addWidget(label2, 0, 2);
+    layout->addWidget(label2, 0, 2, 1, 1, Qt::AlignCenter);
     layout->addWidget(spinParam2, 0, 3);
     layout->addWidget(label3, 0, 4);
     layout->addWidget(labelClics, 1, 0, 1, 4);

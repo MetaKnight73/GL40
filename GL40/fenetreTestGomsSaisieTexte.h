@@ -30,7 +30,7 @@ private:
     int longueurMax;
     QGridLayout *layout;
     QVBoxLayout *layoutZoneSaisie;
-    QLabel *motCourant, *labelZoneSaisie;
+    QLabel *motCourant, *labelZoneSaisie, *info;
     QLineEdit *zoneSaisie;
 
     // Vecteur contenant les valeurs récoltées lors du test

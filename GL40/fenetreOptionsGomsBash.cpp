@@ -9,7 +9,7 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
     layout = new QGridLayout;
     layout->setHorizontalSpacing(5);
     layout->setColumnMinimumWidth(0, 15);
-    layout->setColumnMinimumWidth(1, 15);
+    layout->setColumnMinimumWidth(1, 75);
     layout->setColumnMinimumWidth(2, 15);
     layout->setColumnMinimumWidth(3, 15);
     layoutUsers = new QHBoxLayout;
@@ -25,15 +25,16 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
     spinParam2 = new QDoubleSpinBox;
     spinLongRep = new QSpinBox;
     spinLongRep->setAlignment(Qt::AlignCenter);
-    spinParam1->setFixedWidth(110);
+    spinLongRep->setFixedWidth(210);
+    spinParam1->setFixedWidth(210);
     spinParam1->setAlignment(Qt::AlignCenter);
-    spinParam2->setFixedWidth(110);
+    spinParam2->setFixedWidth(210);
     spinParam2->setAlignment(Qt::AlignCenter);
 
     // Assignation des textes des labels
-    label1->setText("Sélectionnez le nombre de répertoire à parcourir : ");
-    label2->setText("Temps d'activité mentale (M) : ");
-    labelMots->setText("Nombre de caractères maximal d'un répertoire : ");
+    label1->setText("Nombre de répertoires : ");
+    label2->setText("Temps d'activité mentale : ");
+    labelMots->setText("Longueur max. répertoire : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(1);
@@ -76,11 +77,11 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
 
     // On ajoute les éléments dans la page
     layout->addWidget(label1, 0, 0);
-    layout->addWidget(spinParam1, 0, 1);
+    layout->addWidget(spinParam1, 0, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(label2, 1, 0);
-    layout->addWidget(spinParam2, 1, 1);
+    layout->addWidget(spinParam2, 1, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(labelMots, 2, 0);
-    layout->addWidget(spinLongRep, 2, 1);
+    layout->addWidget(spinLongRep, 2, 2, 1, 2, Qt::AlignCenter);
     layout->addLayout(layoutUsers, 3, 0, 1, 6, 0);
     layout->addLayout(layoutValiderAnnuler, 4, 0, 1, 6, 0);
 
@@ -100,9 +101,7 @@ FenetreOptionsGomsBash::FenetreOptionsGomsBash(QWidget *parent) : QDialog(parent
 
 void FenetreOptionsGomsBash::restoreDefaultValues() {
 
-    spinParam1->setValue(10);
     spinParam2->setValue(1.35);
-    spinLongRep->setValue(10);
     userExpert->setDown(false);
     userExpert->setEnabled(true);
 
@@ -110,9 +109,7 @@ void FenetreOptionsGomsBash::restoreDefaultValues() {
 
 void FenetreOptionsGomsBash::restoreExpertValues() {
 
-    spinParam1->setValue(10);
     spinParam2->setValue(1.25);
-    spinLongRep->setValue(10);
     userNormal->setDown(false);
     userNormal->setEnabled(true);
 

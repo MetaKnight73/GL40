@@ -6,6 +6,11 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
     bouton = new QPushButton("Commencer", this);
     bouton->setGeometry(515, 310, 250, 100);
 
+    // Texte d'informations
+    info = new QLabel("Dans ce test, vous devez simplement cliquer les boutons lorsqu'ils apparaissent.", this);
+    info->setGeometry(220, 390, 1280, 100);
+    info->setFont(QFont("Arial", 18, -1, true));
+
     // On initialise les paramètres
     param1= parametre1;
     param2 = parametre2;
@@ -41,6 +46,7 @@ void FenetreTestFitts::deplacerBoutonClic() {
 
     // On change le texte du bouton qu'on va déplacer
     bouton->setText("CLIQUEZ ICI !");
+    info->hide();
 
     // On récupère le temps de départ
     QTime now = QTime::currentTime();

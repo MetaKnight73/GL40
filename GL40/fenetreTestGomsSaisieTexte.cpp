@@ -6,6 +6,11 @@ FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *
     bouton = new QPushButton("Commencer", this);
     bouton->setGeometry(515, 310, 250, 100);
 
+    // Texte d'informations
+    info = new QLabel("Dans ce test, vous devez saisir les mots apparaissant à l'écran puis appuyer sur \"Entrée\".", this);
+    info->setGeometry(180, 390, 1280, 100);
+    info->setFont(QFont("Arial", 18, -1, true));
+
     // On initialise les paramètres
     tempsMental= tempsM;
     longueurMax = longueurMaximale;
@@ -49,14 +54,15 @@ void FenetreTestGomsSaisieTexte::lancerTest() {
 
     // On fait disparaître le bouton
     bouton->hide();
+    info->hide();
 
     layoutZoneSaisie = new QVBoxLayout;
 
     //On génère le premier mot aléatoire
     motCourant = new QLabel(QString(genererMotCourant(longueurMax)), this, 0);
     motCourant->setFont(QFont("Arial Black", 40));
-    labelZoneSaisie->setText(QString("Veuillez saisir le texte affiché ci-dessus puis appuyer sur Entrée"));
-    labelZoneSaisie->setFont(QFont("Arial", 20, -1, true));
+    labelZoneSaisie->setText(QString("Veuillez saisir le texte affiché ci-dessus puis appuyer sur \"Entrée\"."));
+    labelZoneSaisie->setFont(QFont("Arial", 18, -1, true));
     zoneSaisie->setMaximumHeight(50);
     zoneSaisie->setMinimumHeight(50);
     zoneSaisie->setMaximumWidth(700);

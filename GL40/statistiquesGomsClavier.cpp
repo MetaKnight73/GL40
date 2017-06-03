@@ -7,7 +7,14 @@ StatistiquesGomsClavier::StatistiquesGomsClavier(double tM, double tK, int dX, i
 void StatistiquesGomsClavier::calculTempsGoms() {
 
     // Temps goms entre chaque 'repertoire'
-    tempsGoms =  tempsM + ((deplacementX + deplacementY + 1) * tempsK); //Le codage est MK^(nbLignesEcart+nbColonnesEcart+1)
+    tempsGoms =  tempsM + ((deplacementX + deplacementY + 1) * tempsK); // Le codage est MK^(nbLignesEcart+nbColonnesEcart+1)
+
+}
+
+void StatistiquesGomsClavier::calculTempsGomsFirst() {
+
+    // Temps goms entre chaque 'repertoire'
+    tempsGoms =  tempsM + 0.4 + ((deplacementX + deplacementY + 1) * tempsK); // Le codage est MHK^(nbLignesEcart+nbColonnesEcart+1) car on passe de la souris au clavier que sur le premier cas
 
 }
 
