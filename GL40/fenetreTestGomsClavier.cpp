@@ -1,4 +1,5 @@
 #include "fenetreTestGomsClavier.h"
+#include <QDebug>
 
 FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, double parametre1, double parametre2) : QWidget(parent) {
 
@@ -33,9 +34,9 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
 
     //Création du style générale du bouton (cible & courant)
     style = new QString ("background-color : Blank;"
-             "border-width : 2px;"
-             "border-style : outline;"
-             "color : black;");
+                         "border-width : 2px;"
+                         "border-style : outline;"
+                         "color : black;");
 
 }
 
@@ -108,7 +109,7 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     boutonActif += 1;
 
                 break;
-             }
+            }
 
         case Qt::Key_Up : // Appui sur la flèche de gauche : recule d'une colonne -4 pour l'index
             {
@@ -153,12 +154,28 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     chronometre->restart();
                     nombreClicsCourant++;
 
+                    if (nombreClicsCourant == nombreC) // fin
+                        emit sequenceFin(statistiquesGomsClavier);
+
                 }
 
-                if (nombreClicsCourant == nombreC) // fin
-                    emit sequenceFin(statistiquesGomsClavier);
+                break;
 
             }
+        case Qt::Key_Tab :
+            {
+                if(boutonActif != 15)
+                {
+                    if((boutonActif /4) == 3)
+                        (boutonActif %= 4) += 1; // on retombe sur le premier bouton tout à gauche de la ligne suivante
+                    else
+                        boutonActif += 4;
+                }
+                else
+                    boutonActif = 0; //on revient au premier
+
+                break;
+             }
 
         default : break;
 

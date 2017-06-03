@@ -50,6 +50,10 @@ void FenetreTestGomsClics::demarrer() {
     boutonActif = qrand()%16;
     grille[boutonActif]->setEnabled(true);
     grille[boutonActif]->setText("Celui-ci");
+    grille[boutonActif]->setStyleSheet("background-color : Green;"
+                                       "border-width : 2px;"
+                                       "border-style : outline;"
+                                       "color : black;"); // On applique un style pou repérer le bouton cible
 
     setLayout(gridLayout);
 
@@ -63,6 +67,7 @@ void FenetreTestGomsClics::changer() {
         grille[boutonActif]->setDown(false);
         grille[boutonActif]->setDisabled(true);
         grille[boutonActif]->setText("Pas ici");
+        grille[boutonActif]->setStyleSheet("");//on efface le style de l'ancien bouton cible
 
         // Ajout aux stats :
         statistiquesGomsClics.push_back(StatistiquesGomsClics(param2, param1, param3, boutonActif, chronometre->elapsed()));
@@ -71,6 +76,10 @@ void FenetreTestGomsClics::changer() {
         boutonActif = qrand()%16;
         grille[boutonActif]->setEnabled(true);
         grille[boutonActif]->setText("Celui-ci");
+        grille[boutonActif]->setStyleSheet("background-color : Green;"
+                                           "border-width : 2px;"
+                                           "border-style : outline;"
+                                           "color : black;");
         selectionne = false;
 
         chronometre->restart();

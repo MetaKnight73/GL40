@@ -1,11 +1,11 @@
 Revoir alignement feneteres options
-Mettre une couleur (verte ?) sur le bouton à double-cliquer dans le test clic
+Mettre une couleur (verte ?) sur le bouton à double-cliquer dans le test clic // FAIT
 Mettre les textes avec quoi faire sous chaque bouton Commencer là où ca manque
 Goms Bash possibilité de saisir un chemin plus long que une unité de profondeur à chaque fois
 Ajouter \n sur les tooltip du menu principal pour que ce soit plus compact
 ----Ajout---
 Manque un bouton retour sur chaque test pour l'arrêter. Actuellement soit on quitte l'appli soit on termine le test
-Pour le test avec les flèches : parcourir avec tabulation (bon ça sera pas le plus dur)
+Pour le test avec les flèches : parcourir avec tabulation (bon ça sera pas le plus dur) // partiellement fait, manque les statistiques à refaire
 Ajout d'un test (à la place du bash ou en complément?) pour parcourir un chemin en mode graphique (sous forme d'arbre) des sortes de QTreeView en gros
 Améliorer le graphisme de l'application pour la rendre plus user-friendly (attirante) et expliquer les choix (surtout pour la fenêtre d'options apparemment).
 Optionnel : Historique
