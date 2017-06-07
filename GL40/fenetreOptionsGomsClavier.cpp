@@ -87,6 +87,9 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
 
     setLayout(layout);
 
+    start->setFocus();
+    start->setDefault(true);
+
     userNormal->setDown(true);
     userNormal->setEnabled(false);
 

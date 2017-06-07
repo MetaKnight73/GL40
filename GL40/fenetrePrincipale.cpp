@@ -89,6 +89,16 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     fenetreOptionsGomsBash = new FenetreOptionsGomsBash;
     fenetreOptionsGomsClavier = new FenetreOptionsGomsClavier;
 
+    //btnFitts->setDefault(true);
+    indexCourant = 0;
+
+    vecteur = vector<QPushButton*>();
+    vecteur.push_back(btnFitts);
+    vecteur.push_back(btnGoms1);
+    vecteur.push_back(btnGoms2);
+    vecteur.push_back(btnGoms3);
+    vecteur.push_back(btnGoms4);
+
     // Les connexions
     connect(newFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(newGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
@@ -105,6 +115,22 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
     connect(fermer, SIGNAL(triggered()), this, SLOT(close()));
 
+}
+
+void FenetrePrincipale::keyPressEvent(QKeyEvent *event) {
+
+    if(event->isAccepted()) {
+
+        switch (event->key()) {
+
+            case Qt::Key_Down :
+                vecteur.at(indexCourant)->setDefault(false);
+                indexCourant++;
+                vecteur.at(indexCourant)->setDefault(true);
+            break;
+        }
+
+    }
 }
 
 // Méthode appelée pour paramétrer le test Fitts

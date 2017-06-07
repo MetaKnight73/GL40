@@ -24,10 +24,6 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     // Chronomètre pour le calcul des temps
     chronometre = new QTime;
 
-    // Connexions
-    connect(bouton, SIGNAL(clicked(bool)), this, SLOT(demarrer()));
-    connect(this, SIGNAL(sequenceFin(vector<StatistiquesGomsClavier>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier>)));
-
     //On autorise l'utilisation du clavier
     setFocusPolicy(Qt::TabFocus);
 
@@ -36,6 +32,13 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
              "border-width : 2px;"
              "border-style : outline;"
              "color : black;");
+
+    bouton->setFocus();
+    bouton->setDefault(true);
+
+    // Connexions
+    connect(bouton, SIGNAL(clicked(bool)), this, SLOT(demarrer()));
+    connect(this, SIGNAL(sequenceFin(vector<StatistiquesGomsClavier>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier>)));
 
 }
 
@@ -93,14 +96,20 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
             {
                 if((boutonActif / 4) != 3)
                     boutonActif += 4;
+                else if(boutonActif != 15)
+                    boutonActif -= 11;
+                else
+                    boutonActif = 0;
 
                 break;
             }
 
         case Qt::Key_Left : // Appui sur la flèche de gauche : recule d'une colonne -4 pour l'index
             {
-                if((boutonActif / 4) != 0)
-                    boutonActif -= 4;
+                if((boutonActif / 4) == 0 && boutonActif != 0)
+                    boutonActif += 11;
+                else if((boutonActif / 4) != 0)
+                    boutonActif -=4;
 
                 break;
             }
@@ -132,23 +141,34 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
                     grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue")); // Le bouton cible devient un simple bouton actif
                     grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
 
-                    if(nombreClicsCourant == 0) {
+                    // Ce if pour pas retour début
+                    /*if(nombreClicsCourant == 0) {
                         deplacementX = boutonHasard % 4;
                         deplacementY = boutonHasard / 4;
-                    }
+                    }*/
+
+                    // Ces deux lignes pour retour début
+                    deplacementX = boutonHasard % 4;
+                    deplacementY = boutonHasard / 4;
 
                     // Ajout aux stats
                     statistiquesGomsClavier.push_back(StatistiquesGomsClavier(param1, param2, deplacementX, deplacementY, boutonActif, chronometre->elapsed()));
 
                     // On met un nouveau
-                    int colonneDepart = boutonHasard % 4;
-                    int ligneDepart = boutonHasard / 4;
+                    // Ces 2 x 2 lignes commentées pour pas reoutr début
+                    //int colonneDepart = boutonHasard % 4;
+                    //int ligneDepart = boutonHasard / 4;
                     boutonHasard = qrand() % 16;
-                    int colonneArrivee = boutonHasard % 4;
-                    int ligneArrivee = boutonHasard / 4;
+                    //int colonneArrivee = boutonHasard % 4;
+                    //int ligneArrivee = boutonHasard / 4;
 
-                    deplacementX = abs(colonneArrivee - colonneDepart);
-                    deplacementY = abs(ligneArrivee - ligneDepart);
+                    // Ces deux lignes pour pas retour début
+                    //deplacementX = abs(colonneArrivee - colonneDepart);
+                    //deplacementY = abs(ligneArrivee - ligneDepart);
+
+                    // Ces deux lignes pour retour début
+                    grille[boutonActif]->setStyleSheet("");
+                    boutonActif = 0;
 
                     grille[boutonHasard]->setText("CELUI-CI");
                     styleTemp = *style;

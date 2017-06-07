@@ -53,6 +53,9 @@ private:
     QPushButton *btnGoms3;
     QPushButton *btnGoms4;
 
+    vector<QPushButton*> vecteur;
+    int indexCourant;
+
     FenetreOptionsFitts *fenetreOptionsFitts;
     FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
     FenetreOptionsGomsClics *fenetreOptionsGomsClics;
@@ -82,6 +85,7 @@ public slots:
     void afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash);
     void afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier);
     void aPropos();
+    void keyPressEvent(QKeyEvent *event);
 
 };
 

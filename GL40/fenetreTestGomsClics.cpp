@@ -22,6 +22,9 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
     // Chronomètre pour le calcul des temps
     chronometre = new QTime;
 
+    bouton->setFocus();
+    bouton->setDefault(true);
+
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(demarrer()));
     connect(this, SIGNAL(sequenceFin(vector<StatistiquesGomsClics>)), this->parent(), SLOT(afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics>)));

@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "statistiquesFitts.h"
+#include "fenetrePrincipale.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ public:
 
     explicit FenetreTestFitts(int nombreClics, QWidget *parent = 0, double param1 = 0, double param2 = 0);
     void mouseMoveEvent(QMouseEvent *);
+    void retournerMenu();
 
 signals:
 
@@ -46,6 +48,7 @@ signals:
 public slots:
 
     void deplacerBoutonClic();
+    void keyPressEvent(QKeyEvent *event);
 
 };
 

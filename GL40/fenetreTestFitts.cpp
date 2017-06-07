@@ -7,7 +7,7 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
     bouton->setGeometry(515, 310, 250, 100);
 
     // Texte d'informations
-    info = new QLabel("Dans ce test, vous devez simplement cliquer les boutons lorsqu'ils apparaissent.", this);
+    info = new QLabel("Dans ce test, vous devez simplement cliquer les boutons lorsqu'ils apparaissent.\n\t\t\t  (\"Echap\" pour quitter)", this);
     info->setGeometry(220, 390, 1280, 100);
     info->setFont(QFont("Arial", 18, -1, true));
 
@@ -23,6 +23,9 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
 
     // On autorise la détection permanente des évènements souris, car sinon on n'aurait une détection qu'au clic
     setMouseTracking(true);
+
+    bouton->setFocus();
+    bouton->setDefault(true);
 
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(deplacerBoutonClic()));
@@ -42,11 +45,42 @@ void FenetreTestFitts::mouseMoveEvent(QMouseEvent *) {
 
 }
 
+void FenetreTestFitts::keyPressEvent(QKeyEvent *event) {
+
+    if(event->isAccepted()) {
+
+        switch (event->key()) {
+
+            case Qt::Key_Escape :
+                retournerMenu();
+            break;
+        }
+
+    }
+}
+
+void FenetreTestFitts::retournerMenu() {
+
+    parentWidget()->close();
+    FenetrePrincipale *fenetre = new FenetrePrincipale;
+    fenetre->statusBar()->setSizeGripEnabled(false);
+    fenetre->show();
+    QRect rectangleFenetre = QApplication::desktop()->screenGeometry();
+    int x = (rectangleFenetre.width()-fenetre->width()) / 2;
+    int y = (rectangleFenetre.height()-fenetre->height()) / 2;
+    fenetre->move(x, y);
+
+}
+
+
 void FenetreTestFitts::deplacerBoutonClic() {
 
     // On change le texte du bouton qu'on va déplacer
     bouton->setText("CLIQUEZ ICI !");
-    info->hide();
+    bouton->setDefault(false);
+    //info->hide();
+    info->setGeometry(524, 610, 540, 100);
+    info->setText(QString("(\"Echap\" pour quitter)"));
 
     // On récupère le temps de départ
     QTime now = QTime::currentTime();
@@ -83,6 +117,10 @@ void FenetreTestFitts::deplacerBoutonClic() {
 
         }
 
+    }
+
+    if(((tempx + largeurBouton) >= 524) && (tempx < 1064) && ((tempy + largeurBouton) >= 610)) {
+        y -= 110;
     }
 
     // On déplace le bouton

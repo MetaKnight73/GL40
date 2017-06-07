@@ -90,6 +90,9 @@ FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
 
     setLayout(layout);
 
+    start->setFocus();
+    start->setDefault(true);
+
     userNormal->setDown(true);
     userNormal->setEnabled(false);
 

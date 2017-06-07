@@ -26,6 +26,9 @@ FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *
     zoneSaisie = new QLineEdit;
     labelZoneSaisie = new QLabel;
 
+    bouton->setFocus();
+    bouton->setDefault(true);
+
     // Connexions
     connect(bouton, SIGNAL(clicked()), this, SLOT(lancerTest()));
     connect(zoneSaisie, SIGNAL(returnPressed()), this, SLOT(checkWord()));

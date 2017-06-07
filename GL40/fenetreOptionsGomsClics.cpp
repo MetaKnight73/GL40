@@ -100,6 +100,9 @@ FenetreOptionsGomsClics::FenetreOptionsGomsClics(QWidget *parent) : QDialog(pare
 
     setLayout(layout);
 
+    start->setFocus();
+    start->setDefault(true);
+
     userNormal->setDown(true);
     userNormal->setEnabled(false);
 
