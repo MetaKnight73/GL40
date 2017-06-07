@@ -1,6 +1,9 @@
 Revoir alignement feneteres options  =========> OK
-Mettre une couleur (verte ?) sur le bouton ‡ double-cliquer dans le test clic  =======> OK
-Mettre les textes avec quoi faire sous chaque bouton Commencer l‡ o˘ ca manque  ========> OK
-Goms Bash possibilitÈ de saisir un chemin plus long que une unitÈ de profondeur ‡ chaque fois
+Mettre une couleur (verte ?) sur le bouton √† double-cliquer dans le test clic  =======> OK
+Mettre les textes avec quoi faire sous chaque bouton Commencer l√† o√π ca manque  ========> OK
+Goms Bash possibilit√© de saisir un chemin plus long que une unit√© de profondeur √† chaque fois
 Ajouter \n sur les tooltip du menu principal pour que ce soit plus compact  =========> OK
 Optionnel : Historique
+Fitts : boutons ronds
+Goms Clavier : selection du retour en case d√©part
+Ajouter la fonction de retour "esc" sur tous les tests
