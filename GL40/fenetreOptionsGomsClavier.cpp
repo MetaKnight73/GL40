@@ -19,6 +19,7 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     label1 = new QLabel;
     label2 = new QLabel;
     labelProfondeur = new QLabel;
+    labelRetourDepart = new QLabel;
 
     // Spinners
     spinParam1 = new QDoubleSpinBox;
@@ -31,10 +32,15 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     spinParam2->setFixedWidth(210);
     spinParam2->setAlignment(Qt::AlignCenter);
 
+    // CheckBox
+    cbRetourDepart = new QCheckBox;
+    cbRetourDepart->setChecked(false);
+
     // Assignation des textes des labels
     label1->setText("Temps d'activité mentale : ");
     label2->setText("Temps moyen par frappe : ");
     labelProfondeur->setText("Nombre de répertoires : ");
+    labelRetourDepart->setText("retours en haut a gauche : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(0.01);
@@ -82,8 +88,10 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     layout->addWidget(spinParam2, 1, 2, 1, 2, Qt::AlignCenter);
     layout->addWidget(labelProfondeur, 2, 0);
     layout->addWidget(spinProfondeur, 2, 2, 1, 2, Qt::AlignCenter);
-    layout->addLayout(layoutUsers, 3, 0, 1, 6, 0);
-    layout->addLayout(layoutValiderAnnuler, 4, 0, 1, 6, 0);
+    layout->addWidget(labelRetourDepart, 3, 0);
+    layout->addWidget(cbRetourDepart, 3, 2, 1, 2, Qt::AlignCenter);
+    layout->addLayout(layoutUsers, 4, 0, 1, 6, 0);
+    layout->addLayout(layoutValiderAnnuler, 5, 0, 1, 6, 0);
 
     setLayout(layout);
 
@@ -166,5 +174,11 @@ double FenetreOptionsGomsClavier::getParametre1() {
 double FenetreOptionsGomsClavier::getParametre2() {
 
     return spinParam2->value();
+
+}
+
+bool FenetreOptionsGomsClavier::getRetourDepart(){
+
+    return cbRetourDepart->isChecked();
 
 }

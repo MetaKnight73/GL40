@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
+#include <QCheckBox>
 #include <QLabel>
 #include <QBoxLayout>
 
@@ -31,6 +32,7 @@ public:
     QLabel *label1;
     QLabel *label2;
     QLabel *labelProfondeur;
+    QLabel *labelRetourDepart;
 
     // Boutons
     QPushButton *start;
@@ -38,12 +40,16 @@ public:
     QPushButton *userNormal;
     QPushButton *userExpert;
 
+    // CheckBox
+    QCheckBox *cbRetourDepart;
+
 public:
 
     explicit FenetreOptionsGomsClavier(QWidget *parent = 0);
     int getProfondeur();
     double getParametre1();
     double getParametre2();
+    bool getRetourDepart();
 
 public slots:
 

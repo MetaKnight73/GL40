@@ -1,6 +1,6 @@
 #include "fenetreTestGomsClavier.h"
 
-FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, double parametre1, double parametre2) : QWidget(parent) {
+FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, double parametre1, double parametre2, bool param3) : QWidget(parent) {
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
@@ -14,6 +14,7 @@ FenetreTestGomsClavier::FenetreTestGomsClavier(int profondeur, QWidget *parent, 
     // On initialise les paramètres
     param1 = parametre1;
     param2 = parametre2;
+    retourDepart = param3;
     deplacementX = 0;
     deplacementY = 0;
     nombreC = profondeur;
@@ -135,40 +136,40 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
             {
                 if (boutonActif == boutonHasard) // Si on est sur le bon bouton au moment d'appuyer sur Entrer
                 {
-
-                    // On reste à la même position
                     grille[boutonActif]->setText("Pas ici");
-                    grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue")); // Le bouton cible devient un simple bouton actif
-                    grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
 
-                    // Ce if pour pas retour début
-                    /*if(nombreClicsCourant == 0) {
+                    if(retourDepart){
+                        // On reste à la même position
+                        grille[boutonActif]->setStyleSheet(styleTemp.replace("Blank", "LightBlue")); // Le bouton cible devient un simple bouton actif
+                        grille[boutonActif]->setStyleSheet(styleTemp.replace("black", "white"));
+
                         deplacementX = boutonHasard % 4;
                         deplacementY = boutonHasard / 4;
-                    }*/
 
-                    // Ces deux lignes pour retour début
-                    deplacementX = boutonHasard % 4;
-                    deplacementY = boutonHasard / 4;
+                    }else if(nombreClicsCourant == 0) {
+                        deplacementX = boutonHasard % 4;
+                        deplacementY = boutonHasard / 4;
+                    }
+
 
                     // Ajout aux stats
                     statistiquesGomsClavier.push_back(StatistiquesGomsClavier(param1, param2, deplacementX, deplacementY, boutonActif, chronometre->elapsed()));
 
                     // On met un nouveau
-                    // Ces 2 x 2 lignes commentées pour pas reoutr début
-                    //int colonneDepart = boutonHasard % 4;
-                    //int ligneDepart = boutonHasard / 4;
-                    boutonHasard = qrand() % 16;
-                    //int colonneArrivee = boutonHasard % 4;
-                    //int ligneArrivee = boutonHasard / 4;
+                    if(retourDepart){
+                        boutonHasard = qrand() % 16;
+                        grille[boutonActif]->setStyleSheet("");
+                        boutonActif = 0;
+                    }else{
+                        int colonneDepart = boutonHasard % 4;
+                        int ligneDepart = boutonHasard / 4;
+                        boutonHasard = qrand() % 16;
+                        int colonneArrivee = boutonHasard % 4;
+                        int ligneArrivee = boutonHasard / 4;
 
-                    // Ces deux lignes pour pas retour début
-                    //deplacementX = abs(colonneArrivee - colonneDepart);
-                    //deplacementY = abs(ligneArrivee - ligneDepart);
-
-                    // Ces deux lignes pour retour début
-                    grille[boutonActif]->setStyleSheet("");
-                    boutonActif = 0;
+                        deplacementX = abs(colonneArrivee - colonneDepart);
+                        deplacementY = abs(ligneArrivee - ligneDepart);
+                    }
 
                     grille[boutonHasard]->setText("CELUI-CI");
                     styleTemp = *style;

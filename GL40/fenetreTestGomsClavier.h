@@ -19,13 +19,14 @@ class FenetreTestGomsClavier : public QWidget {
 
 public:
 
-    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0);
+    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0, bool param3 = false);
 
     // Variables générales
     int nombreC;
     int nombreClicsCourant;
     int boutonActif, boutonHasard, deplacementX, deplacementY;
     double param1, param2;
+    bool retourDepart;
 
     // Vecteur contenant les valeurs récoltées lors du test
     vector<StatistiquesGomsClavier> statistiquesGomsClavier;
