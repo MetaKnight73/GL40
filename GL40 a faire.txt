@@ -1,4 +1,4 @@
-Revoir alignement feneteres options  =========> OK
+﻿Revoir alignement feneteres options  =========> OK
 Mettre une couleur (verte ?) sur le bouton à double-cliquer dans le test clic  =======> OK
 Mettre les textes avec quoi faire sous chaque bouton Commencer là où ca manque  ========> OK
 Ajouter \n sur les tooltip du menu principal pour que ce soit plus compact  =========> OK
@@ -7,4 +7,4 @@ Goms Clavier : selection du retour en case départ ======> OK
 
 Optionnel : Historique
 Goms Bash possibilité de saisir un chemin plus long que une unité de profondeur à chaque fois
-Ajouter la fonction de retour "esc" sur tous les tests
+Ajouter la fonction de retour "esc" sur tous les tests =========> OK
