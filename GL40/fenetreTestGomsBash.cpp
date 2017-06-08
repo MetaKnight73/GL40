@@ -127,35 +127,32 @@ void FenetreTestGomsBash::lancerTest() {
 void FenetreTestGomsBash::checkWord() {
 
     QString texteZoneSaisie = zoneSaisie->text();
-    QStringList listTexteMotCourant = cheminCourant->text().split("/", QString::SkipEmptyParts); // On découpe la chaine contenant le chemin en list de QString
-    QString texteMotCourant;
 
-    if(!listTexteMotCourant.isEmpty()) {
+    if( !texteZoneSaisie.isEmpty() ) {
 
-        texteMotCourant = listTexteMotCourant.takeFirst(); // On prend le premier élement de la liste qui est le nom du répertoire
-        texteMotCourant = QString("cd ") + texteMotCourant; // On ajoute la commande au début du QString
+        QStringList cheminUser = (texteZoneSaisie.split("cd ", QString::SkipEmptyParts));
 
-    }
+        if( !cheminUser.isEmpty() ) {
 
-    int x = QString::compare(texteZoneSaisie, texteMotCourant, Qt::CaseSensitive);
-    if(!x) {
+            cheminUser = cheminUser.takeFirst().split("/", QString::SkipEmptyParts); // on sépare la commande de la chaine et les rep des séparateurs
+            QStringList chemin = cheminCourant->text().split("/", QString::SkipEmptyParts); // on créer une Qlist à  partir des rep de du chemin créé aléatoirement
 
-        nombreMotsValidesCourant++;
-        statistiquesGomsBash.push_back(StatistiquesGomsBash(tempsMental, texteMotCourant.length(), chronometre->elapsed()));
-        if(nombreMotsValidesCourant < nbRep) {
+            bool egal(true);
 
-            zoneSaisie->clear();
-            cheminCourant->setText(listTexteMotCourant.join("/"));
-            chronometre->restart();
+            for(int i = 0; i < cheminUser.size(); ++i)
+            egal *= bool(cheminUser[i] == chemin[i]); // un Ã©lement différent entre chaque liste rend faux "egal"
 
+            if(egal)//si on a entrÃ© les mÃªmes chaines
+            {
+                cheminCourant->setText((chemin.mid(cheminUser.size(), -1)).join("/")); //on met Ã  jour le label contenant le chemin alÃ©atoire
+                nombreMotsValidesCourant += cheminUser.size();
+                statistiquesGomsBash.push_back(StatistiquesGomsBash(tempsMental, texteZoneSaisie.size(), chronometre->elapsed())); // on renvoie la longueur de ce qui est tapÃ©
+                zoneSaisie->clear();
+                chronometre->restart();
+
+                if(nombreMotsValidesCourant == nbRep)
+                    emit sequenceFinGoms(statistiquesGomsBash);
+            }
         }
-
-        else {
-
-            emit sequenceFinGoms(statistiquesGomsBash);
-
-        }
-
     }
-
 }
