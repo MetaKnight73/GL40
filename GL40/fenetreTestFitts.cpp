@@ -75,6 +75,11 @@ void FenetreTestFitts::retournerMenu() {
 
 void FenetreTestFitts::deplacerBoutonClic() {
 
+    // Verification bouton rond
+    QPoint mousePos = bouton->mapFromGlobal(QCursor::pos());
+    if (sqrt(pow(mousePos.x()-(bouton->width()/2), 2) + pow(mousePos.y()-(bouton->height()/2), 2)) >= bouton->width()/2
+            && nombreClicsCourant>0) return;
+
     // On change le texte du bouton qu'on va déplacer
     bouton->setText("CLIQUEZ ICI !");
     bouton->setDefault(false);

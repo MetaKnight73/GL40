@@ -4,6 +4,6 @@ Mettre les textes avec quoi faire sous chaque bouton Commencer là où ca manque
 Goms Bash possibilité de saisir un chemin plus long que une unité de profondeur à chaque fois
 Ajouter \n sur les tooltip du menu principal pour que ce soit plus compact  =========> OK
 Optionnel : Historique
-Fitts : boutons ronds
+Fitts : boutons ronds =======> OK
 Goms Clavier : selection du retour en case départ
 Ajouter la fonction de retour "esc" sur tous les tests
