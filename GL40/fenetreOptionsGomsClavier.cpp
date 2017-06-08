@@ -2,7 +2,7 @@
 
 FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(parent) {
 
-    // On assigne une taille fixe de fenêtre à 400x200
+    // On assigne une taille fixe de fenêtre à 450x200
     setFixedSize(450, 200);
 
     // Layouts de la fenêtre
@@ -40,7 +40,7 @@ FenetreOptionsGomsClavier::FenetreOptionsGomsClavier(QWidget *parent) : QDialog(
     label1->setText("Temps d'activité mentale : ");
     label2->setText("Temps moyen par frappe : ");
     labelProfondeur->setText("Nombre de répertoires : ");
-    labelRetourDepart->setText("retours en haut a gauche : ");
+    labelRetourDepart->setText("Retours haut gauche : ");
 
     // On gère les valeurs du spinner 1
     spinParam1->setMinimum(0.01);

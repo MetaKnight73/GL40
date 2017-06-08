@@ -7,7 +7,7 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
     bouton->setGeometry(515, 310, 250, 100);
 
     // Texte d'informations
-    info = new QLabel("Dans ce test, vous devez simplement cliquer les boutons lorsqu'ils apparaissent.\n\t\t\t  (\"Echap\" pour quitter)", this);
+    info = new QLabel("Dans ce test, vous devez simplement cliquer les boutons lorsqu'ils apparaissent.", this);
     info->setGeometry(220, 390, 1280, 100);
     info->setFont(QFont("Arial", 18, -1, true));
 
@@ -83,9 +83,6 @@ void FenetreTestFitts::deplacerBoutonClic() {
     // On change le texte du bouton qu'on va déplacer
     bouton->setText("CLIQUEZ ICI !");
     bouton->setDefault(false);
-    //info->hide();
-    info->setGeometry(524, 610, 540, 100);
-    info->setText(QString("(\"Echap\" pour quitter)"));
 
     // On récupère le temps de départ
     QTime now = QTime::currentTime();

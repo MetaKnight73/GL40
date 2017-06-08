@@ -15,6 +15,7 @@
 #include <time.h>
 
 #include "statistiquesGomsBash.h"
+#include "fenetrePrincipale.h"
 
 using namespace std;
 
@@ -44,6 +45,7 @@ public:
 
     explicit FenetreTestGomsBash(int longRep, QWidget *parent = 0, double tempsM = 0, int tailleChemin = 0);
     char* genererMotCourant(int longueur);
+    void retournerMenu();
 
 signals:
 
@@ -53,6 +55,7 @@ public slots:
 
     void lancerTest();
     void checkWord();
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif

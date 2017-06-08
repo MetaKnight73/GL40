@@ -11,15 +11,14 @@
 #include <vector>
 
 #include "statistiquesGomsClavier.h"
+#include "fenetrePrincipale.h"
 
 using namespace std;
 
 class FenetreTestGomsClavier : public QWidget {
     Q_OBJECT
 
-public:
-
-    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0, bool param3 = false);
+private:
 
     // Variables générales
     int nombreC;
@@ -37,6 +36,11 @@ public:
     QTime *chronometre;
     QLabel* info;
     QString *style;
+
+public:
+
+    explicit FenetreTestGomsClavier(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0, bool param3 = false);
+    void retournerMenu();
 
 signals:
 

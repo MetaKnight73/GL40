@@ -10,6 +10,7 @@
 #include <vector>
 
 #include "statistiquesGomsClics.h"
+#include "fenetrePrincipale.h"
 
 using namespace std;
 
@@ -37,6 +38,7 @@ private:
 public:
 
     explicit FenetreTestGomsClics(int profondeur, QWidget *parent = 0, double param1 = 0, double param2 = 0, double param3 = 0);
+    void retournerMenu();
 
 signals:
 
@@ -46,6 +48,7 @@ public slots:
 
     void demarrer();
     void changer();
+    void keyPressEvent(QKeyEvent *event);
 
 };
 

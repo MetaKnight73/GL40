@@ -1,4 +1,5 @@
 #include "fenetreTestGomsSaisieTexte.h"
+#include "fenetrePrincipale.h"
 
 FenetreTestGomsSaisieTexte::FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent, double tempsM, int longueurMaximale) : QWidget(parent) {
 
@@ -53,11 +54,40 @@ char* FenetreTestGomsSaisieTexte::genererMotCourant(int longueur) {
 
 }
 
+void FenetreTestGomsSaisieTexte::keyPressEvent(QKeyEvent *event) {
+
+    if(event->isAccepted()) {
+
+        switch (event->key()) {
+
+            case Qt::Key_Escape :
+                retournerMenu();
+            break;
+        }
+
+    }
+}
+
+void FenetreTestGomsSaisieTexte::retournerMenu() {
+
+    parentWidget()->close();
+    FenetrePrincipale *fenetre = new FenetrePrincipale;
+    fenetre->statusBar()->setSizeGripEnabled(false);
+    fenetre->show();
+    QRect rectangleFenetre = QApplication::desktop()->screenGeometry();
+    int x = (rectangleFenetre.width()-fenetre->width()) / 2;
+    int y = (rectangleFenetre.height()-fenetre->height()) / 2;
+    fenetre->move(x, y);
+
+}
+
 void FenetreTestGomsSaisieTexte::lancerTest() {
 
     // On fait disparaître le bouton
     bouton->hide();
-    info->hide();
+    info->setGeometry(524, 610, 540, 100);
+    info->setText(QString("(\"Echap\" pour quitter)"));
+    info->setStyleSheet(QString("color: red"));
 
     layoutZoneSaisie = new QVBoxLayout;
 

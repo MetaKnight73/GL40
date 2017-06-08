@@ -34,7 +34,9 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
 void FenetreTestGomsClics::demarrer() {
 
     bouton->hide();
-    info->hide();
+    info->setGeometry(524, 610, 540, 100);
+    info->setText(QString("(\"Echap\" pour quitter)"));
+    info->setStyleSheet(QString("color: red"));
 
     // Création layout
     QGridLayout *gridLayout = new QGridLayout(this);
@@ -61,6 +63,33 @@ void FenetreTestGomsClics::demarrer() {
 
     setLayout(gridLayout);
     chronometre->start();
+
+}
+
+void FenetreTestGomsClics::keyPressEvent(QKeyEvent *event) {
+
+    if(event->isAccepted()) {
+
+        switch (event->key()) {
+
+            case Qt::Key_Escape :
+                retournerMenu();
+            break;
+        }
+
+    }
+}
+
+void FenetreTestGomsClics::retournerMenu() {
+
+    parentWidget()->close();
+    FenetrePrincipale *fenetre = new FenetrePrincipale;
+    fenetre->statusBar()->setSizeGripEnabled(false);
+    fenetre->show();
+    QRect rectangleFenetre = QApplication::desktop()->screenGeometry();
+    int x = (rectangleFenetre.width()-fenetre->width()) / 2;
+    int y = (rectangleFenetre.height()-fenetre->height()) / 2;
+    fenetre->move(x, y);
 
 }
 

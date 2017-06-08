@@ -15,6 +15,7 @@
 #include <time.h>
 
 #include "statistiquesGomsSaisieTexte.h"
+#include "fenetrePrincipale.h"
 
 using namespace std;
 
@@ -44,6 +45,7 @@ public:
 
     explicit FenetreTestGomsSaisieTexte(int nombreMots, QWidget *parent = 0, double tempsM = 0, int longueurMax = 0);
     char* genererMotCourant(int longueur);
+    void retournerMenu();
 
 signals:
 
@@ -53,6 +55,7 @@ public slots:
 
     void lancerTest();
     void checkWord();
+    void keyPressEvent(QKeyEvent *event);
 
 };
 
