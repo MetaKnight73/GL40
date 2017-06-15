@@ -3,6 +3,7 @@
 
 #include <QTime>
 #include <QPointF>
+#include <QDateTime>
 #include <math.h>
 
 class StatistiquesFitts {
@@ -31,6 +32,9 @@ private:
     // Temps Fitts
     double tempsFitts;
 
+    // Date et heure de l'enregistrement
+    QDateTime date;
+
 public:
 
     StatistiquesFitts();
@@ -48,6 +52,8 @@ public:
     double getTempsFitts();
     double getParametre1();
     double getParametre2();
+    QDateTime getDate();
+    void setDate(); // currentDate();
 
 };
 

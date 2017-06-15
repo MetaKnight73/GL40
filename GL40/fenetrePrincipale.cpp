@@ -1,5 +1,11 @@
 #include "fenetrePrincipale.h"
 
+    vector<vector<StatistiquesFitts>> FenetrePrincipale::statsFitts;
+    vector<vector<StatistiquesGomsClavier>> FenetrePrincipale::statsGomsClavier;
+    vector<vector<StatistiquesGomsClics>> FenetrePrincipale::statsGomsClics;
+    vector<vector<StatistiquesGomsSaisieTexte>> FenetrePrincipale::statsGomsTexte;
+    vector<vector<StatistiquesGomsBash>> FenetrePrincipale::statsGomsBash;
+
 FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
 
     // Taille fixe à 1280x720
@@ -74,11 +80,25 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     newGoms4 = new QAction("Goms-Keystroke avec les flèches", nouveau);
     nouveau->addAction(newGoms4);
 
+    historique = new QMenu("Historique", this);
+    histoFitts = new QAction("Loi de Fitts", historique);
+    historique->addAction(histoFitts);
+    histoGoms1 = new QAction("Goms-Keystroke avec saisie de texte", historique);
+    historique->addAction(histoGoms1);
+    histoGoms2 = new QAction("Goms-Keystroke avec clics", historique);
+    historique->addAction(histoGoms2);
+    histoGoms3 = new QAction("Goms-Keystroke avec saisie du chemin", historique);
+    historique->addAction(histoGoms3);
+    histoGoms4 = new QAction("Goms-Keystroke avec les flèches", historique);
+    historique->addAction(histoGoms4);
+
     about = new QAction("À propos de nous", this);
     fermer = new QAction("Quitter", this);
 
     menuFile->addMenu(nouveau);
     menuFile->insertSeparator(newFitts);
+    menuFile->addMenu(historique);
+    menuFile->insertSeparator(histoFitts);
     menuFile->addAction(about);
     menuFile->addAction(fermer);
 
@@ -105,6 +125,8 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     connect(newGoms2, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClics()));
     connect(newGoms3, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsBash()));
     connect(newGoms4, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClavier()));
+
+    connect(histoFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesFitts()));
 
     connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
@@ -200,21 +222,31 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClavier() {
 
 }
 
-// Méthode appelée pour afficher les statistiques du test Fitts
-void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts) {
-
-    fenetreStatistiquesFitts = new FenetreStatistiquesFitts(statistiquesFitts);
+// Méthode à appeler pour afficher les statistiques du test Fitts
+void FenetrePrincipale::afficheFenetreStatistiquesFitts(){
+    if (statsFitts.size()==0){
+        QMessageBox::information(this, "Erreur", "Aucune donnée présente");
+        return; // rien a afficher !
+    }
+    fenetreStatistiquesFitts = new FenetreStatistiquesFitts(statsFitts);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesFitts->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
 
     setCentralWidget(fenetreStatistiquesFitts);
+}
 
+// Méthode appelée pour ajouter puis afficher les statistiques du test Fitts
+void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts) {
+
+    statsFitts.push_back(statistiquesFitts);
+    afficheFenetreStatistiquesFitts();
 }
 
 // Méthode appelée pour afficher les statistiques du test Goms Saisie Texte
 void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
 
+    statsGomsTexte.push_back(statistiquesGomsSaisieTexte);
     fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statistiquesGomsSaisieTexte);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
@@ -227,6 +259,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<Statist
 // Méthode appelée pour afficher les statistiques du test Goms Clics
 void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics) {
 
+    statsGomsClics.push_back(statistiquesGomsClics);
     fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statistiquesGomsClics);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
@@ -239,6 +272,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesG
 // Méthode appelée pour afficher les statistiques du test Goms Bash
 void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash) {
 
+    statsGomsBash.push_back(statistiquesGomsBash);
     fenetreStatistiquesGomsBash = new FenetreStatistiquesGomsBash(statistiquesGomsBash);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
@@ -251,6 +285,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGo
 // Méthode appelée pour afficher les statistiques du test Goms Clavier
 void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier) {
 
+    statsGomsClavier.push_back(statistiquesGomsClavier);
     fenetreStatistiquesGomsClavier = new FenetreStatistiquesGomsClavier(statistiquesGomsClavier);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options

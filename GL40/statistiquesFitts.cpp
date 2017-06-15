@@ -64,6 +64,14 @@ double StatistiquesFitts::getParametre2() {
 
 }
 
+void StatistiquesFitts::setDate(){
+    date = QDateTime::currentDateTime();
+}
+
+QDateTime StatistiquesFitts::getDate(){
+    return date;
+}
+
 
 
 

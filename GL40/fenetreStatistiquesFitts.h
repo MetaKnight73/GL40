@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QTextDocument>
 #include <QBoxLayout>
+#include <QComboBox>
 
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
@@ -29,6 +30,9 @@ private:
     QPushButton *recommencer;
     QPushButton *retourMenu;
     QPushButton *quitter;
+    vector<vector<StatistiquesFitts>> statsFitts;
+    QHBoxLayout *layoutSuperieur;
+    QChartView *chartView;
 
     double tempsTotalReel;
     double tempsTotalFitts;
@@ -36,14 +40,16 @@ private:
 public:
 
     explicit FenetreStatistiquesFitts(QWidget *parent = 0);
-    FenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts, QWidget *parent = 0);
+    FenetreStatistiquesFitts(vector<vector<StatistiquesFitts>> statistiquesFitts, QWidget *parent = 0);
     QPushButton* getBoutonRecommencer();
+    void calcul(vector<StatistiquesFitts> statistiquesFitts);
     QChart* createLineChart(vector<StatistiquesFitts> statistiquesFitts) const;
 
 public slots:
 
     void quitterApplication();
     void retournerMenu();
+    void changerEnregistrement(int index);
 
 };
 

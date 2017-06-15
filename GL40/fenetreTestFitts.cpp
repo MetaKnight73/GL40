@@ -84,6 +84,9 @@ void FenetreTestFitts::deplacerBoutonClic() {
     bouton->setText("CLIQUEZ ICI !");
     bouton->setDefault(false);
 
+    info->setGeometry(524, 610, 540, 100);
+    info->setText(QString("(\"Echap\" pour quitter)"));
+
     // On récupère le temps de départ
     QTime now = QTime::currentTime();
     qsrand(now.msec());
@@ -161,6 +164,8 @@ void FenetreTestFitts::deplacerBoutonClic() {
             statistiquesFitts[i].calculTempsFitts();
 
         }
+
+        statistiquesFitts[0].setDate();
 
         emit sequenceFin(statistiquesFitts);
     }

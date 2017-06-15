@@ -3,7 +3,9 @@
 
 FenetreStatistiquesFitts::FenetreStatistiquesFitts(QWidget *parent) : QWidget(parent) {}
 
-FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts, QWidget *parent) : QWidget(parent) {
+FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<vector<StatistiquesFitts>> statistiquesFitts, QWidget *parent) : QWidget(parent) {
+
+    statsFitts = statistiquesFitts;
 
     // Layout principal
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -12,10 +14,18 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     QHBoxLayout *layoutBoutons = new QHBoxLayout;
 
     //Layout supérieur
-    QHBoxLayout *layoutSuperieur = new QHBoxLayout;
+    layoutSuperieur = new QHBoxLayout;
 
     // Layout du tableau
     QHBoxLayout *layoutTableau = new QHBoxLayout;
+
+    // Selection enregistrement
+    QComboBox *listeEnregistrement = new QComboBox;
+    for(unsigned int i=0; i<statsFitts.size(); ++i){
+        listeEnregistrement->addItem(statsFitts[i][0].getDate().toString(QString("d/M/yy ; hh:mm:ss")));
+    }
+    listeEnregistrement->setCurrentIndex(statsFitts.size()-1);
+    layoutBoutons->addWidget(listeEnregistrement);
 
     // Bouton recommencer
     recommencer = new QPushButton("Recommencer");
@@ -61,11 +71,35 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
     layoutTableau->addWidget(tableauResultats);
     layoutTableau->setAlignment(Qt::AlignLeft);
 
+    calcul(statsFitts[statsFitts.size()-1]); // dernier element
+
+    // Dessin
+    chartView = new QChartView(createLineChart(statsFitts[statsFitts.size()-1]), parent);
+    chartView->setMinimumSize(830, 730);
+    chartView->setMaximumSize(830, 730);
+    chartView->setStyleSheet("border: 1px solid black");
+
+    // Ajout des layouts
+    layoutSuperieur->addLayout(layoutTableau);
+    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
+    layout->addLayout(layoutSuperieur);
+    layout->addLayout(layoutBoutons);
+
+    connect(quitter, SIGNAL(clicked()), this, SLOT(quitterApplication()));
+    connect(retourMenu, SIGNAL(clicked()), this, SLOT(retournerMenu()));
+    connect(listeEnregistrement, SIGNAL(currentIndexChanged(int)), this, SLOT(changerEnregistrement(int)));
+
+}
+
+void FenetreStatistiquesFitts::calcul(vector<StatistiquesFitts> statistiquesFitts){
     // On initialise les temps totaux à 0
     tempsTotalReel = 0;
     tempsTotalFitts = 0;
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
+
+    modeleTableau->setRowCount(1); // retire les anciennes donnees
+
     for(unsigned int i = 1; i < statistiquesFitts.size() + 1; i++) {
 
         modeleTableau->setItem(i, 0, new QStandardItem(QString::number(statistiquesFitts[i-1].getDistance())));
@@ -93,22 +127,6 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<StatistiquesFitts> sta
         }
 
     }
-
-    // Dessin
-    QChartView *chartView = new QChartView(createLineChart(statistiquesFitts), parent);
-    chartView->setMinimumSize(830, 730);
-    chartView->setMaximumSize(830, 730);
-    chartView->setStyleSheet("border: 1px solid black");
-
-    // Ajout des layouts
-    layoutSuperieur->addLayout(layoutTableau);
-    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
-    layout->addLayout(layoutSuperieur);
-    layout->addLayout(layoutBoutons);
-
-    connect(quitter, SIGNAL(clicked()), this, SLOT(quitterApplication()));
-    connect(retourMenu, SIGNAL(clicked()), this, SLOT(retournerMenu()));
-
 }
 
 QPushButton* FenetreStatistiquesFitts::getBoutonRecommencer() {
@@ -160,4 +178,17 @@ void FenetreStatistiquesFitts::retournerMenu() {
     fenetre->statusBar()->setSizeGripEnabled(false);
     fenetre->show();
 
+}
+
+void FenetreStatistiquesFitts::changerEnregistrement(int index){
+    calcul(statsFitts[index]);
+    //changer graphique
+    layoutSuperieur->removeWidget(chartView);
+
+    chartView = new QChartView(createLineChart(statsFitts[index]), parentWidget());
+    chartView->setMinimumSize(830, 730);
+    chartView->setMaximumSize(830, 730);
+    chartView->setStyleSheet("border: 1px solid black");
+
+    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
 }

@@ -8,6 +8,7 @@
 #include <QBoxLayout>
 #include <QWidget>
 #include <QLabel>
+#include <QMessageBox>
 
 #include <vector>
 
@@ -37,11 +38,12 @@ private:
     // Menu Bar
     QMenu *menuFile;
     QMenu *nouveau;
-    QAction *newFitts;
-    QAction *newGoms1;
-    QAction *newGoms2;
-    QAction *newGoms3;
-    QAction *newGoms4;
+    QMenu *historique;
+    QAction *newFitts, *histoFitts;
+    QAction *newGoms1, *histoGoms1;
+    QAction *newGoms2, *histoGoms2;
+    QAction *newGoms3, *histoGoms3;
+    QAction *newGoms4, *histoGoms4;
     QAction *about;
     QAction *fermer;
 
@@ -68,6 +70,12 @@ private:
     FenetreStatistiquesGomsBash *fenetreStatistiquesGomsBash;
     FenetreStatistiquesGomsClavier *fenetreStatistiquesGomsClavier;
 
+    static vector<vector<StatistiquesFitts>> statsFitts;
+    static vector<vector<StatistiquesGomsClavier>> statsGomsClavier;
+    static vector<vector<StatistiquesGomsClics>> statsGomsClics;
+    static vector<vector<StatistiquesGomsSaisieTexte>> statsGomsTexte;
+    static vector<vector<StatistiquesGomsBash>> statsGomsBash;
+
 public:
 
     explicit FenetrePrincipale(QWidget *parent = 0);
@@ -79,6 +87,7 @@ public slots:
     void afficheFenetreOptionsGomsClics();
     void afficheFenetreOptionsGomsBash();
     void afficheFenetreOptionsGomsClavier();
+    void afficheFenetreStatistiquesFitts();
     void afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts);
     void afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte);
     void afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics);
