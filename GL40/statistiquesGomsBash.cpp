@@ -38,3 +38,11 @@ double StatistiquesGomsBash::getTempsReal() {
 
     return tempsGomsReal;
 }
+
+void StatistiquesGomsBash::setDate(){
+    date = QDateTime::currentDateTime();
+}
+
+QDateTime StatistiquesGomsBash::getDate(){
+    return date;
+}

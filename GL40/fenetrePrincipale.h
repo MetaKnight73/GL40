@@ -89,9 +89,13 @@ public slots:
     void afficheFenetreOptionsGomsClavier();
     void afficheFenetreStatistiquesFitts();
     void afficheFenetreStatistiquesFitts(vector<StatistiquesFitts> statistiquesFitts);
+    void afficheFenetreStatistiquesGomsSaisieTexte();
     void afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte);
+    void afficheFenetreStatistiquesGomsClics();
     void afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics);
+    void afficheFenetreStatistiquesGomsBash();
     void afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash);
+    void afficheFenetreStatistiquesGomsClavier();
     void afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier);
     void aPropos();
     void keyPressEvent(QKeyEvent *event);

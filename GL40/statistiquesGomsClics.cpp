@@ -46,3 +46,11 @@ double StatistiquesGomsClics::getTempsReal() {
     return tempsGomsReal;
 
 }
+
+void StatistiquesGomsClics::setDate(){
+    date = QDateTime::currentDateTime();
+}
+
+QDateTime StatistiquesGomsClics::getDate(){
+    return date;
+}

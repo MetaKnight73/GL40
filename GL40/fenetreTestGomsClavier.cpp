@@ -201,8 +201,10 @@ void FenetreTestGomsClavier::keyPressEvent(QKeyEvent *event) {
 
                 }
 
-                if (nombreClicsCourant == nombreC) // Fin
+                if (nombreClicsCourant == nombreC){ // Fin
+                    statistiquesGomsClavier[0].setDate();
                     emit sequenceFin(statistiquesGomsClavier);
+                }
 
             }
 

@@ -39,3 +39,11 @@ double StatistiquesGomsSaisieTexte::getTempsReal() {
     return tempsGomsReal;
 
 }
+
+void StatistiquesGomsSaisieTexte::setDate(){
+    date = QDateTime::currentDateTime();
+}
+
+QDateTime StatistiquesGomsSaisieTexte::getDate(){
+    return date;
+}

@@ -127,6 +127,10 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     connect(newGoms4, SIGNAL(triggered()), this, SLOT(afficheFenetreOptionsGomsClavier()));
 
     connect(histoFitts, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesFitts()));
+    connect(histoGoms1, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesGomsSaisieTexte()));
+    connect(histoGoms2, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesGomsClics()));
+    connect(histoGoms3, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesGomsBash()));
+    connect(histoGoms4, SIGNAL(triggered()), this, SLOT(afficheFenetreStatistiquesGomsClavier()));
 
     connect(btnFitts, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
     connect(btnGoms1, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
@@ -244,10 +248,12 @@ void FenetrePrincipale::afficheFenetreStatistiquesFitts(vector<StatistiquesFitts
 }
 
 // Méthode appelée pour afficher les statistiques du test Goms Saisie Texte
-void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
-
-    statsGomsTexte.push_back(statistiquesGomsSaisieTexte);
-    fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statistiquesGomsSaisieTexte);
+void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte() {
+    if (statsGomsTexte.size()==0){
+        QMessageBox::information(this, "Erreur", "Aucune donnée présente");
+        return; // rien a afficher !
+    }
+    fenetreStatistiquesGomsSaisieTexte = new FenetreStatistiquesGomsSaisieTexte(statsGomsTexte);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsSaisieTexte->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
@@ -256,11 +262,19 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<Statist
 
 }
 
-// Méthode appelée pour afficher les statistiques du test Goms Clics
-void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics) {
+void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) {
+    statsGomsTexte.push_back(statistiquesGomsSaisieTexte);
+    afficheFenetreStatistiquesGomsSaisieTexte();
+}
 
-    statsGomsClics.push_back(statistiquesGomsClics);
-    fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statistiquesGomsClics);
+// Méthode appelée pour afficher les statistiques du test Goms Clics
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClics() {
+    if (statsGomsClics.size()==0){
+        QMessageBox::information(this, "Erreur", "Aucune donnée présente");
+        return; // rien a afficher !
+    }
+
+    fenetreStatistiquesGomsClics = new FenetreStatistiquesGomsClics(statsGomsClics);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsClics->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
@@ -269,11 +283,19 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesG
 
 }
 
-// Méthode appelée pour afficher les statistiques du test Goms Bash
-void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash) {
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClics(vector<StatistiquesGomsClics> statistiquesGomsClics) {
+    statsGomsClics.push_back(statistiquesGomsClics);
+    afficheFenetreStatistiquesGomsClics();
+}
 
-    statsGomsBash.push_back(statistiquesGomsBash);
-    fenetreStatistiquesGomsBash = new FenetreStatistiquesGomsBash(statistiquesGomsBash);
+// Méthode appelée pour afficher les statistiques du test Goms Bash
+void FenetrePrincipale::afficheFenetreStatistiquesGomsBash() {
+    if (statsGomsBash.size()==0){
+        QMessageBox::information(this, "Erreur", "Aucune donnée présente");
+        return; // rien a afficher !
+    }
+
+    fenetreStatistiquesGomsBash = new FenetreStatistiquesGomsBash(statsGomsBash);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsBash->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
@@ -282,17 +304,30 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGo
 
 }
 
-// Méthode appelée pour afficher les statistiques du test Goms Clavier
-void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier) {
+void FenetrePrincipale::afficheFenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash) {
+    statsGomsBash.push_back(statistiquesGomsBash);
+    afficheFenetreStatistiquesGomsBash();
+}
 
-    statsGomsClavier.push_back(statistiquesGomsClavier);
-    fenetreStatistiquesGomsClavier = new FenetreStatistiquesGomsClavier(statistiquesGomsClavier);
+// Méthode appelée pour afficher les statistiques du test Goms Clavier
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier() {
+    if (statsGomsClavier.size()==0){
+        QMessageBox::information(this, "Erreur", "Aucune donnée présente");
+        return; // rien a afficher !
+    }
+
+    fenetreStatistiquesGomsClavier = new FenetreStatistiquesGomsClavier(statsGomsClavier);
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsClavier->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClavier()));
 
     setCentralWidget(fenetreStatistiquesGomsClavier);
 
+}
+
+void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier) {
+    statsGomsClavier.push_back(statistiquesGomsClavier);
+    afficheFenetreStatistiquesGomsClavier();
 }
 
 // Méthode appelée pour l'affichage de la boîte de dialogue "A propos"

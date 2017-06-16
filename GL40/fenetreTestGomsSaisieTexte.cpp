@@ -135,7 +135,7 @@ void FenetreTestGomsSaisieTexte::checkWord() {
         }
 
         else {
-
+            statistiquesGomsSaisieTexte[0].setDate();
             emit sequenceFinGoms(statistiquesGomsSaisieTexte);
 
         }

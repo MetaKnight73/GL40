@@ -126,7 +126,7 @@ void FenetreTestGomsClics::changer() {
     }
 
     if (nombreClicsCourant == nombreC) { // Fin
-
+        statistiquesGomsClics[0].setDate();
         emit sequenceFin(statistiquesGomsClics);
 
     }

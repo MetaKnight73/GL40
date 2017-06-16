@@ -59,3 +59,11 @@ double StatistiquesGomsClavier::getTempsReal() {
     return tempsGomsReal;
 
 }
+
+void StatistiquesGomsClavier::setDate(){
+    date = QDateTime::currentDateTime();
+}
+
+QDateTime StatistiquesGomsClavier::getDate(){
+    return date;
+}

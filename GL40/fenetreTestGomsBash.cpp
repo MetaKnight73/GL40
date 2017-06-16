@@ -150,8 +150,10 @@ void FenetreTestGomsBash::checkWord() {
                 zoneSaisie->clear();
                 chronometre->restart();
 
-                if(nombreMotsValidesCourant == nbRep)
+                if(nombreMotsValidesCourant == nbRep){
+                    statistiquesGomsBash[0].setDate();
                     emit sequenceFinGoms(statistiquesGomsBash);
+                }
             }
         }
     }

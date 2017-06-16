@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QFileDialog>
 #include <QTextDocument>
+#include <QComboBox>
 
 #include <QtCharts>
 
@@ -27,6 +28,9 @@ private:
     QPushButton *recommencer;
     QPushButton *retourMenu;
     QPushButton *quitter;
+    vector<vector<StatistiquesGomsSaisieTexte>> statsGomsTexte;
+    QHBoxLayout *layoutSuperieur;
+    QChartView *chartView;
 
     double tempsTotalReel;
     double tempsTotalGoms;
@@ -34,14 +38,16 @@ private:
 public:
 
     explicit FenetreStatistiquesGomsSaisieTexte(QWidget *parent = 0);
-    FenetreStatistiquesGomsSaisieTexte(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte, QWidget *parent = 0);
+    FenetreStatistiquesGomsSaisieTexte(vector<vector<StatistiquesGomsSaisieTexte>> statistiquesGomsSaisieTexte, QWidget *parent = 0);
     QPushButton* getBoutonRecommencer();
+    void calcul(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte);
     QChart* createLineChart(vector<StatistiquesGomsSaisieTexte> statistiquesGomsSaisieTexte) const;
 
 public slots:
 
     void quitterApplication();
     void retournerMenu();
+    void changerEnregistrement(int index);
 
 };
 

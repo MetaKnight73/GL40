@@ -3,7 +3,8 @@
 
 FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(QWidget *parent) : QWidget(parent) {}
 
-FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGomsBash> statistiquesGomsBash, QWidget *parent) : QWidget(parent) {
+FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<vector<StatistiquesGomsBash>> statistiquesGomsBash, QWidget *parent) : QWidget(parent) {
+    statsGomsBash = statistiquesGomsBash;
 
     // Layout principal
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -12,10 +13,18 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGoms
     QHBoxLayout *layoutBoutons = new QHBoxLayout;
 
     //Layout supérieur
-    QHBoxLayout *layoutSuperieur = new QHBoxLayout;
+    layoutSuperieur = new QHBoxLayout;
 
     // Layout du tableau
     QHBoxLayout *layoutTableau = new QHBoxLayout;
+
+    // Selection enregistrement
+    QComboBox *listeEnregistrement = new QComboBox;
+    for(unsigned int i=0; i<statsGomsBash.size(); ++i){
+        listeEnregistrement->addItem(statsGomsBash[i][0].getDate().toString(QString("d/M/yy ; hh:mm:ss")));
+    }
+    listeEnregistrement->setCurrentIndex(statsGomsBash.size()-1);
+    layoutBoutons->addWidget(listeEnregistrement);
 
     // Bouton recommencer
     recommencer = new QPushButton("Recommencer");
@@ -59,9 +68,75 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGoms
     layoutTableau->addWidget(tableauResultats);
     layoutTableau->setAlignment(Qt::AlignLeft);
 
+    calcul(statsGomsBash[statsGomsBash.size()-1]); // dernier element
+
+    // Dessin
+    chartView = new QChartView(createLineChart(statsGomsBash[statsGomsBash.size()-1]), parent);
+    chartView->setMinimumSize(830, 730);
+    chartView->setMaximumSize(830, 730);
+    chartView->setStyleSheet("border: 1px solid black");
+
+    // Ajout des layouts
+    layoutSuperieur->addLayout(layoutTableau);
+    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
+    layout->addLayout(layoutSuperieur);
+    layout->addLayout(layoutBoutons);
+
+    connect(quitter, SIGNAL(clicked()), this, SLOT(quitterApplication()));
+    connect(retourMenu, SIGNAL(clicked()), this, SLOT(retournerMenu()));
+    connect(listeEnregistrement, SIGNAL(currentIndexChanged(int)), this, SLOT(changerEnregistrement(int)));
+
+}
+
+QPushButton* FenetreStatistiquesGomsBash::getBoutonRecommencer() {
+
+    return recommencer;
+
+}
+
+QChart* FenetreStatistiquesGomsBash::createLineChart(vector<StatistiquesGomsBash> statistiquesGomsBash) const {
+
+    QChart *chart = new QChart();
+
+    chart->setTitle("Comparaison des temps Goms théorique et réalisé");
+
+    QString nameTheorique("Temps théorique");
+    QString nameReel("Temps réalisé");
+
+    QLineSeries *serieTheorique = new QLineSeries(chart);
+    QLineSeries *serieReel = new QLineSeries(chart);
+
+    for (unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
+
+        if(i == 1) {
+            statistiquesGomsBash[i-1].calculTempsGomsFirst();
+        }
+        else {
+            statistiquesGomsBash[i-1].calculTempsGoms();
+        }
+
+        serieTheorique->append(i-1, statistiquesGomsBash[i-1].getTempsGoms());
+        serieReel->append(i-1, (double)statistiquesGomsBash[i-1].getTempsReal() / 1000);
+
+    }
+
+    serieTheorique->setName(nameTheorique);
+    serieReel->setName(nameReel);
+
+    chart->addSeries(serieTheorique);
+    chart->addSeries(serieReel);
+
+    chart->createDefaultAxes();
+
+    return chart;
+}
+
+void FenetreStatistiquesGomsBash::calcul(vector<StatistiquesGomsBash> statistiquesGomsBash){
     // On initialise les temps totaux à 0
     tempsTotalReel = 0;
     tempsTotalGoms = 0;
+
+    modeleTableau->setRowCount(1); // retire les anciennes donnees
 
     // On remplit le tableau au fur et à mesure avec les valeurs obtenues au préalable
     for(unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
@@ -97,58 +172,6 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<StatistiquesGoms
         }
 
     }
-
-    // Dessin
-    QChartView *chartView = new QChartView(createLineChart(statistiquesGomsBash), parent);
-    chartView->setMinimumSize(830, 730);
-    chartView->setMaximumSize(830, 730);
-    chartView->setStyleSheet("border: 1px solid black");
-
-    // Ajout des layouts
-    layoutSuperieur->addLayout(layoutTableau);
-    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
-    layout->addLayout(layoutSuperieur);
-    layout->addLayout(layoutBoutons);
-
-    connect(quitter, SIGNAL(clicked()), this, SLOT(quitterApplication()));
-    connect(retourMenu, SIGNAL(clicked()), this, SLOT(retournerMenu()));
-
-}
-
-QPushButton* FenetreStatistiquesGomsBash::getBoutonRecommencer() {
-
-    return recommencer;
-
-}
-
-QChart* FenetreStatistiquesGomsBash::createLineChart(vector<StatistiquesGomsBash> statistiquesGomsBash) const {
-
-    QChart *chart = new QChart();
-
-    chart->setTitle("Comparaison des temps Goms théorique et réalisé");
-
-    QString nameTheorique("Temps théorique");
-    QString nameReel("Temps réalisé");
-
-    QLineSeries *serieTheorique = new QLineSeries(chart);
-    QLineSeries *serieReel = new QLineSeries(chart);
-
-    for (unsigned int i = 1; i < statistiquesGomsBash.size() + 1; i++) {
-
-        serieTheorique->append(i-1, statistiquesGomsBash[i-1].getTempsGoms());
-        serieReel->append(i-1, (double)statistiquesGomsBash[i-1].getTempsReal() / 1000);
-
-    }
-
-    serieTheorique->setName(nameTheorique);
-    serieReel->setName(nameReel);
-
-    chart->addSeries(serieTheorique);
-    chart->addSeries(serieReel);
-
-    chart->createDefaultAxes();
-
-    return chart;
 }
 
 void FenetreStatistiquesGomsBash::quitterApplication() {
@@ -164,4 +187,17 @@ void FenetreStatistiquesGomsBash::retournerMenu() {
     fenetre->statusBar()->setSizeGripEnabled(false);
     fenetre->show();
 
+}
+
+void FenetreStatistiquesGomsBash::changerEnregistrement(int index){
+    calcul(statsGomsBash[index]);
+    //changer graphique
+    layoutSuperieur->removeWidget(chartView);
+
+    chartView = new QChartView(createLineChart(statsGomsBash[index]), parentWidget());
+    chartView->setMinimumSize(830, 730);
+    chartView->setMaximumSize(830, 730);
+    chartView->setStyleSheet("border: 1px solid black");
+
+    layoutSuperieur->addWidget(chartView, 0, Qt::AlignLeft);
 }

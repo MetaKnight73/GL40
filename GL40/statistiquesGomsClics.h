@@ -3,6 +3,7 @@
 
 #include <QTime>
 #include <math.h>
+#include <QDateTime>
 
 class StatistiquesGomsClics {
 
@@ -14,6 +15,9 @@ private:
 
     // Temps Goms
     double tempsGoms, tempsGomsReal;
+
+    // Date et heure de l'enregistrement
+    QDateTime date;
 
 public:
 
@@ -29,6 +33,8 @@ public:
     double getTempsK();
     double getNumBouton();
     double getTempsReal();
+    QDateTime getDate();
+    void setDate(); // currentDate();
 
 };
 
