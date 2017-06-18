@@ -226,6 +226,9 @@ void FenetrePrincipale::afficheFenetreOptionsGomsClavier() {
 
 }
 
+//-----------------------    Statistiques    -----------------------//
+
+
 // Méthode à appeler pour afficher les statistiques du test Fitts
 void FenetrePrincipale::afficheFenetreStatistiquesFitts(){
     if (statsFitts.size()==0){
@@ -236,6 +239,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesFitts(){
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesFitts->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsFitts()));
+    if(QObject::sender()==histoFitts) fenetreStatistiquesFitts->getBoutonRecommencer()->setText("Nouvel Essai");
 
     setCentralWidget(fenetreStatistiquesFitts);
 }
@@ -257,6 +261,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsSaisieTexte() {
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsSaisieTexte->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsSaisieTexte()));
+    if(QObject::sender()==histoGoms1) fenetreStatistiquesGomsSaisieTexte->getBoutonRecommencer()->setText("Nouvel Essai");
 
     setCentralWidget(fenetreStatistiquesGomsSaisieTexte);
 
@@ -278,6 +283,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClics() {
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsClics->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClics()));
+    if(QObject::sender()==histoGoms2) fenetreStatistiquesGomsClics->getBoutonRecommencer()->setText("Nouvel Essai");
 
     setCentralWidget(fenetreStatistiquesGomsClics);
 
@@ -299,6 +305,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsBash() {
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsBash->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
+    if(QObject::sender()==histoGoms3) fenetreStatistiquesGomsBash->getBoutonRecommencer()->setText("Nouvel Essai");
 
     setCentralWidget(fenetreStatistiquesGomsBash);
 
@@ -320,6 +327,7 @@ void FenetrePrincipale::afficheFenetreStatistiquesGomsClavier() {
 
     // Connexion au bouton Recommencer, on réaffiche la fenêtre avec les options
     connect(fenetreStatistiquesGomsClavier->getBoutonRecommencer(), SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClavier()));
+    if(QObject::sender()==histoGoms4) fenetreStatistiquesGomsClavier->getBoutonRecommencer()->setText("Nouvel Essai");
 
     setCentralWidget(fenetreStatistiquesGomsClavier);
 
