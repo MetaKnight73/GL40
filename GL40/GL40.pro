@@ -7,6 +7,8 @@ TARGET = Fitts_and_Goms-Keystroke
 TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
+win32:RC_ICONS += icons/logo.ico
+
 SOURCES += main.cpp\
     fenetrePrincipale.cpp \
     fenetreOptionsFitts.cpp \

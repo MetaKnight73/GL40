@@ -39,19 +39,14 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     line->setMinimumWidth(1260);
     layout->addWidget(line);
 
-    QHBoxLayout *layoutBas = new QHBoxLayout;
-    layoutBas->setAlignment(Qt::AlignCenter);
-
     QVBoxLayout *colonne = new QVBoxLayout;
     colonne->setSpacing(25);
-
 
     // Bouton servant à lancer l'application (la partie fitts)
     QHBoxLayout *fittsLayout = new QHBoxLayout;
     fittsLayout->setSpacing(0);
     btnFitts = new QPushButton("Loi de Fitts");
     btnFitts->setFixedSize(350, 75);
-    btnFitts->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n cliquez simplement sur les ronds quand ils apparaissent."));
     fittsLayout->addWidget(btnFitts);
     // Bouton servant à lancer l'application (historique pour la partie fitts)
     btnFittsHisto = new QPushButton();
@@ -64,13 +59,11 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     btnFittsInfo->setFixedSize(75, 75);
     fittsLayout->addWidget(btnFittsInfo);
 
-
     // Bouton servant à lancer l'application (la partie goms 1)
     QHBoxLayout *gomsTextLayout = new QHBoxLayout;
     gomsTextLayout->setSpacing(0);
     btnGoms1 = new QPushButton("Goms-Keystroke (saisie de texte)");
     btnGoms1->setFixedSize(350, 75);
-    btnGoms1->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n saisissez simplement les chaînes de caractère qui apparaissent à l'écran.\n Une fois le mot saisi, appuyez sur \"Entrée\" pour passer au mot suivant."));
     gomsTextLayout->addWidget(btnGoms1);
     // Bouton servant à lancer l'application (historique pour la partie goms 1)
     btnGoms1Histo = new QPushButton();
@@ -83,13 +76,11 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     btnGoms1Info->setFixedSize(75, 75);
     gomsTextLayout->addWidget(btnGoms1Info);
 
-
     // Bouton servant à lancer l'application (la partie goms 2)
     QHBoxLayout *gomsClicsLayout = new QHBoxLayout;
     gomsClicsLayout->setSpacing(0);
     btnGoms2 = new QPushButton("Goms-Keystroke (clics)");
     btnGoms2->setFixedSize(350, 75);
-    btnGoms2->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n double-cliquez sur chaque carré affichant \"Celui-ci\" afin de passer au suivant."));
     gomsClicsLayout->addWidget(btnGoms2);
     // Bouton servant à lancer l'application (historique pour la partie goms 2)
     btnGoms2Histo = new QPushButton();
@@ -102,13 +93,11 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     btnGoms2Info->setFixedSize(75, 75);
     gomsClicsLayout->addWidget(btnGoms2Info);
 
-
     // Bouton servant à lancer l'application (la partie goms 3)
     QHBoxLayout *gomsBashLayout = new QHBoxLayout;
     gomsBashLayout->setSpacing(0);
     btnGoms3 = new QPushButton("Goms-Keystroke (version bash)");
     btnGoms3->setFixedSize(350, 75);
-    btnGoms3->setToolTip(QString("Paramétrez votre test et après avoir cliqué sur \"Commencer\",\n saisissez la commande \"cd\" suivie de la chaîne de caractères précédant le premier \"/\" de la chaîne affichée à l'écran,\n puis appuyez sur \"Entrée\" pour passer à la chaîne suivante."));
     gomsBashLayout->addWidget(btnGoms3);
     // Bouton servant à lancer l'application (historique pour la partie goms 3)
     btnGoms3Histo = new QPushButton();
@@ -121,13 +110,11 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     btnGoms3Info->setFixedSize(75, 75);
     gomsBashLayout->addWidget(btnGoms3Info);
 
-
     // Bouton servant à lancer l'application (la partie goms 4)
     QHBoxLayout *gomsFlecheLayout = new QHBoxLayout;
     gomsFlecheLayout->setSpacing(0);
     btnGoms4 = new QPushButton("Goms-Keystroke (flèches)");
     btnGoms4->setFixedSize(350, 75);
-    btnGoms4->setToolTip(QString("Paramétrez le test et après avoir cliqué sur \"Commencer\",\n déplacez vous d'un carré à un autre grâce aux flèches directionnelles ou la touche de tabulation afin de parvenir au carré voulu.\n Le carré courant est le carré bleu et le carré visé et le carré vert."));
     gomsFlecheLayout->addWidget(btnGoms4);
     // Bouton servant à lancer l'application (historique pour la partie goms 4)
     btnGoms4Histo = new QPushButton();
@@ -145,23 +132,21 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     colonne->addLayout(gomsClicsLayout);
     colonne->addLayout(gomsBashLayout);
     colonne->addLayout(gomsFlecheLayout);
+    colonne->setContentsMargins(0, 0, 0, 25);
+    colonne->setAlignment(Qt::AlignCenter);
 
+    layout->addLayout(colonne);
 
-    QFrame* line3 = new QFrame;
-    line3->setFrameShape(QFrame::HLine);
-    line3->setMaximumWidth(460);
-    line3->setMinimumWidth(460);
-    colonne->addWidget(line3);
+    QFrame* line2 = new QFrame;
+    line2->setFrameShape(QFrame::HLine);
+    line2->setMaximumWidth(1260);
+    line2->setMinimumWidth(1260);
+    layout->addWidget(line2);
 
     quitter = new QPushButton("Quitter");
     quitter->setFixedSize(200, 35);
     quitter->setStyleSheet(QString("background-color: #DC143C; border: 1px solid black;  border-radius: 2px;"));
-    colonne->addWidget(quitter, 0, Qt::AlignCenter);
-
-    colonne->setAlignment(Qt::AlignCenter);
-    layoutBas->addLayout(colonne);
-
-    layout->addLayout(layoutBas);
+    layout->addWidget(quitter, 0, Qt::AlignCenter);
 
     // Menu bar au sommet
     menuFile = menuBar()->addMenu("Fichier");
@@ -247,6 +232,12 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     connect(btnGoms3, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsBash()));
     connect(btnGoms4, SIGNAL(clicked()), this, SLOT(afficheFenetreOptionsGomsClavier()));
 
+    connect(btnFittsInfo, SIGNAL(clicked()), this, SLOT(afficheInfosFitts()));
+    connect(btnGoms1Info, SIGNAL(clicked()), this, SLOT(afficheInfosGoms1()));
+    connect(btnGoms2Info, SIGNAL(clicked()), this, SLOT(afficheInfosGoms2()));
+    connect(btnGoms3Info, SIGNAL(clicked()), this, SLOT(afficheInfosGoms3()));
+    connect(btnGoms4Info, SIGNAL(clicked()), this, SLOT(afficheInfosGoms4()));
+
     connect(about, SIGNAL(triggered()), this, SLOT(aPropos()));
     connect(fermer, SIGNAL(triggered()), this, SLOT(close()));
     connect(quitter, SIGNAL(clicked(bool)), this, SLOT(close()));
@@ -270,6 +261,41 @@ void FenetrePrincipale::initHistoriquesBoutons() {
     if(statsGomsClavier.empty()) {
         btnGoms4Histo->setDisabled(true);
     }
+
+}
+
+// Méthode appelée pour l'affichage de la boîte de dialogue avec les infos sur Fitts
+void FenetrePrincipale::afficheInfosFitts() {
+
+    QMessageBox::about(this->parentWidget(), "Règles exercice Fitts", "Paramétrez votre test et après avoir cliqué sur \"Commencer\",\ncliquez simplement sur les ronds quand ils apparaissent.");
+
+}
+
+// Méthode appelée pour l'affichage de la boîte de dialogue avec les infos sur Goms saisie texte
+void FenetrePrincipale::afficheInfosGoms1() {
+
+    QMessageBox::about(this->parentWidget(), "Règles exercice Goms-Keystroke (saisie texte)", "Paramétrez votre test et après avoir cliqué sur \"Commencer\",\nsaisissez simplement les chaînes de caractère qui apparaissent à l'écran.\nUne fois le mot saisi, appuyez sur \"Entrée\" pour passer au mot suivant.");
+
+}
+
+// Méthode appelée pour l'affichage de la boîte de dialogue avec les infos sur Goms clics
+void FenetrePrincipale::afficheInfosGoms2() {
+
+    QMessageBox::about(this->parentWidget(), "Règles exercice Goms-Keystroke (clics)", "Paramétrez votre test et après avoir cliqué sur \"Commencer\",\ndouble-cliquez sur chaque carré affichant \"Celui-ci\" afin de passer au suivant.");
+
+}
+
+// Méthode appelée pour l'affichage de la boîte de dialogue avec les infos sur Goms bash
+void FenetrePrincipale::afficheInfosGoms3() {
+
+    QMessageBox::about(this->parentWidget(), "Règles exercice Goms-Keystroke (bash)", "Paramétrez votre test et après avoir cliqué sur \"Commencer\",\nsaisissez la commande \"cd\" suivie de la chaîne de caractères précédant le premier \"/\" de la chaîne affichée à l'écran, puis appuyez sur \"Entrée\" pour passer à la chaîne suivante.");
+
+}
+
+// Méthode appelée pour l'affichage de la boîte de dialogue avec les infos sur Goms clavier
+void FenetrePrincipale::afficheInfosGoms4() {
+
+    QMessageBox::about(this->parentWidget(), "Règles exercice Goms-Keystroke (clavier)", "Paramétrez le test et après avoir cliqué sur \"Commencer\",\ndéplacez vous d'un carré à un autre grâce aux flèches directionnelles ou la touche de tabulation afin de parvenir au carré voulu.\nLe carré courant est le carré bleu et le carré visé et le carré vert.");
 
 }
 

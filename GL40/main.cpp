@@ -16,6 +16,8 @@ int main(int argc, char *argv[]) {
     // Fenêtre principale
     FenetrePrincipale *fenetre = new FenetrePrincipale;
     fenetre->statusBar()->setSizeGripEnabled(false);
+    QIcon icon(":logo");
+    fenetre->setWindowIcon(icon);
 
     // On centre la fenêtre dans l'écran
     QRect rectangleFenetre = QApplication::desktop()->screenGeometry();

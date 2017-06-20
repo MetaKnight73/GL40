@@ -108,6 +108,11 @@ public slots:
     void afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier);
     void aPropos();
     void initHistoriquesBoutons();
+    void afficheInfosFitts();
+    void afficheInfosGoms1();
+    void afficheInfosGoms2();
+    void afficheInfosGoms3();
+    void afficheInfosGoms4();
 
 };
 

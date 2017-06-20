@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file alias="info">icons/info.png</file>
         <file alias="histo">icons/historique.png</file>
+        <file alias="logo">icons/logo.png</file>
     </qresource>
 </RCC>
