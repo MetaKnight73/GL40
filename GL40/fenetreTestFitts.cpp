@@ -85,6 +85,7 @@ void FenetreTestFitts::deplacerBoutonClic() {
     bouton->setDefault(false);
 
     info->setGeometry(524, 610, 540, 100);
+    info->setStyleSheet(QString("color: red;"));
     info->setText(QString("(\"Echap\" pour quitter)"));
 
     // On récupère le temps de départ

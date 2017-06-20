@@ -54,9 +54,12 @@ private:
     QPushButton *btnGoms2;
     QPushButton *btnGoms3;
     QPushButton *btnGoms4;
-
-    vector<QPushButton*> vecteur;
-    int indexCourant;
+    QPushButton *btnFittsHisto;
+    QPushButton *btnGoms1Histo;
+    QPushButton *btnGoms2Histo;
+    QPushButton *btnGoms3Histo;
+    QPushButton *btnGoms4Histo;
+    QPushButton *quitter;
 
     FenetreOptionsFitts *fenetreOptionsFitts;
     FenetreOptionsGomsSaisieTexte *fenetreOptionsGomsSaisieTexte;
@@ -98,7 +101,7 @@ public slots:
     void afficheFenetreStatistiquesGomsClavier();
     void afficheFenetreStatistiquesGomsClavier(vector<StatistiquesGomsClavier> statistiquesGomsClavier);
     void aPropos();
-    void keyPressEvent(QKeyEvent *event);
+    void initHistoriquesBoutons();
 
 };
 

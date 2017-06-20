@@ -20,28 +20,44 @@ FenetreStatistiquesGomsBash::FenetreStatistiquesGomsBash(vector<vector<Statistiq
 
     // Selection enregistrement
     QComboBox *listeEnregistrement = new QComboBox;
-    for(unsigned int i=0; i<statsGomsBash.size(); ++i){
-        listeEnregistrement->addItem(statsGomsBash[i][0].getDate().toString(QString("d/M/yy ; hh:mm:ss")));
+    for(unsigned int i = 0; i < statsGomsBash.size(); ++i){
+        listeEnregistrement->addItem(statsGomsBash[i][0].getDate().toString(QString("d/MM/yyyy - hh:mm:ss")));
     }
     listeEnregistrement->setCurrentIndex(statsGomsBash.size()-1);
+    listeEnregistrement->setEditable(true);
+    listeEnregistrement->lineEdit()->setReadOnly(true);
+    listeEnregistrement->lineEdit()->setAlignment(Qt::AlignCenter);
+
+    QPalette *palette = new QPalette();
+    const QColor *color = new QColor(225, 225, 225);
+    palette->setColor(QPalette::All, QPalette::Base, *color);
+    listeEnregistrement->setPalette(*palette);
+
+    listeEnregistrement->setStyleSheet(QString("padding: 0px;"));
+    listeEnregistrement->setFixedHeight(50);
+    listeEnregistrement->setFixedWidth(300);
+    for (int i = 0 ; i < listeEnregistrement->count() ; ++i) {
+        listeEnregistrement->setItemData(i, Qt::AlignCenter, Qt::TextAlignmentRole);
+    }
+
     layoutBoutons->addWidget(listeEnregistrement);
 
     // Bouton recommencer
     recommencer = new QPushButton("Recommencer");
     recommencer->setFixedHeight(50);
-    recommencer->setFixedWidth(400);
+    recommencer->setFixedWidth(315);
     layoutBoutons->addWidget(recommencer, 0, Qt::AlignCenter);
 
     // Bouton retour menu
     retourMenu = new QPushButton("Retour au menu");
     retourMenu->setFixedHeight(50);
-    retourMenu->setFixedWidth(400);
+    retourMenu->setFixedWidth(315);
     layoutBoutons->addWidget(retourMenu, 0, Qt::AlignCenter);
 
     // Bouton quitter
     quitter = new QPushButton("Quitter");
     quitter->setFixedHeight(50);
-    quitter->setFixedWidth(400);
+    quitter->setFixedWidth(315);
     layoutBoutons->addWidget(quitter, 0, Qt::AlignCenter);
 
     // Initialisation du tableau final
