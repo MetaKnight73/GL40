@@ -53,7 +53,7 @@ FenetreOptionsFitts::FenetreOptionsFitts(QWidget *parent) : QDialog(parent) {
     // On gère les valeurs du spinner du nombre de clics
     spinNbClics->setMinimum(0);
     spinNbClics->setMaximum(1000);
-    spinNbClics->setSingleStep(10);
+    spinNbClics->setSingleStep(1);
     spinNbClics->setValue(10);
 
     // Textes de boutons

@@ -52,3 +52,6 @@ HEADERS  += \
     fenetreStatistiquesGomsBash.h \
     statistiquesGomsBash.h \
     fenetreTestGomsClavier.h
+
+RESOURCES += \
+    ressources.qrc

@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QLabel>
 #include <QMessageBox>
+#include <QIcon>
 
 #include <vector>
 
@@ -59,6 +60,11 @@ private:
     QPushButton *btnGoms2Histo;
     QPushButton *btnGoms3Histo;
     QPushButton *btnGoms4Histo;
+    QPushButton *btnFittsInfo;
+    QPushButton *btnGoms1Info;
+    QPushButton *btnGoms2Info;
+    QPushButton *btnGoms3Info;
+    QPushButton *btnGoms4Info;
     QPushButton *quitter;
 
     FenetreOptionsFitts *fenetreOptionsFitts;
