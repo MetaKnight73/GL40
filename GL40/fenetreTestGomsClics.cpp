@@ -4,6 +4,7 @@ FenetreTestGomsClics::FenetreTestGomsClics(int profondeur, QWidget *parent, doub
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
+    bouton->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center;"));
     bouton->setGeometry(515, 310, 250, 100);
 
     info = new QLabel("Dans ce test, vous devez double-cliquer le bouton correct (en vert).", this);

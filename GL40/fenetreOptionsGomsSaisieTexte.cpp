@@ -57,16 +57,43 @@ FenetreOptionsGomsSaisieTexte::FenetreOptionsGomsSaisieTexte(QWidget *parent) : 
     // Textes de boutons
     start = new QPushButton("Valider");
     start->setFixedHeight(40);
-    start->setStyleSheet(QString("background-color: #32CD32; border: 1px solid black;  border-radius: 2px;"));
+    start->setStyleSheet("QPushButton {"
+                             "border-radius: 10px;"
+                             "color: #FFF;"
+                             "font-size: 14px;"
+                             "text-align: center;"
+                             "font-weight: bold;"
+                             "text-decoration: none;"
+                             "background-color: #82BF56;"
+                             "border-bottom: 4px solid #669644;"
+                         "}"
+                         "QPushButton:pressed {"
+                             "border-bottom: 1px solid #669644;"
+                         "}"
+                         );
 
     cancel = new QPushButton("Annuler");
     cancel->setFixedHeight(40);
-    cancel->setStyleSheet(QString("background-color: #DC143C; border: 1px solid black;  border-radius: 2px;"));
+    cancel->setStyleSheet("QPushButton {"
+                              "border-bottom: 4px solid #bb0000;"
+                              "border-radius: 10px;"
+                              "font-size: 14px;"
+                              "text-align: center;"
+                              "font-weight: bold;"
+                              "color: #FFF;"
+                              "background-color: #E74C3C;"
+                              "border-bottom: 4px solid #BD3E31;"
+                          "}"
+                          "QPushButton:pressed {"
+                              "border-bottom: 1px solid #BD3E31;"
+                          "}");
 
     userNormal = new QPushButton("Utilisateur normal (par défaut)");
+    userNormal->setStyleSheet(QString("font-weight: bold;"));
     userNormal->setFixedHeight(40);
 
     userExpert = new QPushButton("Utilisateur expert");
+    userExpert->setStyleSheet(QString("font-weight: bold;"));
     userExpert->setFixedHeight(40);
 
     layoutUsers->addWidget(userNormal);

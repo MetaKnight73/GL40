@@ -4,6 +4,7 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
+    bouton->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center;"));
     bouton->setGeometry(515, 310, 250, 100);
 
     // Texte d'informations
@@ -35,7 +36,7 @@ FenetreTestFitts::FenetreTestFitts(int nombreClics, QWidget *parent, double para
 
 void FenetreTestFitts::mouseMoveEvent(QMouseEvent *) {
 
-    if(sourisBougeeDebut == false) {
+    if(sourisBougeeDebut == false && nombreClicsCourant != 0) {
 
         chronometre->start();
 
@@ -81,12 +82,14 @@ void FenetreTestFitts::deplacerBoutonClic() {
             && nombreClicsCourant>0) return;
 
     // On change le texte du bouton qu'on va déplacer
-    bouton->setText("CLIQUEZ ICI !");
-    bouton->setDefault(false);
+    if(nombreClicsCourant == 0) {
+        bouton->setText("CLIQUEZ ICI !");
+        bouton->setDefault(false);
 
-    info->setGeometry(524, 610, 540, 100);
-    info->setStyleSheet(QString("color: red;"));
-    info->setText(QString("(\"Echap\" pour quitter)"));
+        info->setGeometry(524, 610, 540, 100);
+        info->setStyleSheet(QString("color: red;"));
+        info->setText(QString("(\"Echap\" pour quitter)"));
+    }
 
     // On récupère le temps de départ
     QTime now = QTime::currentTime();

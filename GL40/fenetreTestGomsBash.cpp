@@ -6,11 +6,12 @@ FenetreTestGomsBash::FenetreTestGomsBash(int longRep, QWidget *parent, double te
 
     // Bouton pour lancer le test
     bouton = new QPushButton("Commencer", this);
+    bouton->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center;"));
     bouton->setGeometry(515, 310, 250, 100);
 
     info = new QLabel("Dans ce test, vous devez saisir la commande \"cd\" suivie du premier nom de répertoire affiché puis appuyer sur \"Entrée\".", this);
-    info->setGeometry(0, 390, 1280, 100);
-    info->setFont(QFont("Arial", 18, -1, true));
+    info->setGeometry(20, 390, 1280, 100);
+    info->setFont(QFont("Arial", 17, -1, true));
 
     // On initialise les paramètres
     tempsMental= tempsM;

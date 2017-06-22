@@ -35,7 +35,7 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<vector<StatistiquesFit
     palette->setColor(QPalette::All, QPalette::Base, *color);
     listeEnregistrement->setPalette(*palette);
 
-    listeEnregistrement->setStyleSheet(QString("padding: 0px;"));
+    listeEnregistrement->setStyleSheet(QString("padding: 0px; font-size: 14px; font-weight: bold;"));
     listeEnregistrement->setFixedHeight(50);
     listeEnregistrement->setFixedWidth(300);
 
@@ -48,18 +48,57 @@ FenetreStatistiquesFitts::FenetreStatistiquesFitts(vector<vector<StatistiquesFit
     recommencer = new QPushButton("Recommencer");
     recommencer->setFixedHeight(50);
     recommencer->setFixedWidth(315);
+    recommencer->setStyleSheet("QPushButton {"
+                               "border-radius: 10px;"
+                               "color: #FFF;"
+                               "font-size: 14px;"
+                               "text-align: center;"
+                               "font-weight: bold;"
+                               "text-decoration: none;"
+                               "background-color: #82BF56;"
+                               "border-bottom: 4px solid #669644;"
+                           "}"
+                           "QPushButton:pressed {"
+                               "border-bottom: 1px solid #669644;"
+                           "}"
+                           );
     layoutBoutons->addWidget(recommencer, 0, Qt::AlignCenter);
 
     // Bouton retour menu
     retourMenu = new QPushButton("Retour au menu");
     retourMenu->setFixedHeight(50);
     retourMenu->setFixedWidth(315);
+    retourMenu->setStyleSheet("QPushButton {"
+                              "border-radius: 10px;"
+                              "font-size: 14px;"
+                              "text-align: center;"
+                              "font-weight: bold;"
+                              "color: #FFF;"
+                              "background-color: #F2CF66;"
+                              "border-bottom: 4px solid #D1B358;"
+                          "}"
+                          "QPushButton:pressed {"
+                              "border-bottom: 1px solid #D1B358;"
+                          "}");
     layoutBoutons->addWidget(retourMenu, 0, Qt::AlignCenter);
 
     // Bouton quitter
-    quitter = new QPushButton("Quitter");
+    quitter = new QPushButton("Quitter l'application");
     quitter->setFixedHeight(50);
     quitter->setFixedWidth(315);
+    quitter->setStyleSheet("QPushButton {"
+                           "border-bottom: 4px solid #bb0000;"
+                           "border-radius: 10px;"
+                           "font-size: 14px;"
+                           "text-align: center;"
+                           "font-weight: bold;"
+                           "color: #FFF;"
+                           "background-color: #E74C3C;"
+                           "border-bottom: 4px solid #BD3E31;"
+                       "}"
+                       "QPushButton:pressed {"
+                           "border-bottom: 1px solid #BD3E31;"
+                       "}");
     layoutBoutons->addWidget(quitter, 0, Qt::AlignCenter);
 
     // Initialisation du tableau final

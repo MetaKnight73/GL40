@@ -46,6 +46,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *fittsLayout = new QHBoxLayout;
     fittsLayout->setSpacing(0);
     btnFitts = new QPushButton("Loi de Fitts");
+    btnFitts->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center; font-style: italic;"));
     btnFitts->setFixedSize(350, 75);
     fittsLayout->addWidget(btnFitts);
     // Bouton servant à lancer l'application (historique pour la partie fitts)
@@ -63,6 +64,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *gomsTextLayout = new QHBoxLayout;
     gomsTextLayout->setSpacing(0);
     btnGoms1 = new QPushButton("Goms-Keystroke (saisie de texte)");
+    btnGoms1->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center; font-style: italic;"));
     btnGoms1->setFixedSize(350, 75);
     gomsTextLayout->addWidget(btnGoms1);
     // Bouton servant à lancer l'application (historique pour la partie goms 1)
@@ -80,6 +82,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     QHBoxLayout *gomsClicsLayout = new QHBoxLayout;
     gomsClicsLayout->setSpacing(0);
     btnGoms2 = new QPushButton("Goms-Keystroke (clics)");
+    btnGoms2->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center; font-style: italic;"));
     btnGoms2->setFixedSize(350, 75);
     gomsClicsLayout->addWidget(btnGoms2);
     // Bouton servant à lancer l'application (historique pour la partie goms 2)
@@ -98,6 +101,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     gomsBashLayout->setSpacing(0);
     btnGoms3 = new QPushButton("Goms-Keystroke (version bash)");
     btnGoms3->setFixedSize(350, 75);
+    btnGoms3->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center; font-style: italic;"));
     gomsBashLayout->addWidget(btnGoms3);
     // Bouton servant à lancer l'application (historique pour la partie goms 3)
     btnGoms3Histo = new QPushButton();
@@ -115,6 +119,7 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     gomsFlecheLayout->setSpacing(0);
     btnGoms4 = new QPushButton("Goms-Keystroke (flèches)");
     btnGoms4->setFixedSize(350, 75);
+    btnGoms4->setStyleSheet(QString("font-weight: bold; font-size: 16px; text-align: center; font-style: italic;"));
     gomsFlecheLayout->addWidget(btnGoms4);
     // Bouton servant à lancer l'application (historique pour la partie goms 4)
     btnGoms4Histo = new QPushButton();
@@ -144,8 +149,20 @@ FenetrePrincipale::FenetrePrincipale(QWidget *parent) : QMainWindow(parent) {
     layout->addWidget(line2);
 
     quitter = new QPushButton("Quitter");
-    quitter->setFixedSize(200, 35);
-    quitter->setStyleSheet(QString("background-color: #DC143C; border: 1px solid black;  border-radius: 2px;"));
+    quitter->setFixedSize(300, 35);
+    quitter->setStyleSheet("QPushButton {"
+                           "border-bottom: 4px solid #bb0000;"
+                           "border-radius: 10px;"
+                           "font-size: 14px;"
+                           "text-align: center;"
+                           "font-weight: bold;"
+                           "color: #FFF;"
+                           "background-color: #E74C3C;"
+                           "border-bottom: 4px solid #BD3E31;"
+                       "}"
+                       "QPushButton:pressed {"
+                           "border-bottom: 1px solid #BD3E31;"
+                       "}");
     layout->addWidget(quitter, 0, Qt::AlignCenter);
 
     // Menu bar au sommet
